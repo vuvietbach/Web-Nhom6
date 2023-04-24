@@ -18,44 +18,67 @@ import SellerInformation from './sellerinformation';
 const drawerWidth = 240;
 
 function SellerMenu(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const [showShopInfo, setShowShopInfo] = React.useState(true);
+
+  const handleShowShopInfo = () => {
+    setShowShopInfo(!showShopInfo);
+  }
 
   const drawer = (
     <div>
       <List>
-        {['Thông tin cửa hàng', 'Danh sách sản phẩm', 'Danh sách đơn hàng'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index === 0 ? <PersonIcon /> : index === 1 ? <ShoppingCartIcon /> : <ArticleIcon />}
-              </ListItemIcon>
-              <ListItemText sx={{ fontSize: 'h6.fontSize', m: 1 }} primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key="1" disablePadding>
+          <ListItemButton onClick={handleShowShopInfo}>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Thông tin cửa hàng" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem key="2" disablePadding>
+          <ListItemButton onClick={() => alert("check2")}>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Danh sách sản phẩm" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem key="3" disablePadding>
+          <ListItemButton onClick={() => alert("check3")}>
+            <ListItemIcon>
+              <ArticleIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Danh sách đơn hàng" />
+          </ListItemButton>
+        </ListItem>
       </List>
+
       <Divider />
+
       <List>
-        {['Chỉnh sửa thông tin', 'Đăng xuất'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <SettingsIcon /> : <PowerSettingsNewIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key="4" disablePadding>
+          <ListItemButton onClick={() => alert("check4")}>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Chỉnh sửa thông tin" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem key="5" disablePadding>
+          <ListItemButton onClick={() => alert("check2")}>
+            <ListItemIcon>
+              <PowerSettingsNewIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Đăng xuất" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </div>
   );
-
-  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -64,34 +87,17 @@ function SellerMenu(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, 
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
         <Drawer
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
-          open
         >
           {drawer}
         </Drawer>
       </Box>
-      <SellerInformation />
+      {showShopInfo && <SellerInformation />}
     </Box>
   );
 }
