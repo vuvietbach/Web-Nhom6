@@ -1,12 +1,8 @@
-import TestComponent from "./components/test";
-
+import Header from './components/header'
 function App() {
     return (
         <div>
-            <h1>Testing</h1>
-        {/* Cần một cái header chung
-        Thêm component vào đây để test */}
-            <TestComponent />
+            <Header />
         </div> 
     )
 }
