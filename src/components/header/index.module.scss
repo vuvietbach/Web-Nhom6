@@ -1,0 +1,33 @@
+@mixin flex_center {
+    display: flex;
+    align-items: center;
+}
+@mixin flex_stretch {
+    display: flex;
+    align-items: stretch;
+}
+$sh1_height: 40px;
+.header {
+    margin: 0 auto;
+    width: 1250px;
+}
+.subheader_1 {
+    height: $sh1_height;
+    display: flex;
+    align-items: center;
+}
+.search_ctn {
+    @include flex_center;
+    flex-grow: 1;
+}
+.search_bar {
+    height: $sh1_height - 5px;
+    margin: 0 auto;
+
+    width: 650px;
+    @include flex_center;
+    
+    border: 1px solid grey;
+    border-radius: 7px;
+}
+
