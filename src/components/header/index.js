@@ -8,10 +8,11 @@ import { Box, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
+import PlaceIcon from '@mui/icons-material/Place';
 export default function Header() {
     const thucPham = ['trái cây', 'thịt, trứng', 'rau củ quả', 'sữa, bơ, phô mai', 'hải sản', 'gạo, mì ăn liền', 'đồ uống, bia rượu', 'bánh kẹo'];
     const thucPhamLink = thucPham.map((item, index) => {
-        <Link href='#' underline='none'>{item}</Link>
+        return <Link href='#' underline='none' sx={{mr:'10px', display:'flex', alignItems:'center'}}>{item}</Link>
     })
   return (
     <div>
@@ -46,45 +47,16 @@ export default function Header() {
                 <Divider orientation="vertical" variant="middle" flexItem sx={{mx: '10px'}}/>
                 <IconButton aria-label="gio hang"><ShoppingCartIcon /></IconButton>
             </div>
-            <Box sx={{display:'flex'}}>
-                {thucPham.map((item, index) => {<span>{item}</span>})}
-            </Box>
+            <Box sx={{display:'flex', alignItem:'center', height:'35px', justifyContent:'space-between'}}>
+                <div style={{display:'flex', alignItems:'center', paddingLeft:'140px'}}>{thucPhamLink}</div>
+                <Link href='#' underline='none' sx={{mr:'10px', display:'flex', alignItems:'center'}}>
+                    <PlaceIcon sx={{mr:'5px', fontSize:'18px'}}/>
+                    <Typography sx={{fontSize:'15px'}}>Giao đến: </Typography>
+                    <Typography sx={{fontSize:'15px', textDecoration:'underline'}}>Q.Hoan Kiem, P.Hang Trong, Ha Noi</Typography>
 
-            {/* <div class="sh1_btn sh1b">
-                <i class="fa-solid fa-house sh1i"></i>
-                <span>Trang chủ</span>
-            </div>
-            <div class="sh1_btn">
-                <i class="fa-solid fa-crown sh1i"></i>            
-                <span>Astra</span>
-            </div>
-            <div class="sh1_btn">
-                <i class="fa-regular fa-face-smile sh1i"></i>            
-                <span>Tài khoản</span>
-            </div>
-            <div class="center-ctn"><div class="separator" style="height:50%; margin-left:10px; margin-right: 10px;"></div></div>           
-            <div class="sh1_btn">
-                <i class="fa-solid fa-cart-shopping"></i>                
-            </div> */}
+                </Link>
+            </Box>
         </div>
-        {/* <div class="subheader">
-            <div style="flex-grow: 1;">
-                <ul class="sh2_list">
-                    <li>trái cây</li>
-                    <li>thịt, trứng</li>
-                    <li>rau củ quả</li>
-                    <li>sữa, bơ, phô mai</li>
-                    <li>hải sản</li>
-                    <li>gạo, mì ăn liền</li>
-                    <li>đồ uống, bia rượu</li>
-                    <li>bánh kẹo</li>
-                </ul>
-            </div>
-            <div class="center-ctn" style="margin-right: 10px;">
-                <i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i>
-                <div>Giao đến: Q.Hoan Kiem, P.Hang Trong, Ha Noi</div>
-            </div>
-        </div>     */}
     </div>
   )
 } 
