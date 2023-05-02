@@ -1,11 +1,14 @@
 :root {
-    --max-content-width: 1250px;
+    --content-max-width: 1250px;
 }
 
 body {
-        margin: 0px;
-        padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 h3 {
     font-size: 1 rem;
+}
+html {
+    background-color: #efefef;
 }

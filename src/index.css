@@ -1,0 +1,11 @@
+.content-area {
+    width: var(--content-max-width);
+    margin: 0 auto;
+}
+.card {
+    background-color: #fff;
+    padding: 10px;
+}
+.round-border {
+    border-radius: 5px;
+}
