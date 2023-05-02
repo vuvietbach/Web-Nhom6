@@ -1,7 +1,8 @@
 import LandingPage from "pages/landingPage";
-import Header from "components/header";
+import Header from "components/header/header";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
+import ProductPage from "pages/productPage/productPage";
 const theme = createTheme({
     palette: {
         secondary: {
@@ -12,10 +13,8 @@ const theme = createTheme({
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <div>
-                <Header></Header>
-                <LandingPage />
-            </div> 
+            <Header></Header>
+            <ProductPage />
         </ThemeProvider>
 
     )
