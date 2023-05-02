@@ -1,10 +1,11 @@
 :root {
-    --header-color: blue;
+    --max-content-width: 1250px;
 }
 
-
-
-body{
+body {
         margin: 0px;
         padding: 0px;
-    }
+}
+h3 {
+    font-size: 1 rem;
+}
