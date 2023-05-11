@@ -1,29 +1,28 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import PersonIcon from '@mui/icons-material/Person';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ArticleIcon from '@mui/icons-material/Article';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import SellerInformation from './sellerinformation';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ArticleIcon from "@mui/icons-material/Article";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import SellerInformation from "./sellerinformation";
 
 const drawerWidth = 240;
 
 function SellerMenu(props) {
-
   const [showShopInfo, setShowShopInfo] = React.useState(true);
 
   const handleShowShopInfo = () => {
     setShowShopInfo(!showShopInfo);
-  }
+  };
 
   const drawer = (
     <div>
@@ -33,7 +32,11 @@ function SellerMenu(props) {
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Thông tin cửa hàng" />
+            <ListItemText
+              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
+              disableTypography
+              primary="Thông tin cửa hàng"
+            />
           </ListItemButton>
         </ListItem>
 
@@ -42,7 +45,11 @@ function SellerMenu(props) {
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Danh sách sản phẩm" />
+            <ListItemText
+              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
+              disableTypography
+              primary="Danh sách sản phẩm"
+            />
           </ListItemButton>
         </ListItem>
 
@@ -51,7 +58,11 @@ function SellerMenu(props) {
             <ListItemIcon>
               <ArticleIcon />
             </ListItemIcon>
-            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Danh sách đơn hàng" />
+            <ListItemText
+              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
+              disableTypography
+              primary="Danh sách đơn hàng"
+            />
           </ListItemButton>
         </ListItem>
       </List>
@@ -64,7 +75,11 @@ function SellerMenu(props) {
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Chỉnh sửa thông tin" />
+            <ListItemText
+              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
+              disableTypography
+              primary="Chỉnh sửa thông tin"
+            />
           </ListItemButton>
         </ListItem>
 
@@ -73,7 +88,11 @@ function SellerMenu(props) {
             <ListItemIcon>
               <PowerSettingsNewIcon />
             </ListItemIcon>
-            <ListItemText sx={{ fontSize: "14px", fontFamily: 'Arial', padding: "5px" }} disableTypography primary="Đăng xuất" />
+            <ListItemText
+              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
+              disableTypography
+              primary="Đăng xuất"
+            />
           </ListItemButton>
         </ListItem>
       </List>
@@ -81,7 +100,7 @@ function SellerMenu(props) {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -90,8 +109,11 @@ function SellerMenu(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
