@@ -38,15 +38,19 @@ export default function AppWidgetSummary({
   ...other
 }) {
   let bgColor = "";
+  let txtColor = "";
   switch (color) {
     case "primary":
       bgColor = "#D1E9FC";
+      txtColor = "#103996";
       break;
     case "success":
       bgColor = "#E9FCD4";
+      txtColor = "#229A16";
       break;
     default:
       bgColor = "#D1E9FC";
+      txtColor = "#103996";
       break;
   }
   return (
@@ -57,7 +61,7 @@ export default function AppWidgetSummary({
         textAlign: "center",
         ...sx,
       }}
-      style={{ backgroundColor: bgColor }}
+      style={{ backgroundColor: bgColor, borderRadius: "10px" }}
       {...other}
     >
       <StyledIcon
@@ -73,7 +77,9 @@ export default function AppWidgetSummary({
         <Iconify icon={icon} width={24} height={24} />
       </StyledIcon>
 
-      <Typography variant="h3">{total}</Typography>
+      <Typography style={{ color: txtColor }} variant="h3">
+        {total}
+      </Typography>
 
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         {title}
