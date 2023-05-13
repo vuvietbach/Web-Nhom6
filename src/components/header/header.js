@@ -9,7 +9,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import PlaceIcon from "@mui/icons-material/Place";
-
+import { SearchBar } from "components/searchBar/searchBar";
+import "./header.css";
 export default function Header() {
   const thucPham = [
     "trái cây",
@@ -33,7 +34,7 @@ export default function Header() {
     );
   });
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div style={{ backgroundColor: "#fff", width:"100%"}}>
       <div style={{ margin: "0 auto", width: "var(--content-max-width)" }}>
         <Box
           sx={{
@@ -44,32 +45,8 @@ export default function Header() {
           }}
         >
           <img src={TikiLogo} style={{ height: "40px" }} alt="tiki logo" />
-          <div style={{ display: "flex", alignItems: "center", flexGrow: "1" }}>
-            <div
-              style={{
-                width: "650px",
-                height: "35px",
-                margin: "0 auto",
-                display: "flex",
-                alignItems: "center",
-                border: "1px solid grey",
-                borderRadius: "7px",
-              }}
-            >
-              <SearchIcon sx={{ margin: "auto 0", marginLeft: "15px" }} />
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Bạn tìm kiếm gì hôm nay"
-                inputProps={{ "aria-label": "Bạn tìm kiếm gì hôm nay" }}
-              />
-              <div
-                class="vr"
-                style={{ height: "70%", alignSelf: "center" }}
-              ></div>
-              <Button variant="text" sx={{ px: "10px" }}>
-                Tìm kiếm
-              </Button>
-            </div>
+          <div class="search-bar-ctn"style={{ display: "flex", alignItems: "center", flexGrow: "1" }}>
+            <SearchBar />
           </div>
           <Button sx={{ height: "100%" }} color={"secondary"}>
             <img
