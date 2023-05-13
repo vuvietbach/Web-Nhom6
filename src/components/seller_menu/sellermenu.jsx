@@ -14,14 +14,44 @@ import ArticleIcon from "@mui/icons-material/Article";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import SellerInformation from "./sellerinformation";
+import ItemList from "./itemlist";
+import OrderList from "./orderlist";
+import UpdateInfo from "./updateinformation";
 
 const drawerWidth = 240;
 
 function SellerMenu(props) {
   const [showShopInfo, setShowShopInfo] = React.useState(true);
+  const [showItemList, setShowItemList] = React.useState(false);
+  const [showOrderList, setShowOrderList] = React.useState(false);
+  const [showUpdateInfo, setShowUpdateInfo] = React.useState(false);
 
   const handleShowShopInfo = () => {
-    setShowShopInfo(!showShopInfo);
+    setShowShopInfo(true);
+    setShowItemList(false);
+    setShowOrderList(false);
+    setShowUpdateInfo(false);
+  };
+
+  const handleShowItemList = () => {
+    setShowShopInfo(false);
+    setShowItemList(true);
+    setShowOrderList(false);
+    setShowUpdateInfo(false);
+  };
+
+  const handleShowOrderList = () => {
+    setShowShopInfo(false);
+    setShowItemList(false);
+    setShowOrderList(true);
+    setShowUpdateInfo(false);
+  };
+
+  const handleShowUpdateInfo = () => {
+    setShowShopInfo(false);
+    setShowItemList(false);
+    setShowOrderList(false);
+    setShowUpdateInfo(true);
   };
 
   const drawer = (
@@ -41,7 +71,7 @@ function SellerMenu(props) {
         </ListItem>
 
         <ListItem key="2" disablePadding>
-          <ListItemButton onClick={() => alert("check2")}>
+          <ListItemButton onClick={handleShowItemList}>
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
@@ -54,7 +84,7 @@ function SellerMenu(props) {
         </ListItem>
 
         <ListItem key="3" disablePadding>
-          <ListItemButton onClick={() => alert("check3")}>
+          <ListItemButton onClick={handleShowOrderList}>
             <ListItemIcon>
               <ArticleIcon />
             </ListItemIcon>
@@ -71,7 +101,7 @@ function SellerMenu(props) {
 
       <List>
         <ListItem key="4" disablePadding>
-          <ListItemButton onClick={() => alert("check4")}>
+          <ListItemButton onClick={handleShowUpdateInfo}>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
@@ -120,6 +150,9 @@ function SellerMenu(props) {
         </Drawer>
       </Box>
       {showShopInfo && <SellerInformation />}
+      {showItemList && <ItemList />}
+      {showOrderList && <OrderList />}
+      {showUpdateInfo && <UpdateInfo />}
     </Box>
   );
 }

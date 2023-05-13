@@ -5,6 +5,19 @@
   width: 100%;
 }
 
+.picture {
+  background-image: url("https://rare-gallery.com/uploads/posts/351193-4k-wallpaper.jpg");
+  border-radius: 10px;
+  height: 12em;
+  width: auto;
+  display: flex;
+}
+
+.picture img {
+  margin: auto;
+  border-radius: 50%;
+}
+
 .avatar {
   margin-left: auto;
   margin-right: auto;
@@ -14,25 +27,10 @@
   display: block;
 }
 
-.text-center {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.information-box {
-  background-color: #d1e9fc;
-  width: 100%;
-  /* height: 30vh; */
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1%;
-}
-
-.information {
-  padding: 15px;
-}
-
 .statistic-box {
+  box-sizing: border-box;
   margin-top: 1%;
+  border-style: solid;
+  border-color: white;
+  border-width: 10px;
 }
