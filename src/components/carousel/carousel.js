@@ -1,3 +1,18 @@
+const controlStyle = {
+    width: '5%',
+}
+const controlBtnStyle = {
+    backgroundColor:'black', 
+    width:'100%',
+    height:"18%", 
+    display:'flex', 
+    alignItems:'center', 
+    justifyContent:'center'
+}
+const controlIconStyle = {
+    fontSize: '2rem',
+    color:'white'
+}
 export default function Carousel(props) {;
     return (
         <div
@@ -20,11 +35,11 @@ export default function Carousel(props) {;
                 href="#carouselExampleControls"
                 role="button"
                 data-slide="prev"
+                style={controlStyle}
             >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
+                <div style={controlBtnStyle}>
+                    <i class="fa-solid fa-chevron-left" style={controlIconStyle}></i>
+                </div>
                 <span class="sr-only">Previous</span>
             </a>
             <a
@@ -32,11 +47,11 @@ export default function Carousel(props) {;
                 href="#carouselExampleControls"
                 role="button"
                 data-slide="next"
+                style={controlStyle}
             >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
+                <div style={controlBtnStyle}>
+                    <i class="fa-solid fa-chevron-right" style={controlIconStyle}></i>
+                </div>
                 <span class="sr-only">Next</span>
             </a>
         </div>

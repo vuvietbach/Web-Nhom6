@@ -1,0 +1,32 @@
+.search-bar {
+    width: 680px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #efefef;
+    border-radius: 8px;
+}
+.search-text {
+    flex-grow: 1;
+    border: none;
+}
+.search-text:focus {
+    outline: none;
+}
+.search-btn {
+    background-color: #fff;
+    padding: 0 15px;
+    height: 100%;
+    border: none;
+    color: var(--tiki-color);
+}
+.search-btn:focus {
+    outline: none;
+}
+.search-btn:hover {
+    background-color: rgb(3, 96, 255, 0.1);
+}
+.search-bar icon {
+    margin-right: 10px;
+    margin-left: 10px;
+}
