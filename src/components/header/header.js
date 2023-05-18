@@ -1,4 +1,3 @@
-import styles from "./index.module.scss";
 import TikiLogo from "assets/tiki.png";
 import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
@@ -34,18 +33,14 @@ export default function Header() {
     );
   });
   return (
-    <div style={{ backgroundColor: "#fff", width:"100%"}}>
+    <div style={{ backgroundColor: "#fff", width: "100%" }}>
       <div style={{ margin: "0 auto", width: "var(--content-max-width)" }}>
-        <Box
-          sx={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            overflow: "auto",
-          }}
-        >
+        <div class="header-row">
           <img src={TikiLogo} style={{ height: "40px" }} alt="tiki logo" />
-          <div class="search-bar-ctn"style={{ display: "flex", alignItems: "center", flexGrow: "1" }}>
+          <div
+            class="search-bar-ctn"
+            style={{ display: "flex", alignItems: "center", flexGrow: "1" }}
+          >
             <SearchBar />
           </div>
           <Button sx={{ height: "100%" }} color={"secondary"}>
@@ -73,7 +68,7 @@ export default function Header() {
           <IconButton aria-label="gio hang">
             <ShoppingCartIcon />
           </IconButton>
-        </Box>
+        </div>
         <Box
           sx={{
             display: "flex",

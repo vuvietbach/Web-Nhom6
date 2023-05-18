@@ -3,3 +3,9 @@
     align-items: center;
     justify-content: center;
 }
+.header-row {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    overflow: visible;
+}
