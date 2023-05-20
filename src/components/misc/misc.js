@@ -72,32 +72,3 @@ export const ListFilter = () => {
         </ul>
     )
 }
-// export const SearchBar = () => {
-//     return (
-//         <div
-//               style={{
-//                 width: "650px",
-//                 height: "35px",
-//                 margin: "0 auto",
-//                 display: "flex",
-//                 alignItems: "center",
-//                 border: "1px solid grey",
-//                 borderRadius: "7px",
-//               }}
-//             >
-//               <SearchIcon sx={{ margin: "auto 0", marginLeft: "15px" }} />
-//               <InputBase
-//                 sx={{ ml: 1, flex: 1 }}
-//                 placeholder="Bạn tìm kiếm gì hôm nay"
-//                 inputProps={{ "aria-label": "Bạn tìm kiếm gì hôm nay" }}
-//               />
-//               <div
-//                 class="vr"
-//                 style={{ height: "70%", alignSelf: "center" }}
-//               ></div>
-//               <Button variant="text" sx={{ px: "10px" }}>
-//                 Tìm kiếm
-//               </Button>
-//             </div>
-//     )
-// }
