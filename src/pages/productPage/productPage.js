@@ -1,9 +1,8 @@
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Grid } from "@mui/material";
-import Carousel from "components/carousel/carousel";
 import { ListFilter, RatingStar, SideCard, CheckList} from "components/misc/misc";
+import { ProductCard } from "components/productCard/productCard";
 import './productPage.css'
 const breadcrumbs = [
   <Link underline="hover" key="1" color="inherit">
@@ -40,6 +39,19 @@ const Ul_items = () => {
     )
 }
 const hcl = <CheckList items={brands}/>
+const product = {
+    name: "Bộ 2 Lon Sữa Bột Friso Gold 4 1400g Dành Cho Trẻ Từ 2 - 6 Tuổi + Tặng Lon Sữa Friso Gold 4 380g",
+    image_url: "https://salt.tikicdn.com/cache/280x280/media/catalog/producttmp/6c/89/d4/caffed40dfb23975fcfef0334c8e9d31.png",
+    price: "1.200.000đ",
+    rating: 4.8,
+}
+const product1 = {
+    name: "Bộ 2 Lon Sữa Bột Friso Gold 4 1400g Dành Cho Trẻ Từ 2 - 6 Tuổi + Tặng Lon Sữa Friso Gold 4 380g",
+    image_url: "https://salt.tikicdn.com/cache/280x280/media/catalog/producttmp/6c/89/d4/caffed40dfb23975fcfef0334c8e9d31.png",
+    price: "1.200.000đ",
+    rating: 4.8, 
+    numberSold: 100,
+}
 export default function ProductPage() {
   return (
     <div class="center-ctn">
@@ -49,7 +61,7 @@ export default function ProductPage() {
       >
         {breadcrumbs}
       </Breadcrumbs>
-      <div class="d-flex">
+      <div class="d-flex" style={{gap:'20px'}}>
         <div class="side-bar">
             <SideCard title="Danh mục sản phẩm" children={<Ul_items/>}/>
             <SideCard title="Địa chỉ nhận hàng">
@@ -88,7 +100,9 @@ export default function ProductPage() {
                     <ListFilter />
                 </div>
             </div>
-            <div>
+            <div class="product-display">
+                <ProductCard product={product}/>
+                <ProductCard product={product1}/>
             </div>
       </div>
       </div>

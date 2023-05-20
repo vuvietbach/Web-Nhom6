@@ -95,5 +95,4 @@ button.reset {
 .vertical-rule {
     border-left: 1px solid #efefef;  /* Adjust the color as needed */
     height: 80%;  /* Adjust the height as needed */
-    margin: 0 10px;  /* Adjust the margin as needed */
-  }
+}
