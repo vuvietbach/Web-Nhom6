@@ -6,8 +6,8 @@ import ProductPage from "pages/productPage/productPage";
 function App() {
     return (
         <div style={{backgroundColor:'#f5f5fa'}}>
-        <Header></Header>
-        <ProductPage />
+            <Header></Header>
+            <ProductPage />
         </div>
     )
 }
