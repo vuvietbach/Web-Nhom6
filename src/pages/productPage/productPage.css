@@ -1,0 +1,14 @@
+.side-bar_ctn {
+    width: 100%;
+    border-right: 1px solid #efefef;
+    padding: 20px;
+}
+.product-display {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+}
+
+.MuiPaginationItem-root:focus {
+    outline: none;
+}
