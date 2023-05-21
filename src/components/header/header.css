@@ -9,3 +9,36 @@
     align-items: center;
     overflow: visible;
 }
+.header-button {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px !important;
+    border-radius: 5px;
+    color: #84848c;
+}
+.header-button:focus {
+    outline: none;
+}
+.header-button:hover {
+    cursor: pointer;
+    background-color: var(--tiki-color-hover);
+}
+.header-button i {
+    margin-right: 5px;
+    position: relative;
+    bottom: 1px;
+}
+.cart-icon {
+    position: relative;
+}
+.cart-count {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    font-size: 0.6rem;
+    padding: 1px 4px;
+    border-radius: 50%;
+}

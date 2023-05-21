@@ -1,6 +1,7 @@
 :root {
     --content-max-width: 1250px;
     --tiki-color: rgb(3, 96, 255);
+    --tiki-color-hover: rgb(3, 96, 255, 0.1);
 }
 .content-area {
     width: var(--content-max-width);
@@ -94,5 +95,21 @@ button.reset {
 }
 .vertical-rule {
     border-left: 1px solid #efefef;  /* Adjust the color as needed */
-    height: 80%;  /* Adjust the height as needed */
+    height: 70%;  /* Adjust the height as needed */
+}
+.unstyled-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    /* Add any other custom styles as needed */
+}
+.unstyled-link {
+    color: inherit;
+    text-decoration: none;
+    /* Add any other custom styles as needed */
+}
+.unstyled-link:hover {
+    text-decoration: none;
+    color: inherit;
 }
