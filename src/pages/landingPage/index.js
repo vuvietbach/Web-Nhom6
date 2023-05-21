@@ -1,6 +1,5 @@
 import { Grid, Typography } from "@mui/material";
 import SideBar from "components/side_bar";
-import Carousel from 'react-bootstrap/Carousel';
 import Button from '@mui/material/Button';
 const iS = {
     width: '100%',
@@ -64,30 +63,6 @@ const LandingPage = () => {
                             <Grid item xs={12}>
                                 <div style={s1}>
                                     <h5>Bộ sưu tập nổi bật</h5>
-                                    <Carousel nextIcon={nI()} prevIcon={pI()}>
-                                        <Carousel.Item>
-                                            <Grid container spacing={1}>
-                                                {iA.map((i, index) => {
-                                                    return (
-                                                        <Grid item xs={2}>
-                                                            <img style={iS1} src={i}/>
-                                                        </Grid>
-                                                    )
-                                                })}
-                                            </Grid>
-                                        </Carousel.Item>
-                                        <Carousel.Item>
-                                            <Grid container spacing={1}>
-                                                {iA.map((i, index) => {
-                                                    return (
-                                                        <Grid item xs={2}>
-                                                            <img style={iS1} src={i}/>
-                                                        </Grid>
-                                                    )
-                                                })}
-                                            </Grid>
-                                        </Carousel.Item>
-                                    </Carousel>
                                 </div>
                             </Grid>
                             <Grid item xs={12} sx={{position:'sticky', top:'0px', zIndex:'10'}}>

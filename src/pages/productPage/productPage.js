@@ -1,9 +1,9 @@
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { ListFilter, RatingStar, SideCard, CheckList} from "components/misc/misc";
 import { ProductCard } from "components/productCard/productCard";
 import './productPage.css'
+import { Pagination } from "@mui/material";
 const breadcrumbs = [
   <Link underline="hover" key="1" color="inherit">
     Trang chủ
@@ -56,7 +56,6 @@ export default function ProductPage() {
   return (
     <div class="center-ctn">
       <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >
         {breadcrumbs}
@@ -104,6 +103,9 @@ export default function ProductPage() {
                 <ProductCard product={product}/>
                 <ProductCard product={product1}/>
             </div>
+            <div class="d-flex justify-content-center mt-3">
+                <Pagination count={20} siblingCount={2} size="large" variant="text"/>
+            </div> 
       </div>
       </div>
     </div>
