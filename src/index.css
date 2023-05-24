@@ -1,0 +1,115 @@
+:root {
+    --content-max-width: 1250px;
+    --tiki-color: rgb(3, 96, 255);
+    --tiki-color-hover: rgb(3, 96, 255, 0.1);
+}
+.content-area {
+    width: var(--content-max-width);
+    margin: 0 auto;
+}
+.card {
+    background-color: #fff;
+    padding: 10px;
+}
+.round-border {
+    border-radius: 5px;
+}
+.side-bar {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+}
+.side-card {
+    width: 100%;
+    background-color: #fff;
+
+    padding: 10px 15px;
+    border: 1px solid #efefef;
+    
+    display: flex;
+    flex-direction: column;
+
+    font-size: 0.9rem;
+}
+ul {
+    list-style-type: none;
+}
+.list-group {
+    font-size: 0.9rem;
+}
+.list-group li {
+    margin-bottom: 3px;
+}
+.side_diachi {
+    font-size: 0.9rem;
+}
+.doidiachi {
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+.stars {
+    margin-right: 3px;
+}
+.price-inp {
+    width: 45%;
+}
+.price-submit {
+    width: 100%;
+
+}
+.hr {
+    flex-grow: 1;
+}
+.check-list li {
+    display: flex;
+    gap: 10px;
+}
+.main-ctn {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.truncate {
+    text-overflow: ellipsis;
+    /* Needed to make it work */
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-filter {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-weight: 400;
+}
+.list-filter li:hover {
+    cursor: pointer;
+}
+.list-filter li.active {
+    font-weight: 500;
+    color: var(--tiki-color);
+}
+button.reset {
+    all: unset;
+}
+.vertical-rule {
+    border-left: 1px solid #efefef;  /* Adjust the color as needed */
+    height: 70%;  /* Adjust the height as needed */
+}
+.unstyled-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    /* Add any other custom styles as needed */
+}
+.unstyled-link {
+    color: inherit;
+    text-decoration: none;
+    /* Add any other custom styles as needed */
+}
+.unstyled-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
