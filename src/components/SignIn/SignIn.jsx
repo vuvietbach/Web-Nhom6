@@ -13,8 +13,8 @@ class SignIn extends Component {
     render () {
     return (
     <div className='body'>
-        <div className="container">
-            <div className="navbar">
+        <div>
+            <div className="Navbar">
                 <div className="shop-icon">
                     <i className="fa-sharp fa-solid fa-shop fa-xl"></i> TEAM6-SHOP
                 </div>
@@ -22,7 +22,7 @@ class SignIn extends Component {
                 <a href="" className="help">Bạn cần giúp đỡ?</a>
             </div>
 
-            <div className="main">
+            <div className="Main">
                 <form action="" className="sign-in-form">
                     <div>
                         <div className="sign-in-subtitle" >
@@ -39,6 +39,7 @@ class SignIn extends Component {
                         isPost();
                     }}/>
                         <span className="validate-password"></span>
+                        
                         <button className="post-btn" id="post" onClick={post} style={{
                             
                         }}>ĐĂNG NHẬP</button>

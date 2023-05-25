@@ -20,7 +20,7 @@ a {
 
 
 /* Navbar */
-.navbar {
+.Navbar {
     width: 100%;
     background-color: #ffffff;
     display: flex;
@@ -64,8 +64,8 @@ a {
     position: absolute;
     left: 750px;
     top: 50px;
-    width: 400px;
-    height: 460px;
+    width: 440px;
+    height: 500px;
     padding: 0 30px;
     border-radius: 5px;
 }
@@ -118,4 +118,13 @@ span {
     font-size: 12px;
     text-align: center;
     color: rgba(0, 0, 0, 0.5);
+}
+
+#role {
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: rgb(219, 238, 255);
 }
