@@ -13,8 +13,8 @@ class SignUp extends Component {
   render() {
     return (
         <div className='body'>
-            <div className="container">
-                <div className="navbar">
+            <div>
+                <div className="Navbar">
                     <div className="shop-icon">
                         <i className="fa-sharp fa-solid fa-shop fa-xl"></i> TEAM6-SHOP
                     </div>
@@ -52,10 +52,15 @@ class SignUp extends Component {
                                 isPost();
                             }}/>
                             <span className="validate-confirm-password"></span>
+
+                            <select id="role">
+                                <option value="user">User</option>
+                                <option value="seller">Seller</option>
+                            </select>
     
                             <button className="post-btn" id="post" onClick={post}>TIẾP THEO</button>
                             <div className="rules">
-                                Bằng việc đăng kí, bạn đã đồng ý với Shopee về <a href="http://" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ</a>
+                                Bằng việc đăng kí, bạn đã đồng ý với Shopee về <a href="http://" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ </a>
                                 & <a href="http://" target="_blank" rel="noopener noreferrer">Chính sách bảo mật</a>                
                             </div>
                             <div className="sign-in">
