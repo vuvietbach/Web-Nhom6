@@ -1,14 +1,15 @@
-import TestComponent from "./components/test";
+import React from 'react';
+import Account from './components/Account_info/Account';
+import Header from './components/Header/Header'
+
 
 function App() {
-    return (
-        <div>
-            <h1>Testing</h1>
-        {/* Cần một cái header chung
-        Thêm component vào đây để test */}
-            <TestComponent />
-        </div> 
-    )
+  return (
+    <div className="App">
+        <Header/>
+        <Account/>
+    </div>
+  );
 }
 
 export default App;
