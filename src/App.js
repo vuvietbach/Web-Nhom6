@@ -1,13 +1,16 @@
 import React from 'react';
 import Account from './components/Account_info/Account';
-import Header from './components/Header/Header'
+import Header from './components/Header/Header';
+import GioHang from './components/Giohang/GioHang';
 
 
 function App() {
   return (
     <div className="App">
-        <Header/>
-        <Account/>
+      
+      <GioHang/>
+      <Header/>
+      <Account/>
     </div>
   );
 }
