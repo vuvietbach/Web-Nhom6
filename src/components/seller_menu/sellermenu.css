@@ -1,11 +1,14 @@
-.container {
+.container2 {
   padding: 0;
   margin: 0;
   margin-top: 2rem;
   width: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: white;
 }
 
-.picture {
+.picture2 {
   background-image: url("https://rare-gallery.com/uploads/posts/351193-4k-wallpaper.jpg");
   border-radius: 10px;
   height: 12em;
@@ -13,7 +16,7 @@
   display: flex;
 }
 
-.picture img {
+.picture2 img {
   margin: auto;
   border-radius: 50%;
 }
@@ -27,7 +30,7 @@
   display: block;
 }
 
-.statistic-box {
+.statistic-box2 {
   box-sizing: border-box;
   margin-top: 1%;
   border-style: solid;

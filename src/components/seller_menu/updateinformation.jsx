@@ -1,7 +1,38 @@
 import React from "react";
+import TextField from "@mui/material/TextField";
 
-function UpdateInfo() {
-  return <div>This is update information page</div>;
-}
+const UpdateInfo = () => {
+  const handleSubmit = () => {};
+
+  const handleInput = () => {};
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          onChange={handleInput}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Username"
+          name="username"
+          autoFocus
+        />
+        <TextField
+          onChange={handleInput}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="phone-number"
+          label="Phone number"
+          name="phone-number"
+        />
+      </form>
+    </>
+  );
+};
 
 export default UpdateInfo;
