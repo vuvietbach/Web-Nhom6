@@ -1,0 +1,74 @@
+@charset "utf-8";
+/* CSS Document */
+
+.menu{
+	width:200px;
+	margin-left: 250px;
+	margin-top: 100px;
+	display:inline-block;
+	box-sizing: border-box;
+	
+}
+.thongtin{
+	display:inline-block;
+	box-sizing: border-box;
+	width:500px;
+	height:600px;
+	margin-left: 50px;
+	vertical-align: top;
+	margin-top:100px;
+	background-color:#FFFFFF; 
+	border:#C0C0C0 1px solid;
+	border-radius: 10px 0px 0px 10px;	
+}
+.tkkhac{
+	display:inline-block;
+	box-sizing: border-box;
+	width: 400px;
+	height:600px;
+	vertical-align: top;
+	margin-top:100px;
+	margin-left: -4px;
+	background-color:#FFFFFF;	
+	border-left: #D4D4D4 1px solid; 
+	border:#C0C0C0 1px solid;
+	border-radius: 0px 10px 10px 0px;
+}
+
+#menu_1:hover,#menu_2:hover,#menu_3:hover,#menu_4:hover,#menu_5:hover,#menu_6:hover,#menu_7:hover,#menu_8:hover,#menu_9:hover,#menu_10:hover,#menu_11:hover,#menu_12:hover,#menu_13:hover,#menu_14:hover,#menu_15:hover,#menu_16:hover,#menu_17:hover,#menu_18:hover,#menu_19:hover,#menu_20:hover{
+	background-color:#E0E0E0;
+	cursor: pointer;
+}
+#body{
+	background-color: #F5F5F5;
+}
+#tieude{
+	color:#393939;
+	font-size:20px;
+}
+#sdt,#mail,#doimk,#maP,#face,#goog{
+	float:right;
+	border: #2CC3D6 1px solid;
+	max-width: 100px;
+	height: 20px;
+	overflow:hidden;
+	margin-right: 20px;
+}
+#luuthaydoi{
+	width:150px;
+	height:40px;
+	display:flex;
+	color:#FFFFFF;
+  	justify-content: center;
+  	align-items: center;
+	text-align: center;
+	background-color:#1297DA;
+	margin-left: 150px;
+	border-radius: 5px
+	
+}
+#luuthaydoi:hover{
+	cursor: pointer;
+}
+
+	
