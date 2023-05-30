@@ -1,5 +1,10 @@
 import TestComponent from "./components/test";
-import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Routes,
+} from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import OrderDetail from "./components/OrderDetail/Order-Detail";
