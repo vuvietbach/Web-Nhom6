@@ -3,7 +3,7 @@
 }
 
 html {
-    background-color: #EBEDEF ;
+    background-color: #efefef ;
 }
 
 html*:focus {
@@ -18,7 +18,7 @@ span {
     cursor: pointer;
 }
 
-.container {
+.Container {
     background-color: #EBEDEF;
     margin: 0 30px 0 30px;
     font-family: Roboto, helvetica, Arial, sans-serif;
@@ -130,6 +130,43 @@ span {
     border: 1px solid rgba(120,120,120,0.5);
 }
 
+.optionList_Wrapper {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+    margin: 5px 15px 5px 0;
+}
+
+.option {
+    display: grid;
+    position: relative;
+    height: 40px;
+    width: 130px;
+    background-color: rgb(242, 242, 242);
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.option:hover {
+    cursor: pointer;
+}
+
+.done-img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: none;
+}
+
+.option.selected_Option .done-img {
+    display: block;
+}
+
+.option.selected_Option {
+    background-color: rgb(229, 242, 255);
+}
+
 input:focus {
     outline: none;
   }
@@ -229,11 +266,46 @@ input:focus {
     padding: 10px;
     background-color: #ffffff;
     border-radius: 5px;
-    height: 340px;
 }
 
-.slider-container {
-    overflow-x: scroll;
+.scrollable-container {
+    position: relative;
+  }
+
+.slideContainer {
+    display: flex;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.product {
+    width: 209px;
+    flex: 0 0 auto;
+    margin: 0 3px;
+  }
+
+#slide_left_btn, #slide_right_btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 70px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    border:solid 0.3px rgb(204, 204, 204);
+    cursor: pointer;
+}
+
+#slide_left_btn {
+    left: 0;
+}
+
+#slide_right_btn {
+    right: 0;
+}
+
+.item_review {
+    display: flex;
+    padding-bottom: 3px;
 }
 
 /* Info Detail */

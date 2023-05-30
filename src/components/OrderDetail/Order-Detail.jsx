@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -13,6 +13,8 @@ import StarIcon from '@mui/icons-material/Star';
 import ChatIcon from '@mui/icons-material/Chat';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import "./OrderDetail.css"
 
 
@@ -57,8 +59,48 @@ function OrderDetail() {
     });
   };
 
+  //funtion for SLideContainer
+  const slideContainerRef = useRef(null);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleSlideLeft = () => {
+    if (slideContainerRef.current) {
+      const newScrollLeft = scrollLeft - 860; // Điều chỉnh giá trị 210 tùy thuộc vào kích thước của mỗi phần tử sản phẩm
+      setScrollLeft(newScrollLeft);
+      slideContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleSlideRight = () => {
+    if (slideContainerRef.current) {
+      const newScrollLeft = scrollLeft + 860; // Điều chỉnh giá trị 210 tùy thuộc vào kích thước của mỗi phần tử sản phẩm
+      setScrollLeft(newScrollLeft);
+      slideContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth',
+      });
+    }
+  };
+  
+
+  //funtion for SelectedOption
+  const toggleOption = (event) => {
+    // Xóa lớp "selected_Option" từ tất cả các "option" trong cùng container
+    const container = event.target.parentNode;
+    const options = container.getElementsByClassName('option');
+    for (let i = 0; i < options.length; i++) {
+        options[i].classList.remove('selected_Option');
+    }
+
+    // Thêm lớp "selected_Option" cho "option" được nhấp vào
+    event.target.classList.add('selected_Option');
+}
+
   return (
-    <div className='container'>
+    <div className='Container'>
 
       { /* Product Wrapper */}
       <div className="product-wrapper">
@@ -88,7 +130,17 @@ function OrderDetail() {
                 <div className="current-price">250.000 ₫</div>
               </div>
 
-              <p className="color">Màu : <span style={{color:'#242424', display:'inline'}}>Black</span></p>
+              <div className="optionList_Wrapper">
+                 {/* <p className="color">Màu : <span style={{color:'#242424', display:'inline'}}>Black</span></p> */}
+                 <div className="option" onClick={toggleOption}>
+                  Hồng
+                  <img className='done-img' src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg" alt="" />
+                 </div>
+                 <div  className="option " onClick={toggleOption}>
+                  Đen
+                  <img className='done-img' src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg" alt="" />
+                 </div>
+              </div>
               <div className="delivery-zone" style={{display:'flex', gap:'5px', alignItems:'center'}}>
                 Giao đến <span className='address'>Q.Hoàng Mai, P.Mai Động, Hà Nội</span> <span className="address-change">Đổi địa chỉ</span>
               </div>
@@ -191,14 +243,140 @@ function OrderDetail() {
             </div>
         </div>
       </div>
-
+      
+      {/* Sản phầm tương tự */}
       <div className="product-slide">
         <div className="block-title">
           <h2>Sản Phẩm Tương Tự</h2>
         </div>
-        <div className="slider-container">
+        <div id="scrollableDiv" class="scrollable-container">
+          <div class="slideContainer" ref={slideContainerRef}>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/ff/56/67/179201822da2de5592fe3675192c9c63.png.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/78/0b/74/d39dc3770433c28e4e0d858daac0319f.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/c8/b6/c3/0000d6c170846892608d67af10f33db5.png.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/3e/0c/19/4aa5e638285d5481bd2d287ab24586b9.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/6f/be/81/b91b333aca551218ab926ab7215e7d9b.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/93/da/1f/434172e0da3ba8a9c5c1b76a7d44c0f7.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/ee/6c/16/14ed3ed183d642ac66a949e519f2eaf2.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/ff/56/67/179201822da2de5592fe3675192c9c63.png.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/c8/b6/c3/0000d6c170846892608d67af10f33db5.png.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product">
+                  <img src="https://salt.tikicdn.com/cache/280x280/ts/product/3e/0c/19/4aa5e638285d5481bd2d287ab24586b9.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
+                  <div className="info">
+                    <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
+                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <div className="item_review">
+                      <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
+                      <div style={{margin:"0 5px 4px 5px",}}>|</div>
+                      <div style={{fontSize:"12px",marginTop:"2px"}}>Đã bán 887</div>
+                    </div>
+                  </div>
+                </div>               
+          </div>
+          <button id='slide_left_btn' onClick={handleSlideLeft}><NavigateBeforeIcon style={{marginLeft:"-4px"}}/></button>
+          <button id="slide_right_btn" onClick={handleSlideRight}><NavigateNextIcon style={{marginLeft:"-4px"}}/></button>
+          
+      </div>
 
-        </div>
       </div>
 
       {/* Info Detail */}
