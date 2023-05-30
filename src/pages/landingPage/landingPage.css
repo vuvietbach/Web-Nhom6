@@ -1,0 +1,55 @@
+
+.carousel-item-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.carousel-item-container img {
+    width: 145px;
+    border-radius: 5px;
+    border: 1px solid #efefef;
+}
+.landing-page-product-display {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 7px;
+}
+.recommendation-container {
+    border: 1px solid #efefef;
+    border-radius: 7px 7px 0px 0px;
+    overflow: hidden;
+
+    position: sticky;
+    top: 15px;
+}
+.recommendation-container .card{
+    border: none !important;
+    border-radius: 0 !important;
+}
+.recommendation-button {
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.recommendation-button:hover {
+    cursor: pointer;
+    background-color: #e7e7ee;
+}
+.recommendation-button img {
+    width: 32px;
+}
+.recommendation-button div {
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+.recommendation-section {
+    display: flex;
+    background-color: #fff;
+
+
+}

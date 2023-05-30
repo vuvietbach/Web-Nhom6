@@ -12,3 +12,14 @@
 .MuiPaginationItem-root:focus {
     outline: none;
 }
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.category {
+    font-size: 0.9rem;
+}
+.category:hover {
+    cursor: pointer;
+}
