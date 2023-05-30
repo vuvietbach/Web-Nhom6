@@ -18,7 +18,7 @@ a {
 
 
 /* Navbar */
-.navbar {
+.Navbar {
     display: flex;
     height: 84px;
     align-items: center;
@@ -45,7 +45,7 @@ a {
 }
 
 /* Main */
-.main {
+.Main {
     display: block;
     position: absolute ;
     height: 580px;
@@ -58,7 +58,7 @@ a {
     position: absolute;
     left: 750px;
     top: 50px;
-    width: 400px;
+    width: 40 0px;
     height: 400px;
     padding: 0 30px;
     border-radius: 5px;
