@@ -1,7 +1,41 @@
+body {
+    background-color: #f5f5fa;
+}
 :root {
     --content-max-width: 1250px;
     --tiki-color: rgb(3, 96, 255);
     --tiki-color-hover: rgb(3, 96, 255, 0.1);
+}
+.content-container {
+    margin: 0 auto;
+    width: var(--content-max-width);
+}
+.body-container {
+    margin: 0 auto;
+    margin-top: 15px;
+    
+    width: var(--content-max-width);
+    
+    display: flex;
+    gap: 15px;
+}
+.side-container {
+    width: 250px;
+    max-height: 100vh;
+    
+    position: sticky;
+    top: 15px;
+    overflow-y: scroll;
+
+    
+    display: flex;
+    flex-direction: column;
+}
+.main-container {
+    width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .content-area {
     width: var(--content-max-width);
@@ -9,7 +43,14 @@
 }
 .card {
     background-color: #fff;
-    padding: 10px;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+.card-title {
+}
+.card-content {
+}
+.main_card {
 }
 .round-border {
     border-radius: 5px;
@@ -112,4 +153,30 @@ button.reset {
 .unstyled-link:hover {
     text-decoration: none;
     color: inherit;
+}
+.truncate {
+    text-overflow: ellipsis;
+    /* Needed to make it work */
+    overflow: hidden;
+    white-space: nowrap;
+}
+.sidecard-button {
+    display: flex;
+    align-items: center;
+
+    padding: 8px 10px;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+.sidecard-button:hover {
+    background-color: #efefef;
+}
+.sidecard-button img {
+    width: 32px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.flex-item {
+    flex: 1;
 }
