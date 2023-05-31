@@ -3,9 +3,8 @@ import './Account.css'
 import images from "../assets/assets";
 const Account = () => {
     return (
-        <>
-              
-              <div>
+        <>    
+            <div>
                 <div id="cot_menu" className="menu">
                   <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
                     <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
@@ -148,8 +147,6 @@ const Account = () => {
                   </div>
                 </div>
               </div>
-    
-  
 
             </>
         )

@@ -1,4 +1,4 @@
-import TikiLogo from "assets/tiki.png";
+import TikiLogo from "../assets/tiki.png";
 import { Box } from "@mui/material";
 import Link from "@mui/material/Link";
 import { SearchBar } from "components/searchBar/searchBar";
