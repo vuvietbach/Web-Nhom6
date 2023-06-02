@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -16,6 +16,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import "./OrderDetail.css"
+import axios from 'axios';
 
 
 function OrderDetail() {
@@ -86,22 +87,59 @@ function OrderDetail() {
   };
   
 
-  //funtion for SelectedOption
-  const toggleOption = (event) => {
-    // Xóa lớp "selected_Option" từ tất cả các "option" trong cùng container
-    const container = event.target.parentNode;
-    const options = container.getElementsByClassName('option');
-    for (let i = 0; i < options.length; i++) {
-        options[i].classList.remove('selected_Option');
-    }
+  const [currentItem, setCurrentItem] = useState({});
+  const [item, setItem]=useState({});
+  const [specific_item, setSpecificItem] = useState([]);
+  const [seller, setSeller] = useState({});
 
-    // Thêm lớp "selected_Option" cho "option" được nhấp vào
-    event.target.classList.add('selected_Option');
-}
+  //funtion for SelectedOption
+  const toggleOption = (item) => {
+    setCurrentItem(item);
+  };
+
+  const FetchSpecificItem = async() =>{
+    try {
+      const response = await axios.get('http://localhost:8080/item/get-item-specific-by-origin-id/1');
+      setSpecificItem(response.data.data);
+      setCurrentItem(response.data.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const FetchItem=async()=>{   
+  try {
+    const response= await axios.get('http://localhost:8080/item/get-item-by-id/1');
+    setItem(response.data.data);
+    localStorage.setItem("item",JSON.stringify(response.data.data));
+  } catch (error) {
+    console.log(error);
+  };
+  }
+
+  const getSeller = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/seller/get-seller-by-id/1");
+      setSeller(response.data.data);
+      const item=localStorage.getItem("item");
+      console.log(item);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await FetchItem();
+      await FetchSpecificItem();
+      await getSeller();
+    };
+  
+    fetchData();
+  }, []);
+
 
   return (
     <div className='Container'>
-
       { /* Product Wrapper */}
       <div className="product-wrapper">
         <div className="image-box">
@@ -114,10 +152,10 @@ function OrderDetail() {
             <div className="title">
             <Typography style={{         
             }} variant="h4" gutterBottom>
-            Củ sạc siêu nhanh 65W Remax RP-U55 - 2 typeC 1 USB - Hàng chính hãng
+            {item.name}
             </Typography>
             <div className="rate">
-              <div className="rate-amout">(Xem 28 đánh giá)</div>
+              <div className="rate-amout">( {item.rate})</div>
               <span style={{color:'rgba(120,120,120,0.5)'}}>|</span>
               <div className="purchase-amount">87 đã bán</div>
             </div>
@@ -127,20 +165,27 @@ function OrderDetail() {
             {/* Left */}
            <div className="left">
               <div className="price">
-                <div className="current-price">250.000 ₫</div>
+                <div className="current-price">{currentItem.price}₫</div>
               </div>
 
               <div className="optionList_Wrapper">
-                 {/* <p className="color">Màu : <span style={{color:'#242424', display:'inline'}}>Black</span></p> */}
-                 <div className="option" onClick={toggleOption}>
-                  Hồng
-                  <img className='done-img' src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg" alt="" />
-                 </div>
-                 <div  className="option " onClick={toggleOption}>
-                  Đen
-                  <img className='done-img' src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg" alt="" />
-                 </div>
+                {specific_item.map((item, index) => (
+                  <div
+                    className={`option ${item === currentItem ? 'selected_Option' : ''}`}
+                    key={index} onClick={() => toggleOption(item)}
+                  >
+                    {item.name}
+                    {item === currentItem && (
+                      <img
+                        className="done-img"
+                        src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg"
+                        alt=""
+                      />
+                    )}
+                  </div>
+                ))}
               </div>
+
               <div className="delivery-zone" style={{display:'flex', gap:'5px', alignItems:'center'}}>
                 Giao đến <span className='address'>Q.Hoàng Mai, P.Mai Động, Hà Nội</span> <span className="address-change">Đổi địa chỉ</span>
               </div>
@@ -177,11 +222,7 @@ function OrderDetail() {
               <div className="seller-info">
                 <img src="https://vcdn.tikicdn.com/cache/w100/ts/seller/78/84/17/cc0779598acc61ec6e81c73f1c90d49d.jpg.webp" alt="" className="brand-img" />
                 <div className="brand-box" style={{marginLeft:'10px'}}>
-                  <span style={{color:'#000000'}} className="brand-name">ICybernet Official Store</span>
-                  {/* <br style={{
-                    width:'100%',
-                    border:'none'
-                    }} /> */}
+                  <span style={{color:'#000000'}} className="brand-name">{seller.name}</span>
                   <img src="https://salt.tikicdn.com/cache/w100/ts/upload/5d/4c/f7/0261315e75127c2ff73efd7a1f1ffdf2.png.webp" alt="Official" className="official-img" />
                 </div>
               </div>
@@ -197,7 +238,7 @@ function OrderDetail() {
                 </div>
                 <div className="follower">
                   <div className="follower-title">
-                    472.8k
+                    {seller.followers}k
                   </div>
                   <div className="subtitle">Theo dõi</div>
                 </div>
@@ -249,13 +290,13 @@ function OrderDetail() {
         <div className="block-title">
           <h2>Sản Phẩm Tương Tự</h2>
         </div>
-        <div id="scrollableDiv" class="scrollable-container">
-          <div class="slideContainer" ref={slideContainerRef}>
+        <div id="scrollableDiv" className="scrollable-container">
+          <div className="slideContainer" ref={slideContainerRef}>
                 <div className="product">
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/ff/56/67/179201822da2de5592fe3675192c9c63.png.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -267,7 +308,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/78/0b/74/d39dc3770433c28e4e0d858daac0319f.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -279,7 +320,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/c8/b6/c3/0000d6c170846892608d67af10f33db5.png.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -291,7 +332,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/3e/0c/19/4aa5e638285d5481bd2d287ab24586b9.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -303,7 +344,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/6f/be/81/b91b333aca551218ab926ab7215e7d9b.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -315,7 +356,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/93/da/1f/434172e0da3ba8a9c5c1b76a7d44c0f7.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -327,7 +368,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/ee/6c/16/14ed3ed183d642ac66a949e519f2eaf2.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -339,7 +380,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/ff/56/67/179201822da2de5592fe3675192c9c63.png.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -351,7 +392,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/c8/b6/c3/0000d6c170846892608d67af10f33db5.png.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -363,7 +404,7 @@ function OrderDetail() {
                   <img src="https://salt.tikicdn.com/cache/280x280/ts/product/3e/0c/19/4aa5e638285d5481bd2d287ab24586b9.jpg.webp" alt="" style={{width:"176px", height:"176px"}} />
                   <div className="info">
                     <span style={{color:"#ff424e"}}>13.860.000 ₫</span>
-                    <h7>Apple Ipad Air (5th Gen)</h7>
+                    <h4>Apple Ipad Air (5th Gen)</h4>
                     <div className="item_review">
                       <span style={{color:"#808089"}}>4.95 <StarIcon style={{color:'rgb(255,213,46)'}} /></span> 
                       <div style={{margin:"0 5px 4px 5px",}}>|</div>
@@ -426,9 +467,7 @@ function OrderDetail() {
       <div className="product-description">
           <h2>Mô Tả Sản Phẩm</h2>
           <p className="description">
-          Như bạn có thể thấy, OPPO A16K là một chiếc điện thoại giá rẻ. 
-          Nó dường như có thân máy được hoàn thiện từ chất liệu nhựa polycarbonate với các cạnh tròn.
-           Đây cũng là nơi chứa cụm camera hình vuông nằm ở góc trên cùng bên trái để chứa 1 ống kính và đèn flash LED. Ở mặt trước, OPPO A16K sẽ sử dụng thiết kế notch hình giọt nước để chứa camera selfie và phần “cằm” tương đối dày.
+          {item.description}
           </p>
       </div>   
       
@@ -451,7 +490,7 @@ function OrderDetail() {
                     }}} />
                 </div>
                 <div className="review-rating_total">
-                  241 nhận xét
+                  {item.number_of_rating} nhận xét
                 </div>
               </div>
             </div>
@@ -509,32 +548,32 @@ function OrderDetail() {
           <div className="review-filter">
             <div>Lọc xem theo:</div>
             <div className="review-star five clickable" onClick ={Click}>
-              {isChange? <div className='review-clicked'><DoneIcon></DoneIcon>Mới nhất</div> :
+              {isChange? <div className='review-clicked'><DoneIcon size='large' fontSize='large' className='medium-icon' ></DoneIcon>Mới nhất</div> :
               <div>Mới nhất</div>}
             </div>
             <div className="review-star five clickable" onClick={Click5}>
-              {isChange5? <div className='review-clicked'><DoneIcon></DoneIcon>5<StarIcon style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
-              <div>5<StarOutlineIcon></StarOutlineIcon></div>}
+              {isChange5? <div className='review-clicked'><DoneIcon fontSize='large'></DoneIcon>5<StarIcon fontSize='large' style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
+              <div>5<StarOutlineIcon fontSize='large' size='large'></StarOutlineIcon></div>}
             </div>
 
             <div className="review-star five clickable" onClick={Click4}>
-              {isChange4? <div className='review-clicked'><DoneIcon></DoneIcon>4<StarIcon style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
-              <div>4<StarOutlineIcon></StarOutlineIcon></div>}
+              {isChange4? <div className='review-clicked'><DoneIcon fontSize='large'></DoneIcon>4<StarIcon fontSize='large' style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
+              <div>4<StarOutlineIcon fontSize='large' size='large'></StarOutlineIcon></div>}
             </div>
 
             <div className="review-star five clickable" onClick={Click3}>
-              {isChange3? <div className='review-clicked'><DoneIcon></DoneIcon>3<StarIcon style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
-              <div>3<StarOutlineIcon></StarOutlineIcon></div>}
+              {isChange3? <div className='review-clicked'><DoneIcon fontSize='large'></DoneIcon>3<StarIcon fontSize='large' style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
+              <div>3<StarOutlineIcon fontSize='large' size='large'></StarOutlineIcon></div>}
             </div>
 
             <div className="review-star five clickable" onClick={Click2}>
-              {isChange2? <div className='review-clicked'><DoneIcon></DoneIcon>2<StarIcon style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
-              <div>2<StarOutlineIcon></StarOutlineIcon></div>}
+              {isChange2? <div className='review-clicked'><DoneIcon fontSize='large'></DoneIcon>2<StarIcon fontSize='large' style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
+              <div>2<StarOutlineIcon fontSize='large' size='large'></StarOutlineIcon></div>}
             </div>
 
             <div className="review-star five clickable" onClick={Click1}>
-              {isChange1? <div className='review-clicked'><DoneIcon></DoneIcon>1<StarIcon style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
-              <div>1<StarOutlineIcon></StarOutlineIcon></div>}
+              {isChange1? <div className='review-clicked'><DoneIcon fontSize='large'></DoneIcon>1<StarIcon fontSize='large' style={{color:'rgb(255,213,46)'}}></StarIcon></div> :
+              <div>1<StarOutlineIcon fontSize='large' size='large'></StarOutlineIcon></div>}
             </div>
           </div>
         </div>
