@@ -6,3 +6,6 @@
     align-items: center; 
     justify-content: center;
 }
+.custom-carousel-control {
+    width: 5%;
+}

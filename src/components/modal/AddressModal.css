@@ -1,0 +1,14 @@
+.address-modal-content {
+    background-color: #f8f8f8;
+    padding: 7x;
+}
+.address-modal-body {
+    margin-bottom: 10px;
+}
+.modal-title {
+    color:black;
+    font-weight: 400;
+}
+.address-description {
+    font-size: 0.9rem;
+}
