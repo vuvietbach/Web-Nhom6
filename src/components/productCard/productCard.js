@@ -1,11 +1,11 @@
 import './productCard.css';
 
-export const ProductCard = ({product}) => {
+const ProductCard = ({product}) => {
     return (
         <div className="product-card">
             <img class="card-img-top" src={product.image_url} alt={product.name}/>
             <div class="product-body">
-                <div className="product-name">{product.name}</div>
+                <div className="product-name">{product.title}</div>
                 <div className='product-rating'>
                     {
                         product.rating && (
@@ -16,14 +16,14 @@ export const ProductCard = ({product}) => {
                         )
                     }
                     {
-                        (product.numberSold && product.rating) && (
+                        (product.number_sold && product.rating) && (
                             <span className='vertical-rule mx-2'></span>
                         )
                     }
                     {
-                        product.numberSold && (
+                        product.number_sold && (
                             <span>
-                                Đã bán {product.numberSold}
+                                Đã bán {product.number_sold}
                             </span>   
                         )
                     }
@@ -35,3 +35,4 @@ export const ProductCard = ({product}) => {
         </div>
     )
 }
+export default ProductCard;

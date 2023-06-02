@@ -1,0 +1,54 @@
+{
+    "bst_noibat": [
+        "https://salt.tikicdn.com/ts/brickv2og/8c/ee/5e/f5245d4db8b0326712e7ba84d402b76b.png",
+        "https://salt.tikicdn.com/ts/brickv2og/88/0e/1d/1efb8f725e8a247752e693247f2984eb.png",
+        "https://salt.tikicdn.com/ts/brickv2og/02/30/ec/63c407f8fee09c2f1181cc80df5f5d37.png",
+        "https://salt.tikicdn.com/ts/brickv2og/f5/29/8a/6e7ea3b808a9fa225ca3b6428e03669a.png",
+        "https://salt.tikicdn.com/ts/brickv2og/85/c6/5c/b207c851b80315040aec3b8ef8b88573.png",
+        "https://salt.tikicdn.com/ts/brickv2og/85/1c/ac/d8d4b48b13228e3b62320c334152fbc9.png"
+    ],
+    "thuong_hieu": [
+        "https://salt.tikicdn.com/ts/tikimsp/71/11/36/9c711e88c2e020780e7fbf4d4e235b5f.png",
+        "https://salt.tikicdn.com/ts/tikimsp/9e/95/ac/d4cdfe402581c357976f6129f008b418.png",
+        "https://salt.tikicdn.com/ts/tikimsp/fc/fe/c9/70d35870e2f671c5f9e5bf099fb3000c.png",
+        "https://salt.tikicdn.com/ts/tikimsp/6a/b3/53/328f07f3ede023ca3885cbe653fae007.png",
+        "https://salt.tikicdn.com/ts/tikimsp/6a/b3/53/328f07f3ede023ca3885cbe653fae007.png",
+        "https://salt.tikicdn.com/ts/tikimsp/2c/bb/5e/686b567fc5f05c4c0f2c3a7e8a61227b.png"
+    ],
+    "danh_muc_noi_bat": [
+
+    ],
+    "first_carousel": {
+        "big": [
+            "https://salt.tikicdn.com/cache/w1080/ts/tikimsp/75/e6/eb/a71496fa03367f5a045f2a71ccca51ea.png.webp",
+            "https://salt.tikicdn.com/cache/w1080/ts/tikimsp/1b/4f/8f/f21c04afd9365d989c2ddca901866345.png.webp"
+        ],
+        "small": "https://salt.tikicdn.com/cache/w750/ts/tikimsp/67/f7/1c/a398b1ff88cf0bc23999e334e3ab2cda.png.webp"
+    },
+    "recommendation": [
+        {
+            "title": "Dành cho bạn",
+            "image_url": "https://salt.tikicdn.com/ts/personalish/f9/27/b5/3a8e2286a1c8fb91b67acc5ee35f82f0.png"
+        },
+        {
+            "title": "Rẻ mỗi ngày",
+            "image_url": "https://salt.tikicdn.com/ts/personalish/3e/da/53/391c37862ff5bd340b3fcf7d858a96dc.png"
+        },
+        {
+            "title": "Freeship",
+            "image_url": "https://salt.tikicdn.com/ts/personalish/d4/de/6f/412a517a5b52d5312b66a47c088daa2e.png"
+        },
+        {
+            "title": "Astra Plus",
+            "image_url": "https://salt.tikicdn.com/ts/personalish/1a/41/2f/bd05c095d72298752832dd5e87917c1c.png"
+        },
+        {
+            "title": "Dịch vụ số",
+            "image_url": "https://salt.tikicdn.com/ts/personalish/08/b8/5c/5c6327fd3cf12c534bff4a55dab2f12d.png"
+        },
+        {
+            "title": "Deal Siêu Hot",
+            "image_url": "https://salt.tikicdn.com/ts/personalish/41/99/9a/8898607d7fca4b79775a708c57a8152f.png"
+        }
+    ]
+}
