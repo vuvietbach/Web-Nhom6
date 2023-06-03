@@ -152,7 +152,6 @@ const ChooseAddress = () => {
 };
 export const AddressModalButton = (props) => {
   const [showModal, setShowModal] = React.useState(false);
-  console.log(showModal);
 
   const handleOpenModal = (event) => {
     event.preventDefault();
