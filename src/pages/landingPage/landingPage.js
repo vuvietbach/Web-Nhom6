@@ -6,16 +6,19 @@ import "./landingPage.css";
 import { Carousel } from "react-bootstrap";
 import products from "data/products.json";
 import ProductCard from "components/productCard/productCard";
-
+import { CustomLink } from "components/misc/misc";
 const ButtonList = ({ data }) => {
   return (
     <div>
       {data.map((item) => {
+        const url = `/danh-muc/${item.title.replace(/ /g, "_")}`;
         return (
-          <a class="sidecard-button">
-            <img src={item.image_url} alt={item.title} />
-            <div>{item.title}</div>
-          </a>
+          <CustomLink to={url}>
+            <a class="sidecard-button">
+              <img src={item.image_url} alt={item.title} />
+              <div>{item.title}</div>
+            </a>
+          </CustomLink>
         );
       })}
     </div>
@@ -24,16 +27,18 @@ const ButtonList = ({ data }) => {
 const LandingPage = () => {
   const bst_noibat = data.bst_noibat;
   const thuong_hieu = data.thuong_hieu;
-  const recom_button = data.recommendation
+  const recom_button = data.recommendation;
+  danhmuc = danhmuc.slice(0, 8)
+
   return (
     <div>
       <Header></Header>
       <div className="body-container">
         <div className="side-container">
-          <div className="card">
+          {/* <div className="card">
             <h6 className="card-title">Nổi bật</h6>
             <ButtonList data={noibat}></ButtonList>
-          </div>
+          </div> */}
           <div className="card">
             <h6 className="card-title">Danh mục</h6>
             <ButtonList data={danhmuc}></ButtonList>
@@ -83,20 +88,16 @@ const LandingPage = () => {
               <h5 className="card-title">Gợi ý hôm nay</h5>
             </div>
             <div class="recommendation-section">
-                  {
-                    recom_button.map((item) => {
-                      return (
-                        <div class="recommendation-button">
-                            <img src={item.image_url}></img>
-                            <div>{item.title}</div>
-                        </div>
-                      )
-
-                    })
-                  }
+              {recom_button.map((item) => {
+                return (
+                  <div class="recommendation-button">
+                    <img src={item.image_url}></img>
+                    <div>{item.title}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-
 
           <div className="landing-page-product-display">
             {products.map((product) => {

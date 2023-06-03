@@ -2,6 +2,8 @@ import TikiLogo from "assets/tiki.png";
 import { SearchBar } from "components/searchBar/searchBar";
 import "./header.css";
 import { AddressModalButton } from "components/modal/AddressModal";
+import { Link, useLocation } from "react-router-dom";
+import { buildUrl } from "components/misc/misc";
 function HeaderButton({ fa_icon, text }) {
   return (
     <button type="button" className="unstyled-button header-button">
@@ -10,20 +12,7 @@ function HeaderButton({ fa_icon, text }) {
     </button>
   );
 }
-const headerButtons = [
-  {
-    fa_icon: "fa fa-home",
-    text: "Trang chủ",
-  },
-  {
-    fa_icon: "fa-solid fa-crown",
-    text: "Astra",
-  },
-  {
-    fa_icon: "fa-regular fa-face-smile-beam",
-    text: "Tài khoản",
-  },
-];
+
 const thuc_pham = [
   "trái cây",
   "thịt, trứng",
@@ -34,7 +23,40 @@ const thuc_pham = [
   "đồ uống, bia rượu",
   "bánh kẹo",
 ];
+const CustomLink = ({ to, children, style }) => (
+  <Link
+    to={to}
+    style={{
+      textDecoration: 'none',
+      color: 'inherit',
+      ...style,
+    }}
+  >
+    {children}
+  </Link>
+);
 export default function Header() {
+  const location = useLocation();
+  // TODO: replace with real url
+  const headerButtons = [
+    {
+      fa_icon: "fa fa-home",
+      text: "Trang chủ",
+      url: "/",
+    },
+    {
+      fa_icon: "fa-solid fa-crown",
+      text: "Astra",
+      url: location.pathname,
+    },
+    {
+      fa_icon: "fa-regular fa-face-smile-beam",
+      text: "Tài khoản",
+      url: location.pathname,
+    },
+  ];
+
+
   return (
     <div style={{ backgroundColor: "#fff", width: "100%", paddingTop: "5px" }}>
       <div style={{ margin: "0 auto", width: "var(--content-max-width)" }}>
@@ -47,7 +69,10 @@ export default function Header() {
             <SearchBar />
           </div>
           {headerButtons.map((item, index) => {
-            return <HeaderButton fa_icon={item.fa_icon} text={item.text} />;
+            return (
+              <CustomLink to={item.url} style={{height: "100%"}}>
+                <HeaderButton fa_icon={item.fa_icon} text={item.text} />
+              </CustomLink>);
           })}
           <div className="vertical-rule" />
           <div className="unstyled-button header-button cart-icon">

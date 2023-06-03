@@ -1,5 +1,37 @@
 [
     {
+        "image_url": "https://salt.tikicdn.com/ts/category/54/c0/ff/fe98a4afa2d3e5142dc8096addc4e40b.png",
+        "title": "Điện Thoại - Máy Tính Bảng"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png",
+        "title": "Điện Gia Dụng"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/d6/7f/6c/5d53b60efb9448b6a1609c825c29fa40.png",
+        "title": "Giày - Dép nam"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/cf/ed/e1/96216aae6dd0e2beeb5e91d301649d28.png",
+        "title": "Giày - Dép nữ"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/9b/31/af/669e6a133118e5439d6c175e27c1f963.png",
+        "title": "Túi thời trang nam"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/31/a7/94/6524d2ecbec216816d91b6066452e3f2.png",
+        "title": "Túi thời trang nữ"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/00/5d/97/384ca1a678c4ee93a0886a204f47645d.png",
+        "title": "Thời trang nam"
+    },
+    {
+        "image_url": "https://salt.tikicdn.com/ts/category/55/5b/80/48cbaafe144c25d5065786ecace86d38.png",
+        "title": "Thời trang nữ"
+    },
+    {
         "image_url": "https://salt.tikicdn.com/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png",
         "title": "Đồ Chơi - Mẹ & Bé"
     },
@@ -8,41 +40,14 @@
         "title": "NGON"
     },
     {
-        "image_url": "https://salt.tikicdn.com/ts/category/54/c0/ff/fe98a4afa2d3e5142dc8096addc4e40b.png",
-        "title": "Điện Thoại - Máy Tính Bảng"
-    },
-    {
         "image_url": "https://salt.tikicdn.com/ts/category/73/0e/89/d7ca146de7198a6808580239e381a0c8.png",
         "title": "Làm Đẹp - Sức Khỏe"
     },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png",
-        "title": "Điện Gia Dụng"
-    },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/55/5b/80/48cbaafe144c25d5065786ecace86d38.png",
-        "title": "Thời trang nữ"
-    },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/00/5d/97/384ca1a678c4ee93a0886a204f47645d.png",
-        "title": "Thời trang nam"
-    },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/cf/ed/e1/96216aae6dd0e2beeb5e91d301649d28.png",
-        "title": "Giày - Dép nữ"
-    },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/31/a7/94/6524d2ecbec216816d91b6066452e3f2.png",
-        "title": "Túi thời trang nữ"
-    },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/d6/7f/6c/5d53b60efb9448b6a1609c825c29fa40.png",
-        "title": "Giày - Dép nam"
-    },
-    {
-        "image_url": "https://salt.tikicdn.com/ts/category/9b/31/af/669e6a133118e5439d6c175e27c1f963.png",
-        "title": "Túi thời trang nam"
-    },
+
+
+
+
+
     {
         "image_url": "https://salt.tikicdn.com/ts/category/3e/c0/30/1110651bd36a3e0d9b962cf135c818ee.png",
         "title": "Balo và Vali"
