@@ -11,6 +11,7 @@ import Account from 'components/Account_info/Account';
 import LandingPage from "pages/landingPage/landingPage";
 import ProductPage from "pages/productPage/productPage";
 import Header from 'components/header/header';
+import GioHang from "./components/GioHang/GioHang"
 
 function App(){
     return(
@@ -23,6 +24,8 @@ function App(){
             <Route path="/Account" element={<Account/>} />
             <Route path="/OrderDetail" element={<OrderDetail/>} />
             <Route path="/danh-muc" element={<ProductPage/>}/>
+            <Route path="/GioHang" element={<GioHang/>}/>
+            
           </Routes>
         </Router>
       </div>
