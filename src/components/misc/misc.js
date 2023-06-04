@@ -1,5 +1,6 @@
 import './misc.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 export const RatingStar = ({rating}) => {
   let stars = [];
   rating = Math.max(0, Math.min(5, rating));
@@ -72,3 +73,34 @@ export const ListFilter = () => {
         </ul>
     )
 }
+export const buildUrl = (path, params=[], query={}) => {
+    let url = path;
+
+    if (params.length > 0) {
+        params.forEach((param) => {
+            url += `/${param}`;
+        })
+    }
+    if (Object.keys(query).length > 0) {
+        const queryParams = new URLSearchParams(query);
+        const queryString = queryParams.toString();
+        if (queryString) {
+        url += `?${queryString}`;
+        }
+    }
+
+    return url;
+}
+
+export const CustomLink = ({ to, children, style }) => (
+    <Link
+      to={to}
+      style={{
+        textDecoration: 'none',
+        color: 'inherit',
+        ...style,
+      }}
+    >
+      {children}
+    </Link>
+  );

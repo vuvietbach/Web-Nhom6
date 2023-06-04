@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+span {
+    color: #ff424f;
+}
+
 .body {
     background-color: #ffffff;
     display: block;
@@ -54,7 +58,7 @@ a {
     position: absolute ;
     left: 0;
 
-    height: 580px;
+    height: 650px;
     width: 100%;
     background-color: #D4E6F1;
 }
@@ -63,9 +67,9 @@ a {
     background-color: #ffffff;
     position: absolute;
     left: 750px;
-    top: 50px;
-    width: 400px;
-    height: 500px;
+    top: 20px;
+    width: 440px;
+    /* height: 500px; */
     padding: 0 30px;
     border-radius: 5px;
 }
@@ -105,7 +109,7 @@ span {
     font-weight: 24px;
     border-color: white;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .rules {
@@ -127,4 +131,8 @@ span {
     margin-bottom: 15px;
     border-radius: 5px;
     background-color: rgb(219, 238, 255);
+}
+
+error {
+    color: #ff424f; ;
 }

@@ -1,6 +1,7 @@
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Header from "components/header/header";
+import { useParams } from "react-router-dom";
 import {
   ListFilter,
   RatingStar,
@@ -27,7 +28,12 @@ const brands = ["Gia dụng Việt", "Tiki Trading", "Shop máy đọc sách Hà
 const hcl = <CheckList items={brands} />;
 
 export default function ProductPage() {
-    const danhmuc = ["Tã, Bỉm", "Dinh dưỡng cho bé", "Thức ăn dặm"];
+    const danhmuccon = ["Tã, Bỉm", "Dinh dưỡng cho bé", "Thức ăn dặm"];
+    const { id } = useParams();
+    console.log(id)
+    // const params = useParams();
+    // const danh_muc = params["ten-danh-muc"];
+    // console.log(danh_muc)
   return (
     <div>
       <Header></Header>
@@ -40,7 +46,7 @@ export default function ProductPage() {
             <h6 className="card-title">Danh mục</h6>
             <div>
             {
-                danhmuc.map((item) => {
+                danhmuccon.map((item) => {
                     return (
                         <a class="category">
                             <div>{item}</div>
@@ -55,9 +61,6 @@ export default function ProductPage() {
             <div style={{fontSize:"0.9rem"}}>Q. Hoàn Kiếm, P.Hàng Trống, Hà Nội</div>
             <div style={{fontWeight:"500", fontSize:"0.8rem"}}>Đổi địa chỉ</div>
           </div>
-          <SideCard title="Dịch vụ">
-            <CheckList items={dv_items} />
-          </SideCard>
           <SideCard title={"Thương hiệu"} hiddenContent={hcl}>
             <CheckList items={brands} />
           </SideCard>
