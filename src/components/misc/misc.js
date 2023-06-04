@@ -55,17 +55,18 @@ export const CheckList = ({items}) => {
         </ul>
     )
 }
-export const ListFilter = () => {
+export const SortList = ({onClick}) => {
     const items = ["Phổ biến", "Bán chạy", "Hàng mới", "Giá thấp đến cao", "Giá cao đến thấp"];
-    const [selected, setSelected] = React.useState(items[0]);
-    const handelClick = (item) => {
-        setSelected(item);
+    const [selected, setSelected] = React.useState(0);
+    const handelClick = (index) => {
+        setSelected(index);
+        onClick(items[index]);
     }
     return (
         <ul class="list-group list-filter">
             {items.map((item, index) => {
                 return (
-                    <li key={index} class={item===selected ? "active" : ""} onClick={() => handelClick(item)}>
+                    <li key={index} class={index===selected ? "active" : ""} onClick={() => handelClick(index)}>
                         {item}
                     </li>
                 )

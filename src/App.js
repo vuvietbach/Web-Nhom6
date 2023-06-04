@@ -9,7 +9,6 @@ import SignIn from "./components/SignIn/SignIn";
 import OrderDetail from "./components/OrderDetail/Order-Detail";
 import LandingPage from "pages/landingPage/landingPage";
 import ProductPage from "pages/productPage/productPage";
-import mock from "myAxios";
 function App(){
     return(
       <div className="App">

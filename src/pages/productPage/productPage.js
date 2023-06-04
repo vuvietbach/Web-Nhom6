@@ -10,6 +10,10 @@ import {
 } from "components/misc/misc";
 import "./productPage.css";
 import { Pagination } from "@mui/material";
+import ProductCard from "components/productCard/productCard";
+import productData from "axiosAPI/data/products.json";
+import { useState } from "react";
+import { SortList } from "components/misc/misc";
 const breadcrumbs = [
   <Link underline="hover" key="1" color="inherit">
     Trang chủ
@@ -18,6 +22,7 @@ const breadcrumbs = [
     Thời trang nam
   </Link>,
 ];
+
 
 // const items = [
 //     'https://salt.tikicdn.com/cache/w1080/ts/tikimsp/75/e6/eb/ac3c8bc53fcca5bfa1a7e2c6bb8aea77.png.webp',
@@ -30,10 +35,19 @@ const hcl = <CheckList items={brands} />;
 export default function ProductPage() {
     const danhmuccon = ["Tã, Bỉm", "Dinh dưỡng cho bé", "Thức ăn dặm"];
     const { id } = useParams();
-    console.log(id)
-    // const params = useParams();
-    // const danh_muc = params["ten-danh-muc"];
-    // console.log(danh_muc)
+    // TODO: replace with real data
+    const [productList, setProductList] = useState(productData["Điện Thoại - Máy Tính Bảng"]);
+    const sortList = (sortTypes) => {
+      console.log(sortTypes);
+      if (sortTypes == "Giá thấp đến cao") {
+        const newProductList = [...productList].sort((a, b) => a.price - b.price);
+        setProductList(newProductList);
+      } else if (sortTypes == "Giá cao đến thấp") {
+        const newProductList = [...productList].sort((a, b) => b.price - a.price);
+        setProductList(newProductList);
+      }
+    }
+
   return (
     <div>
       <Header></Header>
@@ -96,12 +110,17 @@ export default function ProductPage() {
           <div class="card">
             <h4>Điện gia dụng</h4>
             <div>
-              <ListFilter />
+              <SortList onClick={sortList}/>
             </div>
           </div>
           <div class="product-display">
-            {/* <ProductCard product={product} />
-            <ProductCard product={product1} /> */}
+            {
+                productList.map((item) => {
+                  return (
+                    <ProductCard product={item} />
+                  )
+                })
+            }
           </div>
           <div class="custom-pagination">
             <Pagination
