@@ -1,13 +1,16 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Avatar,
+  Box,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -17,10 +20,31 @@ import SellerInformation from "./sellerinformation";
 import ItemList from "./itemlist";
 import OrderList from "./orderlist";
 import UpdateInfo from "./updateinformation";
+import axios from "axios";
 
-const drawerWidth = 240;
-
+const drawerWidth = 300;
 function SellerMenu(props) {
+  const [seller, setSeller] = React.useState(null);
+
+  React.useEffect(() => {
+    async function getSellerById() {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/seller/get-seller-by-id/1"
+        );
+        const sellerData = response.data.data;
+        setSeller(sellerData);
+        console.log("Seller:", sellerData);
+        // You can do further processing with the seller object here
+      } catch (error) {
+        console.error("Error:", error.message);
+        // Handle the error case here
+      }
+    }
+
+    getSellerById();
+  }, []);
+
   const [showShopInfo, setShowShopInfo] = React.useState(true);
   const [showItemList, setShowItemList] = React.useState(false);
   const [showOrderList, setShowOrderList] = React.useState(false);
@@ -54,81 +78,6 @@ function SellerMenu(props) {
     setShowUpdateInfo(true);
   };
 
-  const drawer = (
-    <div>
-      <List>
-        <ListItem key="1" disablePadding>
-          <ListItemButton onClick={handleShowShopInfo}>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
-              disableTypography
-              primary="Thông tin cửa hàng"
-            />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem key="2" disablePadding>
-          <ListItemButton onClick={handleShowItemList}>
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
-              disableTypography
-              primary="Danh sách sản phẩm"
-            />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem key="3" disablePadding>
-          <ListItemButton onClick={handleShowOrderList}>
-            <ListItemIcon>
-              <ArticleIcon />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
-              disableTypography
-              primary="Danh sách đơn hàng"
-            />
-          </ListItemButton>
-        </ListItem>
-      </List>
-
-      <Divider />
-
-      <List>
-        <ListItem key="4" disablePadding>
-          <ListItemButton onClick={handleShowUpdateInfo}>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
-              disableTypography
-              primary="Chỉnh sửa thông tin"
-            />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem key="5" disablePadding>
-          <ListItemButton onClick={() => alert("check2")}>
-            <ListItemIcon>
-              <PowerSettingsNewIcon />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ fontSize: "14px", fontFamily: "Arial", padding: "5px" }}
-              disableTypography
-              primary="Đăng xuất"
-            />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </div>
-  );
-
   return (
     <Box sx={{ display: "flex", backgroundColor: "white", height: "100vh" }}>
       <Box
@@ -146,7 +95,100 @@ function SellerMenu(props) {
             },
           }}
         >
-          {drawer}
+          <div>
+            <Avatar alt="avatar" src={seller.img_url} />
+            <Divider />
+            <List>
+              <ListItem key="1" disablePadding>
+                <ListItemButton onClick={handleShowShopInfo}>
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      fontSize: "14px",
+                      fontFamily: "Arial",
+                      padding: "5px",
+                    }}
+                    disableTypography
+                    primary="Thông tin cửa hàng"
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem key="2" disablePadding>
+                <ListItemButton onClick={handleShowItemList}>
+                  <ListItemIcon>
+                    <ShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      fontSize: "14px",
+                      fontFamily: "Arial",
+                      padding: "5px",
+                    }}
+                    disableTypography
+                    primary="Danh sách sản phẩm"
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem key="3" disablePadding>
+                <ListItemButton onClick={handleShowOrderList}>
+                  <ListItemIcon>
+                    <ArticleIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      fontSize: "14px",
+                      fontFamily: "Arial",
+                      padding: "5px",
+                    }}
+                    disableTypography
+                    primary="Danh sách đơn hàng"
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+
+            <Divider />
+
+            <List>
+              <ListItem key="4" disablePadding>
+                <ListItemButton onClick={handleShowUpdateInfo}>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      fontSize: "14px",
+                      fontFamily: "Arial",
+                      padding: "5px",
+                    }}
+                    disableTypography
+                    primary="Chỉnh sửa thông tin"
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem key="5" disablePadding>
+                <ListItemButton onClick={() => alert("check2")}>
+                  <ListItemIcon>
+                    <PowerSettingsNewIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      fontSize: "14px",
+                      fontFamily: "Arial",
+                      padding: "5px",
+                    }}
+                    disableTypography
+                    primary="Đăng xuất"
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </div>
         </Drawer>
       </Box>
       {showShopInfo && <SellerInformation />}

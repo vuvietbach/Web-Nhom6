@@ -1,6 +1,6 @@
 import AppWidgetSummary from "../../sections/AppWidget";
-import "./sellermenu.css";
 import { Grid } from "@mui/material";
+import "./sellermenu.css";
 
 const SellerInformation = () => {
   return (
