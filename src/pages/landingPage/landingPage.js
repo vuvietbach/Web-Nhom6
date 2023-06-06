@@ -33,7 +33,7 @@ const LandingPage = () => {
   return (
     <div>
       <Header></Header>
-      <div className="body-container">
+      <div className="body-container" style={{marginTop:"15px"}}>
         <div className="side-container">
           {/* <div className="card">
             <h6 className="card-title">Nổi bật</h6>

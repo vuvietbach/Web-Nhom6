@@ -12,7 +12,6 @@ body {
 }
 .body-container {
     margin: 0 auto;
-    margin-top: 15px;
     
     width: var(--content-max-width);
     
