@@ -1,9 +1,9 @@
-import TikiLogo from "assets/tiki.png";
+
+import TikiLogo from "../assets/tiki.png";
 import { SearchBar } from "components/searchBar/searchBar";
 import "./header.css";
 import { AddressModalButton } from "components/modal/AddressModal";
 import { Link, useLocation } from "react-router-dom";
-import { buildUrl } from "components/misc/misc";
 function HeaderButton({ fa_icon, text }) {
   return (
     <button type="button" className="unstyled-button header-button">

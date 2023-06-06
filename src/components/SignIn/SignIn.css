@@ -59,7 +59,7 @@ a {
     left: 750px;
     top: 50px;
     width: 40 0px;
-    height: 400px;
+    height: 440px;
     padding: 0 30px;
     border-radius: 5px;
 }
@@ -99,7 +99,7 @@ span {
     font-weight: 24px;
     border-color: white;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .rules {
@@ -112,4 +112,8 @@ span {
     font-size: 12px;
     text-align: center;
     color: rgba(0, 0, 0, 0.5);
+}
+
+.error {
+    color: #ff424f; ;
 }
