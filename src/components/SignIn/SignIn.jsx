@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import "./SignIn.css";
 import axios from 'axios';
 
@@ -8,6 +9,7 @@ const SignIn = () => {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [nameInputValue, setNameInputValue] = useState('');
   const [passwordInputValue, setPasswordInputValue] = useState('');
+  const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
 
   const checkValidName = (e) => {
     const name = e.target.value;
@@ -40,17 +42,39 @@ const SignIn = () => {
   const post = async (e) => {
     e.preventDefault();
     try {
-      const res=await axios.post('http://localhost:8080/auth/login',{
-        username:nameInputValue,
-        password:passwordInputValue
-    });
-    localStorage.setItem("user",JSON.stringify(res.data.data));
-    // const user=localStorage.getItem("user");
+      const res = await axios.post('http://localhost:8080/auth/login', {
+        username: nameInputValue,
+        password: passwordInputValue
+      });
+      localStorage.setItem("user", JSON.stringify(res.data.data));
+      setCookie('accessToken', res.data.accessToken);
+      setCookie('refreshToken', res.data.refreshToken);
+
+      sendRefreshToken(); // Gửi refresh token sau khi nhận được token từ API login
     } catch (error) {
       document.querySelector(".error-message").innerHTML = "Sai tài khoản hoặc mật khẩu";
     }
-    
+
   };
+
+
+const sendRefreshToken = () => {
+
+  setTimeout(async () => {
+    try {
+      const res = await axios.post('http://localhost:8080/auth/refresh-token', null, {
+        withCredentials: true // Gửi cookie trong yêu cầu
+      });
+
+      console.log(res.data);
+      setCookie('accessToken', res.data.accessToken);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    sendRefreshToken();
+  }, 60000);
+};
+
 
   const isPost = () => {
     const isValid = isValidName && isValidPassword;
@@ -81,7 +105,7 @@ const SignIn = () => {
         <div className="Main">
           <form action="" className="sign-in-form">
             <div>
-              <div className="sign-in-subtitle" >
+              <div className="sign-in-subtitle">
                 Đăng nhập
               </div>
               <input type="text" placeholder="Tên tài khoản" className="input-box name-input" onChange={checkValidName} />
