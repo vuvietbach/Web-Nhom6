@@ -48,6 +48,14 @@ export default function AppWidgetSummary({
       bgColor = "#E9FCD4";
       txtColor = "#229A16";
       break;
+    case "warning":
+      bgColor = "#FFE16A";
+      txtColor = "#B78103";
+      break;
+    case "secondary":
+      bgColor = "#e397f0";
+      txtColor = "#7b1fa2";
+      break;
     default:
       bgColor = "#D1E9FC";
       txtColor = "#103996";
