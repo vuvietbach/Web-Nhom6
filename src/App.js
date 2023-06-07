@@ -13,7 +13,6 @@ import ProductPage from "pages/productPage/productPage";
 import Header from "components/header/header";
 import GioHang from "./components/GioHang/GioHang";
 import mock from "myAxios";
-import SellerMenu from "components/seller_menu/sellermenu";
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
           <Route path="/chi-tiet-san-pham" element={<OrderDetail />} />
           <Route path="/GioHang" element={<GioHang />} />
           <Route path="/danh-muc/:id" element={<ProductPage />} />
-          <Route path="/seller" element={<SellerMenu />} />
         </Routes>
       </Router>
     </div>
