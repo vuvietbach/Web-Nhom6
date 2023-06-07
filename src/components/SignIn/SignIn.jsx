@@ -46,9 +46,11 @@ const SignIn = () => {
         username: nameInputValue,
         password: passwordInputValue
       });
-      localStorage.setItem("user", JSON.stringify(res.data.data));
+      localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
       setCookie('accessToken', res.data.accessToken);
       setCookie('refreshToken', res.data.refreshToken);
+      const userData = JSON.parse(localStorage.getItem("user"));
+      console.log(userData.phone_number);
 
       sendRefreshToken(); // Gửi refresh token sau khi nhận được token từ API login
     } catch (error) {
@@ -65,14 +67,12 @@ const sendRefreshToken = () => {
       const res = await axios.post('http://localhost:8080/auth/refresh-token', null, {
         withCredentials: true // Gửi cookie trong yêu cầu
       });
-
-      console.log(res.data);
       setCookie('accessToken', res.data.accessToken);
     } catch (error) {
       console.log(error.response.data);
     }
     sendRefreshToken();
-  }, 60000);
+  }, 1000 * 60 * 30);
 };
 
 
