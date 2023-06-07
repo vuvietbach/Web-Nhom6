@@ -1,5 +1,10 @@
 
 import TikiLogo from "../assets/tiki.png";
+import { Box } from "@mui/material";
+
+
+
+
 import { SearchBar } from "components/searchBar/searchBar";
 import "./header.css";
 import { AddressModalButton } from "components/modal/AddressModal";
