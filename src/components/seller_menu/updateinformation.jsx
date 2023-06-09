@@ -1,6 +1,5 @@
 import React from "react";
-import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
+import { Typography, TextField, Button } from "@mui/material";
 
 const UpdateInfo = () => {
   const handleSubmit = () => {};
@@ -69,6 +68,9 @@ const UpdateInfo = () => {
             rows={6}
             style={{ marginBottom: "2%" }}
           />
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
         </form>
       </div>
     </div>
