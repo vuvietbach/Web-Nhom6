@@ -35,6 +35,7 @@ function SellerMenu(props) {
   //       const sellerData = response.data.data;
   //       setSeller(sellerData);
   //       console.log("Seller:", sellerData);
+  //       console.log(seller);
   //       // You can do further processing with the seller object here
   //     } catch (error) {
   //       console.error("Error:", error.message);

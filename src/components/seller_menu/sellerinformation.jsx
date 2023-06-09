@@ -1,17 +1,20 @@
 import AppWidgetSummary from "../../sections/AppWidget";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import "./sellermenu.css";
 
 const SellerInformation = () => {
   return (
     <div className="container2">
-      <div className="picture2">
-        <img
-          className="avatar"
-          src="https://img.ws.mms.shopee.vn/1301e27a24db00dd03edf9096b701875"
-          alt="avatar"
-        />
-      </div>
+      <Typography
+        variant="h1"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Your stats
+      </Typography>
       <div className="statistic-box2">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
