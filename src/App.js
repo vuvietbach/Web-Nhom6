@@ -13,6 +13,7 @@ import ProductPage from "pages/productPage/productPage";
 import GioHang from "./components/GioHang/GioHang";
 import { CookiesProvider } from "react-cookie";
 import SellerMenu from "components/seller_menu/sellermenu";
+import ShopInfo from "components/shop_info/shopInfo";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/GioHang" element={<GioHang />} />
             <Route path="/danh-muc/:id" element={<ProductPage />} />
             <Route path="/seller" element={<SellerMenu />} />
+            <Route path="/shop/:name" element={<ShopInfo />} />
           </Routes>
         </Router>
       </div>
