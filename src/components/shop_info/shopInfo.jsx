@@ -35,6 +35,8 @@ const items = [
 const ShopInfo = () => {
   const [sellerData, setSellerData] = useState(null);
   const { name } = useParams();
+  console.log(name);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,57 +51,61 @@ const ShopInfo = () => {
 
     fetchData();
   }, [name]);
-  console.log(sellerData);
+
   return (
     <Box p={2}>
-      <Grid container spacing={2}>
-        {/* Store Header */}
-        <Grid item xs={12}>
-          <Card>
-            <CardContent>
-              <Grid container spacing={2} alignItems="center">
-                <Grid item>
-                  <Avatar
-                    src={sellerData.img_url}
-                    alt={sellerData.name}
-                    sx={{ width: 80, height: 80 }}
-                  />
-                </Grid>
-                <Grid item>
-                  <Typography variant="h5">{sellerData.name}</Typography>
-                  <Typography variant="body1" color="textSecondary">
-                    {sellerData.description}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-        {/* Item List */}
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            {items.map((item) => (
-              <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
-                <Card>
-                  <CardContent>
-                    <Box textAlign="center">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        style={{ width: "100%", height: "auto" }}
-                      />
-                    </Box>
-                    <Typography variant="h6">{item.name}</Typography>
-                    <Typography variant="body1">
-                      ${item.price.toFixed(2)}
+      {sellerData ? (
+        <Grid container spacing={2}>
+          {/* Store Header */}
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item>
+                    <Avatar
+                      src={sellerData.img_url}
+                      alt={sellerData.name}
+                      sx={{ width: 80, height: 80 }}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="h5">{sellerData.name}</Typography>
+                    <Typography variant="body1" color="textSecondary">
+                      {sellerData.description}
                     </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+          {/* Item List */}
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              {items.map((item) => (
+                <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
+                  <Card>
+                    <CardContent>
+                      <Box textAlign="center">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      </Box>
+                      <Typography variant="h6">{item.name}</Typography>
+                      <Typography variant="body1">
+                        ${item.price.toFixed(2)}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Typography variant="body1">Loading...</Typography>
+      )}
     </Box>
   );
 };
