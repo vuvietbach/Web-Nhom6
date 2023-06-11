@@ -46,11 +46,15 @@ const SignIn = () => {
         username: nameInputValue,
         password: passwordInputValue
       });
-      localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
+      if(res.data.data.role == 'user'){
+        localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
+      }
+      else localStorage.setItem('user', JSON.stringify(res.data.data.dataSeller));
       setCookie('accessToken', res.data.accessToken);
       setCookie('refreshToken', res.data.refreshToken);
       const userData = JSON.parse(localStorage.getItem("user"));
       console.log(userData.phone_number);
+      document.querySelector(".error-message").innerHTML = "";
 
       sendRefreshToken(); // Gửi refresh token sau khi nhận được token từ API login
     } catch (error) {
