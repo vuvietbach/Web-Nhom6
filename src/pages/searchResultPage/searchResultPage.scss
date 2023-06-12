@@ -1,0 +1,64 @@
+.container1 {
+    display: flex;
+    gap: 10px;
+}
+.banner {
+    width: 250px;
+}
+.banner img {
+    width: 100%;
+}
+.result-container {
+    width: 1030px;
+}
+button.pill-box:focus, button.pill-box:hover {
+    border: 1px solid #000;
+}
+.filter-section {
+    display: flex;
+}
+.filter-slider {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+
+}
+.filter-slider_prev-button, .filter-slider_next-button{
+    all: unset;
+    align-self: flex-end;
+    padding: 7px;
+    background-color: #fff;
+    z-index: 10;
+}
+.filter-slider_next-button {
+    position: absolute;
+    right: 0;
+    background-color: rgba($color: #fff, $alpha: 0.4);
+}
+.filter-container {
+
+    display: flex;    
+    transition: transform 0.3s ease; /* Adjust transition duration and easing as needed */
+
+    
+}
+.filter-modal-section {
+    flex: 0 0 10%;    
+    display: flex;
+    align-items: end;
+}
+.filter-modal-button {
+    all: unset;
+    flex: 1;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #efefef;
+    border-radius: 7px;
+    height: 60%;
+    &:hover {
+        border: 1px solid #000;
+    }
+}

@@ -26,12 +26,6 @@
     min-height: 68px;
     
 }
-*, ::before, ::after {
-    box-sizing: border-box;
-}
-div {
-    display: block;
-}
 html {
     line-height: 1.15;
     text-size-adjust: 100%;
@@ -50,9 +44,6 @@ html {
     left: 0px;
     top: -20px;
     right: 0px;
-}
-*, ::before, ::after {
-    box-sizing: border-box;
 }
 
 .tonghang {
@@ -647,13 +638,4 @@ li {
     display: block;
     cursor: pointer;
     margin: 15px 0px 0px;
-}
-button, [type="button"], [type="reset"], [type="submit"] {
-    appearance: button;
-}
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-    font-size: 100%;
-    line-height: 1.15;
-    margin: 0px;
 }

@@ -10,10 +10,6 @@ html*:focus {
     outline: none;
 }
 
-span {
-    color: #0b74e5;
-}
-
 .medium-icon {
     width: 40px;
     height: 20px;
