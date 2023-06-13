@@ -1,13 +1,13 @@
-body {
+/* body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-}
+} */
 
-span {
+/* span {
     color: #ff424f;
-}
+} */
 
 .body {
     background-color: #ffffff;
@@ -16,7 +16,7 @@ span {
     width: 100%;
 }
 
-a {
+.link {
     text-decoration: none;
     color: #ff424f;
     font-size: 14px;
@@ -70,7 +70,7 @@ a {
     top: 20px;
     width: 440px;
     /* height: 500px; */
-    padding: 0 30px;
+    padding: 0 30px 15px 30px;
     border-radius: 5px;
 }
 
@@ -133,6 +133,6 @@ span {
     background-color: rgb(219, 238, 255);
 }
 
-error {
+.error {
     color: #ff424f; ;
 }

@@ -34,6 +34,7 @@ function OrderDetail() {
   const Click3 = () => { setIsChange3(!isChange3)}
   const Click4 = () => { setIsChange4(!isChange4)}
   const Click5 = () => { setIsChange5(!isChange5)}
+  
 
   const handleIncrement = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
@@ -631,7 +632,7 @@ function OrderDetail() {
             </div>
           </div>
         </div>
-      </div>      
+      </div>   
     </div>
   )
 }

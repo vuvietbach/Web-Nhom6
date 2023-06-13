@@ -186,8 +186,8 @@ const SignUp = () => {
               <button className="post-btn" id="post" onClick={post}>TIẾP THEO</button>
               <span className="error-message error"></span>
               <div className="rules">
-                Bằng việc đăng kí, bạn đã đồng ý về <a href="http://" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ </a>
-                & <a href="http://" target="_blank" rel="noopener noreferrer">Chính sách bảo mật</a>
+                Bằng việc đăng kí, bạn đã đồng ý về <a className='link' href="http://" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ </a>
+                & <a className='link' href="http://" target="_blank" rel="noopener noreferrer">Chính sách bảo mật</a>
               </div>
               <div className="sign-in">
                 Bạn đã có tài khoản? <Link to="/SignIn">Đăng nhập</Link>

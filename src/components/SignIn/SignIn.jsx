@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import "./SignIn.css";
 import axios from 'axios';
@@ -10,6 +10,7 @@ const SignIn = () => {
   const [nameInputValue, setNameInputValue] = useState('');
   const [passwordInputValue, setPasswordInputValue] = useState('');
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
+  const navigate = useNavigate();
 
   const checkValidName = (e) => {
     const name = e.target.value;
@@ -46,10 +47,6 @@ const SignIn = () => {
         username: nameInputValue,
         password: passwordInputValue
       });
-      if(res.data.data.role == 'user'){
-        localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
-      }
-      else localStorage.setItem('user', JSON.stringify(res.data.data.dataSeller));
       setCookie('accessToken', res.data.accessToken);
       setCookie('refreshToken', res.data.refreshToken);
       const userData = JSON.parse(localStorage.getItem("user"));
@@ -57,6 +54,13 @@ const SignIn = () => {
       document.querySelector(".error-message").innerHTML = "";
 
       sendRefreshToken(); // Gửi refresh token sau khi nhận được token từ API login
+      if(res.data.data.role == 'user'){
+        localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
+      }
+      else {
+        localStorage.setItem('user', JSON.stringify(res.data.data.dataSeller));
+        navigate("/Seller");
+      }
     } catch (error) {
       document.querySelector(".error-message").innerHTML = "Sai tài khoản hoặc mật khẩu";
     }
@@ -123,7 +127,7 @@ const sendRefreshToken = () => {
               </button>
               <span className="error-message error"></span>
               <div className="forget-password">
-                <a href="http://" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(0, 85, 170)' }}>Quên mật khẩu</a>
+                <a className='link' href="http://" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(0, 85, 170)' }}>Quên mật khẩu</a>
               </div>
               <div className="sign-up">
                 Bạn chưa có tài khoản? <Link to="/SignUp">Đăng ký</Link>
