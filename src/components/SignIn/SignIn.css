@@ -10,7 +10,7 @@ body {
     font-family: sans-serif;
 }
 
-a {
+.link {
     text-decoration: none;
     color: #ff424f;
     font-size: 14px;

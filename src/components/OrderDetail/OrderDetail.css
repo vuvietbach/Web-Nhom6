@@ -2,17 +2,17 @@
     --color-text: #242424;
 }
 
-html {
+/* html {
     background-color: #efefef ;
-}
+} */
 
-html*:focus {
+/* html*:focus {
     outline: none;
-}
+} */
 
-span {
+/* span {
     color: #0b74e5;
-}
+} */
 
 .medium-icon {
     width: 40px;
