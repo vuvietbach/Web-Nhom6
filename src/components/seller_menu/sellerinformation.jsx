@@ -3,6 +3,8 @@ import { Grid, Typography } from "@mui/material";
 import "./sellermenu.css";
 
 const SellerInformation = () => {
+  const userData = JSON.parse(localStorage.getItem("user"));
+  console.log(userData);
   return (
     <div className="container2">
       <Typography

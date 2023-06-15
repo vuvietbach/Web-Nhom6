@@ -29,7 +29,7 @@ function App() {
             <Route path="/GioHang" element={<GioHang />} />
             <Route path="/danh-muc/:id" element={<ProductPage />} />
             <Route path="/seller" element={<SellerMenu />} />
-            <Route path="/shop/:name" element={<ShopInfo />} />
+            <Route path="/shop/:id" element={<ShopInfo />} />
           </Routes>
         </Router>
       </div>
