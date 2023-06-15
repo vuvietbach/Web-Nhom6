@@ -4,7 +4,7 @@ export const MainLayout = ({ children }) => {
         <div>
             <Header></Header>
             <div class="content-container">
-                
+                {children}
             </div>
         </div>
     )

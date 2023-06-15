@@ -10,36 +10,29 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  MenuItem,
 } from "@mui/material";
 import ShopProductCard from "../../sections/ProductCard";
+import axios from "axios";
 
-const products = [
-  {
-    name: "test",
-    cover:
-      "https://upload.wikimedia.org/wikipedia/vi/0/0a/Genshin_Impact_cover.jpg",
-    price: 20000,
-  },
-  {
-    name: "untest",
-    cover:
-      "https://upload.wikimedia.org/wikipedia/vi/0/0a/Genshin_Impact_cover.jpg",
-    price: 20000,
-  },
-];
+const userData = JSON.parse(localStorage.getItem("user"));
 
 function ItemList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [openDialog, setOpenDialog] = useState(false);
   const [newItemName, setNewItemName] = useState("");
+  const [newBrand, setNewBrand] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
   const [additionalItems, setAdditionalItems] = useState([]);
   const [selectedFileNames, setSelectedFileNames] = useState([]);
+  const [itemData, setItemData] = useState([]);
 
   const productsPerPage = 12;
 
   // Filter the products based on the search query
-  const filteredProducts = products.filter((product) =>
+  const filteredProducts = itemData.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -52,6 +45,38 @@ function ItemList() {
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
+
+  useEffect(() => {
+    const fetchItemsBySellerId = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/item/get-item-by-seller-id/${userData?.id}`
+        );
+        setItemData(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (userData?.id) {
+      fetchItemsBySellerId();
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchCategoryList = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/category/get-all-category"
+        );
+        setCategoryList(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCategoryList();
+  }, []);
 
   const startIdx = (currentPage - 1) * productsPerPage;
   const endIdx = startIdx + productsPerPage;
@@ -70,10 +95,20 @@ function ItemList() {
     setOpenDialog(false);
     setAdditionalItems([]);
     setNewItemName("");
+    setNewBrand("");
+    setSelectedCategory("");
   };
 
   const handleNewItemNameChange = (event) => {
     setNewItemName(event.target.value);
+  };
+
+  const handleNewBrand = (event) => {
+    setNewBrand(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   const handleAddAdditionalItem = () => {
@@ -94,15 +129,42 @@ function ItemList() {
     console.log("Uploading picture:", file);
   };
 
-  const handleAddItem = () => {
-    // Add logic to handle the submission of the new item
-    console.log("Adding item:", newItemName, additionalItems);
-    // Reset fields and close the dialog
-    setAdditionalItems([]);
-    setNewItemName("");
-    setOpenDialog(false);
-  };
+  const handleAddItem = async () => {
+    try {
+      // Create the item object to send to the API
+      const item = {
+        name: newItemName,
+        description: "", // Add the description if available
+        seller_id: userData?.id,
+        brand: newBrand,
+        category_id: selectedCategory,
+        item_specific: additionalItems.map((item) => ({
+          name: item.specificItem,
+          price: item.price,
+        })),
+      };
 
+      // Send the item data to the API
+      const response = await axios.post(
+        "http://localhost:8080/item/create-item-v2",
+        item
+      );
+
+      // Log the response from the API
+      console.log("Item added:", response.data);
+
+      // Reset fields and close the dialog
+      setAdditionalItems([]);
+      setNewItemName("");
+      setNewBrand("");
+      setSelectedCategory("");
+      setOpenDialog(false);
+    } catch (error) {
+      console.error("Error adding item:", error);
+      // Handle error scenarios
+    }
+  };
+  // comment
   useEffect(() => {
     document.body.style.backgroundColor = "white";
     return () => {
@@ -165,6 +227,31 @@ function ItemList() {
             onChange={handleNewItemNameChange}
             sx={{ mt: 3 }}
           />
+          <TextField
+            fullWidth
+            label="Brand"
+            variant="outlined"
+            value={newBrand}
+            onChange={handleNewBrand}
+            sx={{ mt: 3 }}
+          />
+
+          {/* Category Select Field */}
+          <TextField
+            select
+            fullWidth
+            label="Category"
+            variant="outlined"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            sx={{ mt: 3 }}
+          >
+            {categoryList.map((category) => (
+              <MenuItem key={category.id} value={category.id}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </TextField>
 
           {/* Additional Item Fields */}
           {additionalItems.map((item, index) => (

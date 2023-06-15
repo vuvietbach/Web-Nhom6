@@ -1,0 +1,23 @@
+.dropdown-container {
+    position: absolute;
+    top: 105%;
+    right: 0;
+    
+    z-index: 10;
+    background-color: #fff;
+
+    width: 140px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.dropdown-container .dropdown-item {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.dropdown-container .dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.dropdown-container hr {
+    margin: 0 auto;
+    width: 85%;;
+    color: rgba(0, 0, 0, 0.1);
+}

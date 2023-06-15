@@ -20,12 +20,19 @@ ShopProductCard.propTypes = {
 };
 
 export default function ShopProductCard({ product }) {
-  const { name, cover, price } = product;
+  const { name, img, price } = product;
 
   return (
     <Card>
       <Box sx={{ pt: "100%", position: "relative" }}>
-        <StyledProductImg alt={name} src={cover} />
+        <StyledProductImg
+          alt={name}
+          src={
+            img
+              ? img
+              : "https://cdn-icons-png.flaticon.com/512/4555/4555971.png"
+          }
+        />
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>

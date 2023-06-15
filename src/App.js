@@ -10,6 +10,7 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Account from "components/Account_info/Account";
 import LandingPage from "pages/landingPage/landingPage";
 import ProductPage from "pages/productPage/productPage";
+import SearchResultPage from "pages/searchResultPage/searchResultPage";
 import GioHang from "./components/GioHang/GioHang";
 import { CookiesProvider } from "react-cookie";
 import SellerMenu from "components/seller_menu/sellermenu";
@@ -21,15 +22,16 @@ function App() {
       <div className="App">
         <Router>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/SignIn" element={<SignIn />} />
-            <Route path="/Account" element={<Account />} />
-            <Route path="/chi-tiet-san-pham/:id" element={<ProductDetail />} />
-            <Route path="/GioHang" element={<GioHang />} />
-            <Route path="/danh-muc/:id" element={<ProductPage />} />
+            <Route path="/" element={<LandingPage/>}/>
+            <Route path="/SignUp" element={<SignUp/>} />
+            <Route path="/SignIn" element={<SignIn/>} />
+            <Route path="/Account" element={<Account/>} />
+            <Route path="/chi-tiet-san-pham/:id" element={<OrderDetail/>} />
+            <Route path="/GioHang" element={<GioHang/>}/>
+            <Route path="/danh-muc/:id" element={<ProductPage/>}/>
+            <Route path="/ket-qua-tim-kiem" element={<SearchResultPage/>}/>
             <Route path="/seller" element={<SellerMenu />} />
-            <Route path="/shop/:name" element={<ShopInfo />} />
+            <Route path="/shop/:id" element={<ShopInfo />} />
           </Routes>
         </Router>
       </div>
