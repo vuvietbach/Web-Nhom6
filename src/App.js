@@ -26,7 +26,7 @@ function App() {
             <Route path="/SignUp" element={<SignUp/>} />
             <Route path="/SignIn" element={<SignIn/>} />
             <Route path="/Account" element={<Account/>} />
-            <Route path="/chi-tiet-san-pham/:id" element={<OrderDetail/>} />
+            <Route path="/chi-tiet-san-pham/:id" element={<ProductDetail/>} />
             <Route path="/GioHang" element={<GioHang/>}/>
             <Route path="/danh-muc/:id" element={<ProductPage/>}/>
             <Route path="/ket-qua-tim-kiem" element={<SearchResultPage/>}/>
