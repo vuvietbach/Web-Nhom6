@@ -91,13 +91,6 @@
     border-radius: 5px;
 }
 
-span {
-    height: 20px;
-    display: flex;
-    align-items: center;
-    color: rgb(243, 88, 88);
-    user-select: none;
-}
 
 .post-btn {
     width: 390px;
