@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, Typography, Button } from "@mui/material";
+import axios from "axios";
+
+const userData = JSON.parse(localStorage.getItem("user"));
 
 const data = [
   {
@@ -124,13 +127,32 @@ const OrderBar = ({ itemspecific_name, quantity, status }) => {
 
 const OrderList = () => {
   const [filter, setFilter] = useState("all");
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    const fetchOrdersBySellerId = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/order/get-order-by-seller-id/${userData?.id}`
+        );
+        setOrders(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (userData?.id) {
+      fetchOrdersBySellerId();
+    }
+  }, []);
 
   const handleFilter = (status) => {
     setFilter(status);
   };
 
   const filteredData =
-    filter === "all" ? data : data.filter((order) => order.status === filter);
+    filter === "all"
+      ? orders
+      : orders.filter((order) => order.status === filter);
 
   return (
     <div style={{ width: "100vw", padding: "20px" }}>
@@ -160,9 +182,9 @@ const OrderList = () => {
           Done
         </Button>
       </div>
-      {filteredData.map((order) => (
+      {filteredData.map((order, index) => (
         <OrderBar
-          key={order.order_id}
+          key={index}
           itemspecific_name={order.itemspecific_name}
           quantity={order.quantity}
           status={order.status}
