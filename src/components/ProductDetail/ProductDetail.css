@@ -25,7 +25,7 @@
 
 .Container {
     background-color: #EBEDEF;
-    margin: 0 30px 0 30px;
+    margin: 30px 30px 0 50px;
     font-family: Roboto, helvetica, Arial, sans-serif;
 }
 
@@ -40,6 +40,7 @@
     height: 600px;
     margin-top: 20px;
     margin-right: 20px;
+    margin-left: 20px;
 }
 
 .product-image {
@@ -287,7 +288,21 @@ input:focus {
     width: 209px;
     flex: 0 0 auto;
     margin: 0 3px;
-  }
+    padding-right: 10px;
+}
+
+.product :hover {
+    cursor: pointer;
+}
+
+.productName {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 #slide_left_btn, #slide_right_btn {
     position: absolute;
@@ -375,9 +390,9 @@ h2 {
 /* Customer Review */
 
 .customer-review {
-    height: 1000px;
     background-color: #ffffff;
     margin-top: 20px;
+    margin-bottom: 50px;
     padding: 15px;
     padding-left: 30px;
     border-radius: 5px;
@@ -463,7 +478,7 @@ h2 {
 
 .review-comment {
     display: flex;
-    height: 400px;
+    /* height: 200px; */
     padding: 15px;
 }
 

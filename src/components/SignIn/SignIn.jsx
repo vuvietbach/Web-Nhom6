@@ -49,8 +49,8 @@ const SignIn = () => {
       });
       setCookie('accessToken', res.data.accessToken);
       setCookie('refreshToken', res.data.refreshToken);
-      const userData = JSON.parse(localStorage.getItem("user"));
-      console.log(userData.phone_number);
+      // const userData = JSON.parse(localStorage.getItem("user"));
+      // console.log(userData.phone_number);
       document.querySelector(".error-message").innerHTML = "";
 
       sendRefreshToken(); // Gửi refresh token sau khi nhận được token từ API login
@@ -59,8 +59,8 @@ const SignIn = () => {
       }
       else {
         localStorage.setItem('user', JSON.stringify(res.data.data.dataSeller));
-        navigate("/Seller");
       }
+      navigate("/");
     } catch (error) {
       document.querySelector(".error-message").innerHTML = "Sai tài khoản hoặc mật khẩu";
     }
