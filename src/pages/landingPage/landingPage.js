@@ -1,22 +1,24 @@
 import Header from "components/header/header";
-import noibat from "./data/noibat.json";
-import danhmuc from "./data/danhmuc.json";
+import danhmuc from "data/landingPageCategories.json";
 import data from "./data/data.json";
 import "./landingPage.css";
 import { Carousel } from "react-bootstrap";
 import products from "data/products.json";
 import ProductCard from "components/productCard/productCard";
 import { CustomLink } from "components/misc/misc";
-const ButtonList = ({ data }) => {
+export const CategoryList = ({ data }) => {
+  console.log(data)
   return (
     <div>
       {data.map((item) => {
-        const url = `/danh-muc/${item.title.replace(/ /g, "_")}`;
+        const url = `/danh-muc/${item.id}`;
         return (
           <CustomLink to={url}>
             <a class="sidecard-button">
-              <img src={item.image_url} alt={item.title} />
-              <div>{item.title}</div>
+              { item.image_url && (
+                <img src={item.image_url} alt={item.name} />
+              )}
+              <div>{item.name}</div>
             </a>
           </CustomLink>
         );
@@ -28,20 +30,15 @@ const LandingPage = () => {
   const bst_noibat = data.bst_noibat;
   const thuong_hieu = data.thuong_hieu;
   const recom_button = data.recommendation;
-  danhmuc = danhmuc.slice(0, 8)
-
+  console.log(danhmuc)
   return (
     <div>
       <Header></Header>
       <div className="body-container" style={{marginTop:"15px"}}>
         <div className="side-container">
-          {/* <div className="card">
-            <h6 className="card-title">Nổi bật</h6>
-            <ButtonList data={noibat}></ButtonList>
-          </div> */}
           <div className="card">
             <h6 className="card-title">Danh mục</h6>
-            <ButtonList data={danhmuc}></ButtonList>
+            <CategoryList data={danhmuc}></CategoryList>
           </div>
         </div>
         <div className="main-container">

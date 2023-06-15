@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Thời trang nam",
+        "image_url": "https://salt.tikicdn.com/ts/category/00/5d/97/384ca1a678c4ee93a0886a204f47645d.png",
+        "id": 915
+    },
+    {
+        "name": "Thời trang nữ",
+        "image_url": "https://salt.tikicdn.com/ts/category/55/5b/80/48cbaafe144c25d5065786ecace86d38.png",
+        "id": 931
+    },
+    {
+        "name": "Túi thời trang nam",
+        "image_url": "https://salt.tikicdn.com/ts/category/9b/31/af/669e6a133118e5439d6c175e27c1f963.png",
+        "id": 27616
+    },
+    {
+        "name": "Túi thời trang nữ",
+        "image_url": "https://salt.tikicdn.com/ts/category/31/a7/94/6524d2ecbec216816d91b6066452e3f2.png",
+        "id": 976
+    },
+    {
+        "name": "Giày - Dép nam",
+        "image_url": "https://salt.tikicdn.com/ts/category/d6/7f/6c/5d53b60efb9448b6a1609c825c29fa40.png",
+        "id": 1686
+    },
+    {
+        "name": "Giày - Dép nữ",
+        "image_url": "https://salt.tikicdn.com/ts/category/cf/ed/e1/96216aae6dd0e2beeb5e91d301649d28.png",
+        "id": 1703
+    },
+    {
+        "name": "Điện Thoại - Máy Tính Bảng",
+        "image_url": "https://salt.tikicdn.com/ts/category/54/c0/ff/fe98a4afa2d3e5142dc8096addc4e40b.png",
+        "id": 1789
+    },
+    {
+        "name": "Điện Gia Dụng",
+        "image_url": "https://salt.tikicdn.com/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png",
+        "id": 1882
+    }
+]

@@ -1,19 +1,29 @@
+import React from "react";
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Header from "components/header/header";
 import { useParams } from "react-router-dom";
 import {
-  ListFilter,
+  CheckboxList,
   RatingStar,
   SideCard,
-  CheckList,
+  ExpandableList,
 } from "components/misc/misc";
 import "./productPage.css";
 import { Pagination } from "@mui/material";
 import ProductCard from "components/productCard/productCard";
 import productData from "axiosAPI/data/products.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SortList } from "components/misc/misc";
+import {
+  getSubCategories,
+  sortProducts,
+  getBrandsByCategory,
+  getItemsByCategory,
+} from "axiosAPI/API";
+import { CategoryList } from "pages/landingPage/landingPage";
+import fakeSubCategories from "data/subCategories.json";
+import fakeBrands from "data/fakeBrands.json";
 const breadcrumbs = [
   <Link underline="hover" key="1" color="inherit">
     Trang chủ
@@ -22,31 +32,77 @@ const breadcrumbs = [
     Thời trang nam
   </Link>,
 ];
-
-
-// const items = [
-//     'https://salt.tikicdn.com/cache/w1080/ts/tikimsp/75/e6/eb/ac3c8bc53fcca5bfa1a7e2c6bb8aea77.png.webp',
-//     'https://salt.tikicdn.com/cache/280x280/ts/product/a3/f3/c6/4955f365a9d35f7273f6c2cba8b47197.jpg.webp',
-// ]
-const dv_items = ["Now Giao Siêu Tốc 2H", "ASTRA+ Thưởng thêm Astra"];
 const brands = ["Gia dụng Việt", "Tiki Trading", "Shop máy đọc sách Hà Nội"];
-const hcl = <CheckList items={brands} />;
+const sortTypeMap = {
+  "Giá thấp đến cao": "price-asc",
+  "Giá cao đến thấp": "price-desc",
+  "Bán chạy": "best-seller",
+  "Hàng mới": "newest",
+  "Phổ biến": "popular",
+};
 
 export default function ProductPage() {
-    const danhmuccon = ["Tã, Bỉm", "Dinh dưỡng cho bé", "Thức ăn dặm"];
-    const { id } = useParams();
-    // TODO: replace with real data
-    const [productList, setProductList] = useState(productData["Điện Thoại - Máy Tính Bảng"]);
-    const sortList = (sortTypes) => {
-      console.log(sortTypes);
-      if (sortTypes == "Giá thấp đến cao") {
-        const newProductList = [...productList].sort((a, b) => a.price - b.price);
-        setProductList(newProductList);
-      } else if (sortTypes == "Giá cao đến thấp") {
-        const newProductList = [...productList].sort((a, b) => b.price - a.price);
-        setProductList(newProductList);
+  const { id } = useParams();
+  const category_id = id;
+  // TODO: replace with real data
+
+  // sort by price asc, price desc, best seller, newest, popular
+  const [items, setItems] = useState(
+    productData["Điện Thoại - Máy Tính Bảng"]
+  );
+  const sortList = (sortType) => {
+    sortType = sortTypeMap[sortType];
+    let newList = sortProducts(items, sortType);
+    setItems(newList);
+  };
+  // get sub categories
+  const [subCategories, setSubCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  useEffect(() => {
+    getSubCategories(category_id)
+      .then((subCategories) => {
+        console.log(subCategories.data);
+        setSubCategories(subCategories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getBrandsByCategory(category_id)
+      .then((brands) => {
+        setBrands(CheckboxList(brands, handleCheckboxChange));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getItemsByCategory(category_id)
+      .then((items) => {
+        setItems(items);
+      })
+      .catch((err) => {
+        console.log(err);
       }
-    }
+    );
+  }, [category_id]);
+  const handleCheckboxChange = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+  
+    setSelectedBrands((prevSelectedBrands) => {
+      if (isChecked) {
+        return [...prevSelectedBrands, value];
+      } else {
+        return prevSelectedBrands.filter((item) => item !== value);
+      }
+    });
+  };
+  
+  // get brands
+  useEffect(() => {
+    console.log("selectedBrands", selectedBrands);
+  }, [selectedBrands]);
+
+  // filter according to brands
 
   return (
     <div>
@@ -56,28 +112,21 @@ export default function ProductPage() {
       </div>
       <div class="body-container" style={{ marginTop: "0" }}>
         <div class="side-container">
-        <div className="card">
-            <h6 className="card-title">Danh mục</h6>
-            <div>
-            {
-                danhmuccon.map((item) => {
-                    return (
-                        <a class="category">
-                            <div>{item}</div>
-                        </a>
-                    )
-                })
-            }
+          {subCategories.length > 0 && (
+            <div className="side-card">
+              <h6 className="card-title">Danh mục</h6>
+              <CategoryList data={subCategories}></CategoryList>
             </div>
-          </div>
-          <div className="card">
-            <h6 className="card-title" >Địa chỉ nhận hàng</h6>
-            <div style={{fontSize:"0.9rem"}}>Q. Hoàn Kiếm, P.Hàng Trống, Hà Nội</div>
-            <div style={{fontWeight:"500", fontSize:"0.8rem"}}>Đổi địa chỉ</div>
-          </div>
-          <SideCard title={"Thương hiệu"} hiddenContent={hcl}>
-            <CheckList items={brands} />
-          </SideCard>
+          )}
+          {brands.length > 0 && (
+            <div className="side-card">
+              <h6 className="card-title">Thương hiệu</h6>
+              <ExpandableList
+                data={brands}
+                initiallyExpanded={10}
+              ></ExpandableList>
+            </div>
+          )}
           <SideCard title={"Đánh giá"}>
             <ul class="list-group">
               <li>
@@ -110,17 +159,13 @@ export default function ProductPage() {
           <div class="card">
             <h4>Điện gia dụng</h4>
             <div>
-              <SortList onClick={sortList}/>
+              <SortList onClick={sortList} />
             </div>
           </div>
           <div class="product-display">
-            {
-                productList.map((item) => {
-                  return (
-                    <ProductCard product={item} />
-                  )
-                })
-            }
+            {items.map((item) => {
+              return <ProductCard product={item} />;
+            })}
           </div>
           <div class="custom-pagination">
             <Pagination
