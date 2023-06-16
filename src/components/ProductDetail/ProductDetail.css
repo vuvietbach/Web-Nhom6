@@ -13,6 +13,9 @@
 /* span {
     color: #0b74e5;
 } */
+.span {
+    display: block;
+}
 
 .medium-icon {
     width: 40px;

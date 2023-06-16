@@ -127,5 +127,7 @@
 }
 
 .error {
-    color: #ff424f; ;
+    color: #ff424f;
+    height: 25px;
+    display: block;
 }
