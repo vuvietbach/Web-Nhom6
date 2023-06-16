@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./SignIn.css";
 import axios from 'axios';
 
@@ -60,7 +62,13 @@ const SignIn = () => {
       else {
         localStorage.setItem('user', JSON.stringify(res.data.data.dataSeller));
       }
-      navigate("/");
+      toast.success('Đăng nhập thành công!', {
+        autoClose: 300, // Thời gian hiển thị toast là 1000ms (1 giây)
+      });
+
+      setTimeout(() => {
+        navigate(-1);
+      }, 1000); // Chuyển hướng trang sau 1 giây (1000ms)
     } catch (error) {
       document.querySelector(".error-message").innerHTML = "Sai tài khoản hoặc mật khẩu";
     }
@@ -136,6 +144,7 @@ const sendRefreshToken = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
