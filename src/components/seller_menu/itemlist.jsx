@@ -28,6 +28,7 @@ function ItemList() {
   const [additionalItems, setAdditionalItems] = useState([]);
   const [selectedFileNames, setSelectedFileNames] = useState([]);
   const [itemData, setItemData] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const productsPerPage = 12;
 
@@ -126,7 +127,13 @@ function ItemList() {
     const updatedSelectedFileNames = [...selectedFileNames];
     updatedSelectedFileNames[index] = file.name;
     setSelectedFileNames(updatedSelectedFileNames);
-    console.log("Uploading picture:", file);
+
+    // Store the selected file in selectedFiles state
+    setSelectedFiles((prevSelectedFiles) => {
+      const updatedSelectedFiles = [...prevSelectedFiles];
+      updatedSelectedFiles[index] = file;
+      return updatedSelectedFiles;
+    });
   };
 
   const handleAddItem = async () => {
@@ -153,11 +160,32 @@ function ItemList() {
       // Log the response from the API
       console.log("Item added:", response.data);
 
+      // Get the ID of the newly created item
+      const newItemId = response.data.data.newItem.id;
+      // Upload the selected files
+      const uploadPromises = selectedFiles.map((file) => {
+        const formData = new FormData();
+        formData.append("image", file);
+        return axios.post(
+          `http://localhost:8080/item/item-picture/${newItemId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      });
+
+      // Wait for all file uploads to complete
+      await Promise.all(uploadPromises);
+
       // Reset fields and close the dialog
       setAdditionalItems([]);
       setNewItemName("");
       setNewBrand("");
       setSelectedCategory("");
+      setSelectedFiles([]);
       setOpenDialog(false);
     } catch (error) {
       console.error("Error adding item:", error);
