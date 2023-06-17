@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import ShopProductCard from "../../sections/ProductCard";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const userData = JSON.parse(localStorage.getItem("user"));
 
@@ -138,6 +140,11 @@ function ItemList() {
 
   const handleAddItem = async () => {
     try {
+      if (additionalItems.length === 0) {
+        toast.error("Please add at least one item specific");
+        return;
+      }
+
       // Create the item object to send to the API
       const item = {
         name: newItemName,
@@ -188,7 +195,7 @@ function ItemList() {
       setSelectedFiles([]);
       setOpenDialog(false);
     } catch (error) {
-      console.error("Error adding item:", error);
+      toast.error("Error adding item:", error);
       // Handle error scenarios
     }
   };
@@ -202,6 +209,18 @@ function ItemList() {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 3, minHeight: "100vh" }}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Typography variant="h4">Products</Typography>
       <CssBaseline />
       <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
