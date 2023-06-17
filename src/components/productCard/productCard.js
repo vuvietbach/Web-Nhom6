@@ -1,24 +1,26 @@
 import './productCard.css';
-
+import { useNavigate } from 'react-router-dom';
 const ProductCard = ({product}) => {
-    const hasRating = ("rating" in product && product.rate) ? true : false;
-    const hasNumberSold = ("number_sold" in product && product.number_sold) ? true : false;
+    const navigate = useNavigate();
+    const handleOnClick = () => {
+        navigate(`/chi-tiet-san-pham/${product.id}`);
+    }
     return (
-        <div className="product-card">
-            <img class="card-img-top" src={product.img} alt={product.name}/>
+        <div className="product-card" onClick={handleOnClick}>
+            <img class="card-img-top" src={product.image_url} alt={product.name}/>
             <div class="product-body">
                 <div className="product-name">{product.name}</div>
                 <div className='product-rating'>
                     {
-                        product.rate && (
+                        product.rating && (
                             <span>
-                                <span>{product.rate}</span>
+                                <span>{product.rating}</span>
                                 <i class="fas fa-star" style={{fontSize:"0.7rem", color:'orange'}}></i>
                             </span>
                         )
                     }
                     {
-                        (product.rate && product.number_sold) && (
+                        (product.rating && product.number_sold) && (
                             <span className='vertical-rule mx-2'></span>
                         )
                     }

@@ -7,7 +7,6 @@ import products from "data/products.json";
 import ProductCard from "components/productCard/productCard";
 import { CustomLink } from "components/misc/misc";
 export const CategoryList = ({ data }) => {
-  console.log(data)
   return (
     <div>
       {data.map((item) => {

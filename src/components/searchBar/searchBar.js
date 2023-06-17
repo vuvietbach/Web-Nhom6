@@ -1,13 +1,22 @@
 import "./searchBar.css";
-import React, { useState } from "react";
-
+import React, { useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 export const SearchBar = () => {
-  const [searchText, setSearchText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
+  
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    setShowDropdown(false);
 
-  const handleInputChange = (event) => {
-    setSearchText(event.target.value);
-  };
+    const queryParams = new URLSearchParams();
+    queryParams.append("query", inputRef.current.value);
+    const queryString = queryParams.toString();
+    const url = `/tim-kiem?${queryString}`
+
+    navigate(url);
+  }
   return (
     <div>
       <div class="search-bar-wrapper">
@@ -16,13 +25,12 @@ export const SearchBar = () => {
           <input
             class="search-text"
             type="text"
-            value={searchText}
-            onChange={handleInputChange}
+            ref={inputRef}
             onClick={() => setShowDropdown(true)}
             placeholder="Tìm kiếm sản phẩm"
           />
           <div class="vertical-rule" style={{ margin: "0" }}></div>
-          <button class="search-btn" type="submit">
+          <button class="search-btn" type="submit" onClick={handleOnClick}>
             Tìm kiếm
           </button>
         </form>

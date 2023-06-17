@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Header from "components/header/header";
@@ -22,8 +22,6 @@ import {
   getItemsByCategory,
 } from "axiosAPI/API";
 import { CategoryList } from "pages/landingPage/landingPage";
-import fakeSubCategories from "data/subCategories.json";
-import fakeBrands from "data/fakeBrands.json";
 const breadcrumbs = [
   <Link underline="hover" key="1" color="inherit">
     Trang chủ
@@ -40,16 +38,43 @@ const sortTypeMap = {
   "Hàng mới": "newest",
   "Phổ biến": "popular",
 };
-
+const ButtonGroup = ({items, onClick}) => {
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const handleOnClick = (index) => {
+    if (activeIndex === index) {
+      setActiveIndex(-1);
+    } else {
+      setActiveIndex(index);
+    }
+    onClick(index);
+  }
+  return (
+    <div>
+      {items.map((item, index) => {
+        return (
+          <div class={`sidecard-button-no-hover ${activeIndex === index ? "active" : ""}`} onClick={()=>handleOnClick(index)} key={index}>
+              {item}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+const RatingNumbers = [3, 4, 5]
+const ratings = [3, 4, 5].map((rating) => {
+  return <div style={{display:"flex", alignItems:"center"}}>
+    <RatingStar rating={rating} />
+    <div>từ {rating} sao</div>
+  </div>
+})
 export default function ProductPage() {
   const { id } = useParams();
   const category_id = id;
   // TODO: replace with real data
 
   // sort by price asc, price desc, best seller, newest, popular
-  const [items, setItems] = useState(
-    productData["Điện Thoại - Máy Tính Bảng"]
-  );
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] =useState([]);
   const sortList = (sortType) => {
     sortType = sortTypeMap[sortType];
     let newList = sortProducts(items, sortType);
@@ -59,10 +84,10 @@ export default function ProductPage() {
   const [subCategories, setSubCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedRating, setSelectedRating] = useState(-1);
   useEffect(() => {
     getSubCategories(category_id)
       .then((subCategories) => {
-        console.log(subCategories.data);
         setSubCategories(subCategories);
       })
       .catch((err) => {
@@ -78,6 +103,7 @@ export default function ProductPage() {
     getItemsByCategory(category_id)
       .then((items) => {
         setItems(items);
+        setFilteredItems(items);
       })
       .catch((err) => {
         console.log(err);
@@ -85,7 +111,7 @@ export default function ProductPage() {
     );
   }, [category_id]);
   const handleCheckboxChange = (event) => {
-    const value = event.target.value;
+    const value = parseInt(event.target.value);
     const isChecked = event.target.checked;
   
     setSelectedBrands((prevSelectedBrands) => {
@@ -96,11 +122,29 @@ export default function ProductPage() {
       }
     });
   };
-  
-  // get brands
+  const filterByRating = (ratingIndex) => {
+    const rating = ratingIndex === -1 ? -1 : RatingNumbers[ratingIndex];
+    console.log(rating);
+    setSelectedRating(rating)
+  }
+  const prevSelectedBrands = useRef();
   useEffect(() => {
-    console.log("selectedBrands", selectedBrands);
-  }, [selectedBrands]);
+    let newList = items.filter(item => item.rating >= selectedRating);
+    if (prevSelectedBrands === selectedBrands) {
+      setFilteredItems(newList);
+    }
+    else {
+      const timer = setTimeout(() => {
+        if (selectedBrands.length > 0) {
+          newList = items.filter((item) => selectedBrands.includes(item.brand_id));
+        }
+        setFilteredItems(newList);
+      }, 200);
+      prevSelectedBrands.current = selectedBrands;
+      return () => clearTimeout(timer);
+    }
+  }, [selectedBrands, selectedRating, items]);
+
 
   // filter according to brands
 
@@ -127,22 +171,10 @@ export default function ProductPage() {
               ></ExpandableList>
             </div>
           )}
-          <SideCard title={"Đánh giá"}>
-            <ul class="list-group">
-              <li>
-                <RatingStar rating={5} />
-                từ 5 sao
-              </li>
-              <li>
-                <RatingStar rating={4} />
-                từ 4 sao
-              </li>
-              <li>
-                <RatingStar rating={3} />
-                từ 3 sao
-              </li>
-            </ul>
-          </SideCard>
+          <div className="side-card">
+            <h6 className="card-title">Đánh giá</h6>
+            <ButtonGroup items={ratings} onClick={filterByRating}></ButtonGroup>
+          </div>
           <SideCard title={"Giá"}>
             <div>Chọn khoảng giá</div>
             <form>
@@ -163,7 +195,7 @@ export default function ProductPage() {
             </div>
           </div>
           <div class="product-display">
-            {items.map((item) => {
+            {filteredItems.map((item) => {
               return <ProductCard product={item} />;
             })}
           </div>

@@ -3,7 +3,9 @@ import { MainLayout } from "components/layoutTemplate/layoutTemplate";
 import Dropdown from "components/dropdown/dropdown";
 import Button from "react-bootstrap/Button";
 import { useState, useRef, useEffect } from "react";
-
+import { useLocation, useParams } from "react-router-dom";
+import { searchItems } from "axiosAPI/API";
+import ItemsContainer from "components/itemContainer/itemContainer";
 const filters = [
   {
     name: "Thương hiệu",
@@ -61,7 +63,7 @@ const FilterSlider = () => {
     if (type === "prev") {
       if (currentFirst > 0) {
         let offset = elementWidths[currentFirst - 1];
-        
+
         setCurrentFirst(currentFirst - 1);
 
         setMovement(movement + offset); // Move right by 100 pixels (adjust as needed)
@@ -127,44 +129,60 @@ const FilterSlider = () => {
     </div>
   );
 };
+
 export default function SearchResultPage() {
-  const handleSort = (type) => {
-    console.log("sort");
-  };
+  const location = useLocation();
+  const key = location.pathname;
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("query");
+  const [ items, setItems ] = useState([]);
+  useEffect(() => {
+    searchItems(query)
+      .then((data) => {
+        setItems(data);
+      })
+      .catch((err) => console.log(err));
+  }, [query]);
   return (
-    <MainLayout>
-      <div class="two-area-layout">
-        <div class="result-container">
-          <div className="card">
-            <div class="filter-section">
-              <FilterSlider />
-              <div class="filter-modal-section">
-                <VR />
-                <button class="filter-modal-button">
-                  <i class="fa-solid fa-filter"></i>
-                  &nbsp;
-                  <span>Tất cả</span>
-                </button>
-              </div>
-            </div>
-            <hr style={{ marginTop: "10px", marginBottom: "10px" }} />
-            <div class="sort-section" style={{ display: "flex" }}>
-              <div style={{ display: "inline-block", marginLeft: "auto" }}>
-                Sắp xếp theo &nbsp;
-                <Dropdown dropdownList={sortOptions} onClick={handleSort}>
-                  <button class="pill-box" style={{ backgroundColor: "#fff" }}>
-                    Phổ biến &nbsp;
-                    <i class="fa-solid fa-chevron-down"></i>
+    <div key={query}>
+      <MainLayout>
+        <div class="two-area-layout">
+          <div class="result-container">
+            <div className="card">
+              <div class="filter-section">
+                <FilterSlider />
+                <div class="filter-modal-section">
+                  <VR />
+                  <button class="filter-modal-button">
+                    <i class="fa-solid fa-filter"></i>
+                    &nbsp;
+                    <span>Tất cả</span>
                   </button>
-                </Dropdown>
+                </div>
+              </div>
+              <hr style={{ marginTop: "10px", marginBottom: "10px" }} />
+              <div class="sort-section" style={{ display: "flex" }}>
+                <div style={{ display: "inline-block", marginLeft: "auto" }}>
+                  Sắp xếp theo &nbsp;
+                  <Dropdown dropdownList={sortOptions}>
+                    <button
+                      class="pill-box"
+                      style={{ backgroundColor: "#fff" }}
+                    >
+                      Phổ biến &nbsp;
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                  </Dropdown>
+                </div>
               </div>
             </div>
+            <ItemsContainer items={items} />
+          </div>
+          <div class="banner">
+            <img src="https://salt.tikicdn.com/ts/tka/fa/7c/6b/e4540edcd4c3b6247ddca94936f23b6b.jpg" />
           </div>
         </div>
-        <div class="banner">
-          <img src="https://salt.tikicdn.com/ts/tka/fa/7c/6b/e4540edcd4c3b6247ddca94936f23b6b.jpg" />
-        </div>
-      </div>
-    </MainLayout>
+      </MainLayout>
+    </div>
   );
 }

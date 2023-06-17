@@ -29,7 +29,7 @@ function App() {
             <Route path="/chi-tiet-san-pham" element={<OrderDetail/>} />
             <Route path="/GioHang" element={<GioHang/>}/>
             <Route path="/danh-muc/:id" element={<ProductPage/>}/>
-            <Route path="/ket-qua-tim-kiem" element={<SearchResultPage/>}/>
+            <Route path="/tim-kiem" element={<SearchResultPage/>}/>
             <Route path="/seller" element={<SellerMenu />} />
             <Route path="/shop/:id" element={<ShopInfo />} />
           </Routes>
