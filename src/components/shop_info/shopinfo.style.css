@@ -1,10 +1,10 @@
 .header-card-shop {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
   border-radius: 0px;
+  width: 100%;
   background: linear-gradient(45deg, #667eea, #764ba2, #a24b8c);
   background-size: 200% 200%;
   animation: color 5s ease-in-out infinite;

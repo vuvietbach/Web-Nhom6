@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate,useNavigate, json } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./SignUp.css"
 import axios from 'axios';
 
@@ -104,8 +106,13 @@ const SignUp = () => {
         .then(response => {
           console.log(response.data);
           document.querySelector(".error-message").innerHTML = "";
-          alert("Tạo tài khoản thành công");
-          navigate("/SignIn");
+          toast.success('Tạo tài khoản thành công!', {
+            autoClose: 300, // Thời gian hiển thị toast là 1000ms (1 giây)
+          });
+    
+          setTimeout(() => {
+            navigate("/SignIn");
+          }, 1000); // Chuyển hướng trang sau 1 giây (1000ms)
           // localStorage.setItem("user",JSON.stringify(response.data.data));
         })
         .catch(error => {
@@ -196,6 +203,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

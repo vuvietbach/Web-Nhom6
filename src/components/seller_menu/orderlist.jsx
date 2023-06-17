@@ -1,63 +1,60 @@
 import React, { useState, useEffect } from "react";
-import { Paper, Typography, Button } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from "@mui/material";
 import axios from "axios";
 
 const userData = JSON.parse(localStorage.getItem("user"));
 
-const data = [
-  {
-    item_id: 1,
-    order_id: 1,
-    quantity: 1,
-    status: "pending",
-    itemspecific_name: "Fan A",
-  },
-  {
-    item_id: 1,
-    order_id: 2,
-    quantity: 1,
-    status: "pending",
-    itemspecific_name: "Fan A",
-  },
-  {
-    item_id: 1,
-    order_id: 3,
-    quantity: 1,
-    status: "pending",
-    itemspecific_name: "Fan A",
-  },
-  {
-    item_id: 2,
-    order_id: 1,
-    quantity: 1,
-    status: "shipping",
-    itemspecific_name: "Fan B",
-  },
-  {
-    item_id: 2,
-    order_id: 2,
-    quantity: 1,
-    status: "done",
-    itemspecific_name: "Fan B",
-  },
-  {
-    item_id: 2,
-    order_id: 3,
-    quantity: 1,
-    status: "pending",
-    itemspecific_name: "Fan B",
-  },
-];
+const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogAction, setDialogAction] = useState("");
 
-const OrderBar = ({ itemspecific_name, quantity, status }) => {
-  const handleApprove = () => {
-    // Logic for approving the order
-    console.log("Order Approved");
+  const handleApprove = async () => {
+    setDialogAction("approve");
+    setOpenDialog(true);
   };
 
-  const handleDecline = () => {
-    // Logic for declining the order
-    console.log("Order Declined");
+  const handleDecline = async () => {
+    setDialogAction("decline");
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDialogAction = async () => {
+    setOpenDialog(false);
+
+    try {
+      const requestBody = {
+        order_id: id,
+        item_id: item_id,
+        status: dialogAction === "approve" ? "shipping" : "decline",
+      };
+
+      const response = await axios.post(
+        "http://localhost:8080/order/change-status",
+        requestBody
+      );
+
+      console.log(
+        `Order ${
+          dialogAction.charAt(0).toUpperCase() + dialogAction.slice(1)
+        }:`,
+        response.data
+      );
+      // Handle the response as needed
+    } catch (error) {
+      console.error(`Error ${dialogAction}ing order:`, error);
+      // Handle error scenarios
+    }
   };
 
   let statusColor = "";
@@ -121,6 +118,17 @@ const OrderBar = ({ itemspecific_name, quantity, status }) => {
           Decline
         </Button>
       </div>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>{`Are you sure you want to ${dialogAction}?`}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleDialogClose}>Cancel</Button>
+          <Button onClick={handleDialogAction} color="primary">
+            {dialogAction.charAt(0).toUpperCase() + dialogAction.slice(1)}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Paper>
   );
 };
@@ -128,6 +136,7 @@ const OrderBar = ({ itemspecific_name, quantity, status }) => {
 const OrderList = () => {
   const [filter, setFilter] = useState("all");
   const [orders, setOrders] = useState([]);
+
   useEffect(() => {
     const fetchOrdersBySellerId = async () => {
       try {
@@ -145,8 +154,21 @@ const OrderList = () => {
     }
   }, []);
 
+  console.log(orders);
+
   const handleFilter = (status) => {
     setFilter(status);
+  };
+
+  const updateOrders = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/order/get-order-by-seller-id/${userData?.id}`
+      );
+      setOrders(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const filteredData =
@@ -188,6 +210,8 @@ const OrderList = () => {
           itemspecific_name={order.itemspecific_name}
           quantity={order.quantity}
           status={order.status}
+          id={order.order_id}
+          item_id={order.item_id}
         />
       ))}
     </div>

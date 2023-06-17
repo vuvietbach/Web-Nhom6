@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
-import OrderDetail from "./components/OrderDetail/Order-Detail";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Account from "components/Account_info/Account";
 import LandingPage from "pages/landingPage/landingPage";
 import ProductPage from "pages/productPage/productPage";
@@ -26,7 +26,7 @@ function App() {
             <Route path="/SignUp" element={<SignUp/>} />
             <Route path="/SignIn" element={<SignIn/>} />
             <Route path="/Account" element={<Account/>} />
-            <Route path="/chi-tiet-san-pham" element={<OrderDetail/>} />
+            <Route path="/chi-tiet-san-pham/:id" element={<ProductDetail/>} />
             <Route path="/GioHang" element={<GioHang/>}/>
             <Route path="/danh-muc/:id" element={<ProductPage/>}/>
             <Route path="/tim-kiem" element={<SearchResultPage/>}/>
