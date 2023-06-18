@@ -1,10 +1,5 @@
 
-import TikiLogo from "../assets/tiki.png";
-import { Box } from "@mui/material";
-
-
-
-
+import Tikilogo from "../assets/tiki.png";
 import { SearchBar } from "components/searchBar/searchBar";
 import "./header.css";
 import { AddressModalButton } from "components/modal/AddressModal";
@@ -17,17 +12,6 @@ function HeaderButton({ fa_icon, text }) {
     </button>
   );
 }
-
-const thuc_pham = [
-  "trái cây",
-  "thịt, trứng",
-  "rau củ quả",
-  "sữa, bơ, phô mai",
-  "hải sản",
-  "gạo, mì ăn liền",
-  "đồ uống, bia rượu",
-  "bánh kẹo",
-];
 const CustomLink = ({ to, children, style }) => (
   <Link
     to={to}
@@ -40,6 +24,13 @@ const CustomLink = ({ to, children, style }) => (
     {children}
   </Link>
 );
+const TikiLogo = () => {
+  return (
+    <CustomLink to="/">
+      <img src={Tikilogo} style={{ height: "40px" }} alt="tiki logo" />
+    </CustomLink>
+  )
+}
 export default function Header() {
   const location = useLocation();
   // TODO: replace with real url
@@ -66,7 +57,7 @@ export default function Header() {
     <div style={{ backgroundColor: "#fff", width: "100%", paddingTop: "5px" }}>
       <div style={{ margin: "0 auto", width: "var(--content-max-width)" }}>
         <div class="header-row">
-          <img src={TikiLogo} style={{ height: "40px" }} alt="tiki logo" />
+          <TikiLogo></TikiLogo>
           <div
             class="search-bar-ctn"
             style={{ display: "flex", alignItems: "center", flexGrow: "1" }}

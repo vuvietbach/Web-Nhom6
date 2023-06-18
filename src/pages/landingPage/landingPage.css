@@ -19,8 +19,8 @@
     border-radius: 7px 7px 0px 0px;
     overflow: hidden;
 
-    position: sticky;
-    top: 15px;
+    /* position: sticky;
+    top: 15px; */
 }
 .recommendation-container .card{
     border: none !important;

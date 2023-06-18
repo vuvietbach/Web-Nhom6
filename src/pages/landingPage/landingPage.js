@@ -3,9 +3,11 @@ import danhmuc from "data/landingPageCategories.json";
 import data from "./data/data.json";
 import "./landingPage.css";
 import { Carousel } from "react-bootstrap";
-import products from "data/products.json";
-import ProductCard from "components/productCard/productCard";
 import { CustomLink } from "components/misc/misc";
+import { useEffect } from "react";
+import { getItemRecommendation } from "axiosAPI/API";
+import ItemsContainer from "components/itemContainer/itemContainer";
+import { useState } from "react";
 export const CategoryList = ({ data }) => {
   return (
     <div>
@@ -29,7 +31,12 @@ const LandingPage = () => {
   const bst_noibat = data.bst_noibat;
   const thuong_hieu = data.thuong_hieu;
   const recom_button = data.recommendation;
-  console.log(danhmuc)
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    getItemRecommendation().then((data) => {
+      setItems(data);
+    });
+  }, []);
   return (
     <div>
       <Header></Header>
@@ -94,12 +101,7 @@ const LandingPage = () => {
               })}
             </div>
           </div>
-
-          <div className="landing-page-product-display">
-            {products.map((product) => {
-              return <ProductCard product={product} />;
-            })}
-          </div>
+          <ItemsContainer items={items}></ItemsContainer>
         </div>
       </div>
     </div>

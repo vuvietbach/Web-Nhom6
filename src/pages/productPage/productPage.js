@@ -34,8 +34,8 @@ const brands = ["Gia dụng Việt", "Tiki Trading", "Shop máy đọc sách Hà
 const sortTypeMap = {
   "Giá thấp đến cao": "price-asc",
   "Giá cao đến thấp": "price-desc",
-  "Bán chạy": "best-seller",
-  "Hàng mới": "newest",
+  "Bán chạy": "popular",
+  "Hàng mới": "popular",
   "Phổ biến": "popular",
 };
 const ButtonGroup = ({items, onClick}) => {
@@ -124,7 +124,6 @@ export default function ProductPage() {
   };
   const filterByRating = (ratingIndex) => {
     const rating = ratingIndex === -1 ? -1 : RatingNumbers[ratingIndex];
-    console.log(rating);
     setSelectedRating(rating)
   }
   const prevSelectedBrands = useRef();

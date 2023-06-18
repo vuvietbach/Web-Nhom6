@@ -148,7 +148,7 @@ export default function SearchResultPage() {
       <MainLayout>
         <div class="two-area-layout">
           <div class="result-container">
-            <div className="card">
+            <div className="card" style={{marginBottom:"15px"}}>
               <div class="filter-section">
                 <FilterSlider />
                 <div class="filter-modal-section">

@@ -42,6 +42,9 @@ export function sortProducts(products, type) {
         productsCopy.sort((a, b) => a.price - b.price);
     } else if(type === "price-desc") {
         productsCopy.sort((a, b) => b.price - a.price);
+    } else if(type === "popular") {
+        console.log(products[0]);
+        productsCopy.sort((a, b) => b.number_sold - a.number_sold);
     }
     return productsCopy;
 }
@@ -74,3 +77,11 @@ export async function searchItems(searchTerm) {
         throw error;
     }
 } 
+export async function getItemRecommendation() {
+    try {
+        const response = await axios.get(`${API_URL}/item/get-item-recommendation`);
+        return adjustItemKey(response.data.data);
+    } catch(error) {
+        throw error;
+    }
+}

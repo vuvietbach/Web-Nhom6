@@ -6,7 +6,7 @@ const ProductCard = ({product}) => {
         navigate(`/chi-tiet-san-pham/${product.id}`);
     }
     return (
-        <div className="product-card" onClick={handleOnClick}>
+        <div className="product-card clickable" onClick={handleOnClick}>
             <img class="card-img-top" src={product.image_url} alt={product.name}/>
             <div class="product-body">
                 <div className="product-name">{product.name}</div>
