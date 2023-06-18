@@ -51,7 +51,8 @@ const UpdateInfo = () => {
     try {
       const response = await axios.post(
         "http://localhost:8080/seller/update-seller",
-        updatedData
+        updatedData,
+        { withCredentials: true }
       );
       if (response.data.message === "OK") {
         toast.success("Success");

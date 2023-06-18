@@ -94,7 +94,9 @@ export default function ShopProductCard({ product }) {
 
     // Send the update request to the API
     axios
-      .post(`http://localhost:8080/item/update-specific-item`, payload)
+      .post(`http://localhost:8080/item/update-specific-item`, payload, {
+        withCredentials: true,
+      })
       .then(() => {
         toast.success("Update successful");
       })
@@ -119,7 +121,9 @@ export default function ShopProductCard({ product }) {
 
     // Send the update request to the API
     axios
-      .post("http://localhost:8080/item/update-item", payload)
+      .post("http://localhost:8080/item/update-item", payload, {
+        withCredentials: true,
+      })
       .then(() => {
         toast.success("Item saved successfully");
       })
@@ -139,7 +143,9 @@ export default function ShopProductCard({ product }) {
     if (confirmed) {
       // Send delete request to API
       axios
-        .delete(`http://localhost:8080/item/delete-item/${id}`)
+        .delete(`http://localhost:8080/item/delete-item/${id}`, {
+          withCredentials: true,
+        })
         .then(() => {
           toast.success("Delete successfully");
         })
