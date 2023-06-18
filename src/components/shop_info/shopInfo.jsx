@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "./shopinfo.style.css";
 import Header from "components/header/header";
+import ShopInfoStyle from "./shopinfo.style";
 
 const ShopInfo = () => {
   const [sellerData, setSellerData] = useState(null);
@@ -67,9 +67,9 @@ const ShopInfo = () => {
   };
 
   return (
-    <>
+    <ShopInfoStyle>
       <Header />
-      <Box p={2} sx={{overFlow: "hidden"}}>
+      <Box p={2} sx={{ overFlow: "hidden" }}>
         {sellerData ? (
           <Grid container spacing={2}>
             {/* Store Header */}
@@ -298,7 +298,7 @@ const ShopInfo = () => {
           <Typography variant="body1">Loading...</Typography>
         )}
       </Box>
-    </>
+    </ShopInfoStyle>
   );
 };
 
