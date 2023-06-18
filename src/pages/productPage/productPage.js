@@ -1,90 +1,111 @@
 import React, { useRef } from "react";
-import Link from "@mui/material/Link";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Header from "components/header/header";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import {
   CheckboxList,
   RatingStar,
   SideCard,
   ExpandableList,
+  CustomPagination,
 } from "components/misc/misc";
 import "./productPage.css";
-import { Pagination } from "@mui/material";
 import ProductCard from "components/productCard/productCard";
-import productData from "axiosAPI/data/products.json";
 import { useEffect, useState } from "react";
-import { SortList } from "components/misc/misc";
 import {
   getSubCategories,
-  sortProducts,
   getBrandsByCategory,
   getItemsByCategory,
+  getCategoryById
 } from "axiosAPI/API";
 import { CategoryList } from "pages/landingPage/landingPage";
-const breadcrumbs = [
-  <Link underline="hover" key="1" color="inherit">
-    Trang chủ
-  </Link>,
-  <Link key="2" color="text.primary">
-    Thời trang nam
-  </Link>,
-];
-const brands = ["Gia dụng Việt", "Tiki Trading", "Shop máy đọc sách Hà Nội"];
-const sortTypeMap = {
-  "Giá thấp đến cao": "price-asc",
-  "Giá cao đến thấp": "price-desc",
-  "Bán chạy": "popular",
-  "Hàng mới": "popular",
-  "Phổ biến": "popular",
-};
-const ButtonGroup = ({items, onClick}) => {
+import { setItems } from "redux_code/dispatch";
+import { useDispatch, useSelector } from "react-redux";
+import { MainLayout } from "components/layoutTemplate/layoutTemplate";
+import { sortItems, filterItems } from "redux_code/dispatch";
+import { selectDisplayItems } from "redux_code/selector";
+import { sortTypeMap } from "utils";
+
+const ButtonGroup = ({ items, onClick }) => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const handleOnClick = (index) => {
     if (activeIndex === index) {
       setActiveIndex(-1);
+      onClick(-1);
     } else {
       setActiveIndex(index);
+      onClick(index);
     }
-    onClick(index);
-  }
+  };
   return (
     <div>
       {items.map((item, index) => {
         return (
-          <div class={`sidecard-button-no-hover ${activeIndex === index ? "active" : ""}`} onClick={()=>handleOnClick(index)} key={index}>
-              {item}
+          <div
+            class={`sidecard-button-no-hover ${
+              activeIndex === index ? "active" : ""
+            }`}
+            onClick={() => handleOnClick(index)}
+            key={index}
+          >
+            {item}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
-const RatingNumbers = [3, 4, 5]
+  );
+};
+const SortList = () => {
+  const dispatch = useDispatch();
+  const [selected, setSelected] = React.useState(0);
+  const items = [
+    "Phổ biến",
+    "Bán chạy",
+    "Hàng mới",
+    "Giá thấp đến cao",
+    "Giá cao đến thấp",
+  ];
+  const handelClick = (index) => {
+    setSelected(index);
+    const sortType = sortTypeMap[items[index]];
+    dispatch(sortItems(sortType));
+  };
+  return (
+    <ul class="list-group list-filter">
+      {items.map((item, index) => {
+        return (
+          <li
+            key={index}
+            class={index === selected ? "active" : ""}
+            onClick={() => handelClick(index)}
+          >
+            {item}
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+const RatingNumbers = [3, 4, 5];
 const ratings = [3, 4, 5].map((rating) => {
-  return <div style={{display:"flex", alignItems:"center"}}>
-    <RatingStar rating={rating} />
-    <div>từ {rating} sao</div>
-  </div>
-})
+  return (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <RatingStar rating={rating} />
+      <div>từ {rating} sao</div>
+    </div>
+  );
+});
 export default function ProductPage() {
+  const location = useLocation();
   const { id } = useParams();
   const category_id = id;
   // TODO: replace with real data
-
-  // sort by price asc, price desc, best seller, newest, popular
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] =useState([]);
-  const sortList = (sortType) => {
-    sortType = sortTypeMap[sortType];
-    let newList = sortProducts(items, sortType);
-    setItems(newList);
-  };
+  const dispatch = useDispatch();
+  const displayItems = useSelector(selectDisplayItems);
   // get sub categories
   const [subCategories, setSubCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedRating, setSelectedRating] = useState(-1);
+  const [category, setCategory] = useState({});
   useEffect(() => {
     getSubCategories(category_id)
       .then((subCategories) => {
@@ -102,18 +123,20 @@ export default function ProductPage() {
       });
     getItemsByCategory(category_id)
       .then((items) => {
-        setItems(items);
-        setFilteredItems(items);
+        dispatch(setItems(items));
       })
       .catch((err) => {
         console.log(err);
-      }
-    );
-  }, [category_id]);
+      });
+    getCategoryById(category_id).then((category) => {
+      setCategory(category);
+    });
+  }, [location.pathname, location.search]);
+
   const handleCheckboxChange = (event) => {
     const value = parseInt(event.target.value);
     const isChecked = event.target.checked;
-  
+
     setSelectedBrands((prevSelectedBrands) => {
       if (isChecked) {
         return [...prevSelectedBrands, value];
@@ -122,38 +145,20 @@ export default function ProductPage() {
       }
     });
   };
-  const filterByRating = (ratingIndex) => {
+  const handleRatingFilterChange = (ratingIndex) => {
     const rating = ratingIndex === -1 ? -1 : RatingNumbers[ratingIndex];
-    setSelectedRating(rating)
-  }
-  const prevSelectedBrands = useRef();
+    console.log(rating);
+    setSelectedRating(rating);
+  };
   useEffect(() => {
-    let newList = items.filter(item => item.rating >= selectedRating);
-    if (prevSelectedBrands === selectedBrands) {
-      setFilteredItems(newList);
-    }
-    else {
-      const timer = setTimeout(() => {
-        if (selectedBrands.length > 0) {
-          newList = items.filter((item) => selectedBrands.includes(item.brand_id));
-        }
-        setFilteredItems(newList);
-      }, 200);
-      prevSelectedBrands.current = selectedBrands;
-      return () => clearTimeout(timer);
-    }
-  }, [selectedBrands, selectedRating, items]);
-
+    const filterArgs = { brands: selectedBrands, rating: selectedRating };
+    dispatch(filterItems(filterArgs));
+  }, [selectedBrands, selectedRating]);
 
   // filter according to brands
-
   return (
-    <div>
-      <Header></Header>
-      <div class="content-container">
-        <Breadcrumbs aria-label="breadcrumb">{breadcrumbs}</Breadcrumbs>
-      </div>
-      <div class="body-container" style={{ marginTop: "0" }}>
+    <MainLayout>
+      <div style={{ display: "flex", gap: "15px" }}>
         <div class="side-container">
           {subCategories.length > 0 && (
             <div className="side-card">
@@ -172,7 +177,10 @@ export default function ProductPage() {
           )}
           <div className="side-card">
             <h6 className="card-title">Đánh giá</h6>
-            <ButtonGroup items={ratings} onClick={filterByRating}></ButtonGroup>
+            <ButtonGroup
+              items={ratings}
+              onClick={handleRatingFilterChange}
+            ></ButtonGroup>
           </div>
           <SideCard title={"Giá"}>
             <div>Chọn khoảng giá</div>
@@ -188,26 +196,20 @@ export default function ProductPage() {
         </div>
         <div class="main-container">
           <div class="card">
-            <h4>Điện gia dụng</h4>
+            <h4>{category.name}</h4>
             <div>
-              <SortList onClick={sortList} />
+              <SortList />
             </div>
           </div>
           <div class="product-display">
-            {filteredItems.map((item) => {
-              return <ProductCard product={item} />;
-            })}
+            {displayItems &&
+              displayItems.map((item) => {
+                return <ProductCard product={item} />;
+              })}
           </div>
-          <div class="custom-pagination">
-            <Pagination
-              count={20}
-              siblingCount={2}
-              size="large"
-              variant="text"
-            />
-          </div>
+          <CustomPagination />
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }

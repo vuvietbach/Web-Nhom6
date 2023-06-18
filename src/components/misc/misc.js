@@ -1,6 +1,11 @@
 import "./misc.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import { Pagination } from "@mui/material";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setDisplayRange } from "redux_code/dispatch";
 export const RatingStar = ({ rating }) => {
   let stars = [];
   rating = Math.max(0, Math.min(5, rating));
@@ -81,35 +86,7 @@ export const CheckboxList = (items, handleCheckboxChange) => {
     </div>
   ));
 };
-export const SortList = ({ onClick }) => {
-  const items = [
-    "Phổ biến",
-    "Bán chạy",
-    "Hàng mới",
-    "Giá thấp đến cao",
-    "Giá cao đến thấp",
-  ];
-  const [selected, setSelected] = React.useState(0);
-  const handelClick = (index) => {
-    setSelected(index);
-    onClick(items[index]);
-  };
-  return (
-    <ul class="list-group list-filter">
-      {items.map((item, index) => {
-        return (
-          <li
-            key={index}
-            class={index === selected ? "active" : ""}
-            onClick={() => handelClick(index)}
-          >
-            {item}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+
 export const buildUrl = (path, params = [], query = {}) => {
   let url = path;
 
@@ -141,3 +118,26 @@ export const CustomLink = ({ to, children, style }) => (
     {children}
   </Link>
 );
+
+export const CustomPagination = () => {
+  const [page, setPage] = React.useState(1);
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setPage(1);
+  }, [location]);
+  const itemPerPage = 20;
+  const itemLength = useSelector((state) => state.item.filteredItems ? state.item.filteredItems.length : 0);
+  const pageCount = Math.max(Math.ceil(itemLength / itemPerPage), 1);
+  const handlePageChange = (event, page) => {
+    const startIndex = (page - 1) * itemPerPage;
+    const endIndex = Math.min(startIndex + itemPerPage, itemLength);
+    dispatch(setDisplayRange([startIndex, endIndex]));
+  }
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent:"center", marginTop: "15px" }}>
+      <Pagination count={pageCount} defaultPage={page} siblingCount={2} size="large" variant="text" onChange={handlePageChange}/>
+    </div>
+  );
+};

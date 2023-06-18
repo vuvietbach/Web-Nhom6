@@ -201,7 +201,6 @@ button.reset {
     border: 1px solid #efefef;
     border-radius: 15px;
     padding: 5px 10px;
-
 }
 .product-display {
     display: grid;
@@ -210,4 +209,7 @@ button.reset {
 }
 .clickable {
     cursor: pointer;
+}
+button:focus {
+    outline: none;
 }

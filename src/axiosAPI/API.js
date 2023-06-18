@@ -1,4 +1,5 @@
 import axios from "axios";
+import { func } from "prop-types";
 const API_URL = "http://localhost:8080";
 function adjustItemKey(items) {
     if(items.length > 0) {
@@ -36,18 +37,7 @@ export async function getBrandsByCategory(category_id) {
         throw error;
     }
 }
-export function sortProducts(products, type) {
-    let productsCopy = [...products];
-    if (type === "price-asc") {
-        productsCopy.sort((a, b) => a.price - b.price);
-    } else if(type === "price-desc") {
-        productsCopy.sort((a, b) => b.price - a.price);
-    } else if(type === "popular") {
-        console.log(products[0]);
-        productsCopy.sort((a, b) => b.number_sold - a.number_sold);
-    }
-    return productsCopy;
-}
+
 export async function getItemsByCategory(category_id) {
     try {
         const response = await axios.get(`${API_URL}/item/get-item-by-category/${category_id}`);
@@ -81,6 +71,30 @@ export async function getItemRecommendation() {
     try {
         const response = await axios.get(`${API_URL}/item/get-item-recommendation`);
         return adjustItemKey(response.data.data);
+    } catch(error) {
+        throw error;
+    }
+}
+export async function getCategoryById(id) {
+    try {
+        const response = await axios.get(`${API_URL}/category/get-category-by-id/${id}`);
+        return response.data.data[0];
+    } catch(error) {
+        throw error;
+    }
+}
+export async function getAllBrands() {
+    try {
+        const response = await axios.get(`${API_URL}/brand/get-all-brand`);
+        return response.data.data;
+    } catch(error) {
+        throw error;
+    }
+}
+export async function getAllCategories() {
+    try {
+        const response = await axios.get(`${API_URL}/category/get-all-category`);
+        return response.data.data;
     } catch(error) {
         throw error;
     }

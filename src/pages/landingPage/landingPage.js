@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import { getItemRecommendation } from "axiosAPI/API";
 import ItemsContainer from "components/itemContainer/itemContainer";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setDisplayRange, setItems } from "redux_code/dispatch";
+import { selectDisplayItems } from "redux_code/selector";
 export const CategoryList = ({ data }) => {
   return (
     <div>
@@ -27,15 +30,35 @@ export const CategoryList = ({ data }) => {
     </div>
   );
 };
+const  MoreButton = () => {
+  const [expand, setExpand] = useState(false);
+  const dispatch = useDispatch();
+  const handleOnClick = () => {
+    if (expand) {
+      dispatch(setDisplayRange([0, 20]));
+    } else {
+      dispatch(setDisplayRange([0, 1000]));
+    }
+    setExpand(!expand);
+  }
+  return (
+    <button type="button" class="btn btn-outline-primary" onClick={handleOnClick} style={{width:"100px"}}>
+      {expand ? "Thu gọn" : "Xem thêm"}
+    </button>
+  )
+}
 const LandingPage = () => {
   const bst_noibat = data.bst_noibat;
   const thuong_hieu = data.thuong_hieu;
   const recom_button = data.recommendation;
-  const [items, setItems] = useState([]);
+  const displayItems = useSelector(selectDisplayItems);
+  const dispatch = useDispatch();
   useEffect(() => {
     getItemRecommendation().then((data) => {
-      setItems(data);
-    });
+      dispatch(setItems(data));
+      dispatch(setDisplayRange([0, 20]));
+
+    })
   }, []);
   return (
     <div>
@@ -101,7 +124,10 @@ const LandingPage = () => {
               })}
             </div>
           </div>
-          <ItemsContainer items={items}></ItemsContainer>
+          <ItemsContainer items={displayItems}></ItemsContainer>
+          <div style={{display:"flex",justifyContent:"center",margin:"20px 0"}}>
+              <MoreButton></MoreButton>
+          </div>
         </div>
       </div>
     </div>
