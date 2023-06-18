@@ -86,6 +86,29 @@ export const CheckboxList = (items, handleCheckboxChange) => {
     </div>
   ));
 };
+export const CheckBox = ({id, value, handleCheckboxChange}) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        fontSize: "1rem",
+        padding: "5px 10px",
+      }}
+    >
+      <input
+        id={id}
+        type="checkbox"
+        value={id}
+        onChange={()=>handleCheckboxChange(id, value)}
+      />
+      <label htmlFor={id} style={{ margin: "0", marginLeft: "7px" }}>
+        {value.name}
+      </label>
+    </div>
+  )
+
+}
 
 export const buildUrl = (path, params = [], query = {}) => {
   let url = path;

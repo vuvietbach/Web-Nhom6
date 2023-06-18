@@ -227,7 +227,7 @@ export default function SearchResultPage() {
         <div class="two-area-layout">
           <div class="result-container">
             <div className="card" style={{ marginBottom: "15px" }}>
-              <div class="filter-section">
+              {/* <div class="filter-section">
                 <FilterSlider filters={options}/>
                 <div class="filter-modal-section">
                   <VR />
@@ -238,7 +238,7 @@ export default function SearchResultPage() {
                   </button>
                 </div>
               </div>
-              <hr style={{ marginTop: "10px", marginBottom: "10px" }} />
+              <hr style={{ marginTop: "10px", marginBottom: "10px" }} /> */}
               <SortSection />
             </div>
             <ItemsContainer items={displayItems} />
