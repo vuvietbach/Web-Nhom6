@@ -20,6 +20,7 @@ import SellerInformation from "./sellerinformation";
 import ItemList from "./itemlist";
 import OrderList from "./orderlist";
 import UpdateInfo from "./updateinformation";
+import UpdatePassword from "./updatepassword";
 import axios from "axios";
 
 const drawerWidth = 300;
@@ -50,12 +51,14 @@ function SellerMenu(props) {
   const [showItemList, setShowItemList] = React.useState(false);
   const [showOrderList, setShowOrderList] = React.useState(false);
   const [showUpdateInfo, setShowUpdateInfo] = React.useState(false);
+  const [showUpdatePassword, setShowUpdatePassword] = React.useState(false);
 
   const handleShowShopInfo = () => {
     setShowShopInfo(true);
     setShowItemList(false);
     setShowOrderList(false);
     setShowUpdateInfo(false);
+    setShowUpdatePassword(false);
   };
 
   const handleShowItemList = () => {
@@ -63,6 +66,7 @@ function SellerMenu(props) {
     setShowItemList(true);
     setShowOrderList(false);
     setShowUpdateInfo(false);
+    setShowUpdatePassword(false);
   };
 
   const handleShowOrderList = () => {
@@ -70,6 +74,7 @@ function SellerMenu(props) {
     setShowItemList(false);
     setShowOrderList(true);
     setShowUpdateInfo(false);
+    setShowUpdatePassword(false);
   };
 
   const handleShowUpdateInfo = () => {
@@ -77,6 +82,15 @@ function SellerMenu(props) {
     setShowItemList(false);
     setShowOrderList(false);
     setShowUpdateInfo(true);
+    setShowUpdatePassword(false);
+  };
+
+  const handleShowUpdatePassword = () => {
+    setShowShopInfo(false);
+    setShowItemList(false);
+    setShowOrderList(false);
+    setShowUpdateInfo(false);
+    setShowUpdatePassword(true);
   };
 
   const handleSignOut = () => {
@@ -190,6 +204,23 @@ function SellerMenu(props) {
               </ListItem>
 
               <ListItem key="5" disablePadding>
+                <ListItemButton onClick={handleShowUpdatePassword}>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      fontSize: "14px",
+                      fontFamily: "Arial",
+                      padding: "5px",
+                    }}
+                    disableTypography
+                    primary="Đổi mật khẩu"
+                  />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem key="6" disablePadding>
                 <ListItemButton onClick={handleSignOut}>
                   <ListItemIcon>
                     <PowerSettingsNewIcon />
@@ -213,6 +244,7 @@ function SellerMenu(props) {
       {showItemList && <ItemList />}
       {showOrderList && <OrderList />}
       {showUpdateInfo && <UpdateInfo />}
+      {showUpdatePassword && <UpdatePassword />}
     </Box>
   );
 }

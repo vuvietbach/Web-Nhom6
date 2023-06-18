@@ -161,7 +161,8 @@ function ItemList() {
       // Send the item data to the API
       const response = await axios.post(
         "http://localhost:8080/item/create-item-v2",
-        item
+        item,
+        { withCredentials: true }
       );
 
       // Log the response from the API

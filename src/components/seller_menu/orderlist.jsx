@@ -15,12 +15,12 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogAction, setDialogAction] = useState("");
 
-  const handleApprove = async () => {
+  const handleApprove = () => {
     setDialogAction("approve");
     setOpenDialog(true);
   };
 
-  const handleDecline = async () => {
+  const handleDecline = () => {
     setDialogAction("decline");
     setOpenDialog(true);
   };
@@ -41,9 +41,9 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
 
       const response = await axios.post(
         "http://localhost:8080/order/change-status",
-        requestBody
+        requestBody,
+        { withCredentials: true }
       );
-
       console.log(
         `Order ${
           dialogAction.charAt(0).toUpperCase() + dialogAction.slice(1)
@@ -60,13 +60,13 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
   let statusColor = "";
   switch (status) {
     case "pending":
-      statusColor = "yellow";
+      statusColor = "#fbc02d";
       break;
     case "done":
-      statusColor = "green";
+      statusColor = "#4caf50";
       break;
     case "shipping":
-      statusColor = "blue";
+      statusColor = "#2196f3";
       break;
     default:
       statusColor = "black";
@@ -96,28 +96,30 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
       >
         {status}
       </div>
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleApprove}
-          style={{
-            marginRight: "8px",
-            backgroundColor: "#3f51b5",
-            color: "#fff",
-          }}
-        >
-          Approve
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleDecline}
-          style={{ backgroundColor: "#f50057", color: "#fff" }}
-        >
-          Decline
-        </Button>
-      </div>
+      {status === "pending" && (
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleApprove}
+            style={{
+              marginRight: "8px",
+              backgroundColor: "#3f51b5",
+              color: "#fff",
+            }}
+          >
+            Approve
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleDecline}
+            style={{ backgroundColor: "#f50057", color: "#fff" }}
+          >
+            Decline
+          </Button>
+        </div>
+      )}
 
       {/* Confirmation Dialog */}
       <Dialog open={openDialog} onClose={handleDialogClose}>
@@ -154,21 +156,8 @@ const OrderList = () => {
     }
   }, []);
 
-  console.log(orders);
-
   const handleFilter = (status) => {
     setFilter(status);
-  };
-
-  const updateOrders = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/order/get-order-by-seller-id/${userData?.id}`
-      );
-      setOrders(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const filteredData =
@@ -182,38 +171,60 @@ const OrderList = () => {
         <Button
           variant="contained"
           onClick={() => handleFilter("all")}
-          style={{ marginRight: "8px" }}
+          style={{
+            marginRight: "8px",
+            backgroundColor: filter === "all" ? "#3f51b5" : "#fff",
+            color: filter === "all" ? "#fff" : "#3f51b5",
+          }}
+          disabled={filter === "all"}
         >
           All
         </Button>
         <Button
           variant="contained"
           onClick={() => handleFilter("pending")}
-          style={{ marginRight: "8px" }}
+          style={{
+            marginRight: "8px",
+            backgroundColor: filter === "pending" ? "#3f51b5" : "#fff",
+            color: filter === "pending" ? "#fff" : "#3f51b5",
+          }}
         >
           Pending
         </Button>
         <Button
           variant="contained"
           onClick={() => handleFilter("shipping")}
-          style={{ marginRight: "8px" }}
+          style={{
+            marginRight: "8px",
+            backgroundColor: filter === "shipping" ? "#3f51b5" : "#fff",
+            color: filter === "shipping" ? "#fff" : "#3f51b5",
+          }}
         >
           Shipping
         </Button>
-        <Button variant="contained" onClick={() => handleFilter("done")}>
+        <Button
+          variant="contained"
+          onClick={() => handleFilter("done")}
+          style={{
+            backgroundColor: filter === "done" ? "#3f51b5" : "#fff",
+            color: filter === "done" ? "#fff" : "#3f51b5",
+          }}
+        >
           Done
         </Button>
       </div>
-      {filteredData.map((order, index) => (
-        <OrderBar
-          key={index}
-          itemspecific_name={order.itemspecific_name}
-          quantity={order.quantity}
-          status={order.status}
-          id={order.order_id}
-          item_id={order.item_id}
-        />
-      ))}
+      <div style={{ overflowY: "scroll", maxHeight: "calc(100vh - 100px)" }}>
+        {filteredData.map((order, index) => (
+          <OrderBar
+            key={index}
+            itemspecific_name={order.itemspecific_name}
+            quantity={order.quantity}
+            status={order.status}
+            id={order.order_id}
+            item_id={order.item_id}
+          />
+        ))}
+      </div>
     </div>
   );
 };
