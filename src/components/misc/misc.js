@@ -86,7 +86,7 @@ export const CheckboxList = (items, handleCheckboxChange) => {
     </div>
   ));
 };
-export const CheckBox = ({id, value, handleCheckboxChange}) => {
+export const CheckBox = ({item, onClick}) => {
   return (
     <div
       style={{
@@ -97,13 +97,12 @@ export const CheckBox = ({id, value, handleCheckboxChange}) => {
       }}
     >
       <input
-        id={id}
+        id={item.id}
         type="checkbox"
-        value={id}
-        onChange={()=>handleCheckboxChange(id, value)}
+        onChange={(event)=>onClick(event, item)}
       />
-      <label htmlFor={id} style={{ margin: "0", marginLeft: "7px" }}>
-        {value.name}
+      <label htmlFor={item.id} style={{ margin: "0", marginLeft: "7px" }}>
+        {item.name}
       </label>
     </div>
   )
