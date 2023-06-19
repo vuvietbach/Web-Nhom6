@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate,useNavigate, json } from 'react-router-dom';
+import { Link, Navigate,useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./SignUp.css"
@@ -19,6 +19,7 @@ const SignUp = () => {
   const [nameInputValue, setNameInputValue] = useState('');
   const [role, setRole] = useState("user");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkValidPhoneNumber = (e) => {
     const input = e.target.value;
@@ -111,7 +112,7 @@ const SignUp = () => {
           });
     
           setTimeout(() => {
-            navigate("/SignIn");
+            navigate("/SignIn",{state: { previousPath: location.pathname }  });
           }, 1000); // Chuyển hướng trang sau 1 giây (1000ms)
           // localStorage.setItem("user",JSON.stringify(response.data.data));
         })
