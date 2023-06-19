@@ -1,13 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, Card, CardContent } from "@mui/material";
 import AppWidgetSummary from "../../sections/AppWidget";
 import InformationStyle from "./sellerinformation.style";
+import axios from "axios";
 
 const SellerInformation = () => {
+  const [sellerData, setSellerData] = useState(null);
   const userData = JSON.parse(localStorage.getItem("user"));
   console.log(userData);
 
-  if (!userData) {
+  useEffect(() => {
+    // Set background color of html and body to white
+    document.documentElement.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "white";
+    return () => {
+      // Reset background color when component is unmounted
+      document.documentElement.style.backgroundColor = null;
+      document.body.style.backgroundColor = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const fetchSellerData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/seller/get-seller-by-id/${userData.id}`
+        );
+        setSellerData(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchSellerData();
+  }, [userData.id]);
+
+  if (!sellerData) {
     return <div>Loading...</div>;
   }
 
@@ -16,14 +44,14 @@ const SellerInformation = () => {
       <div className="container-seller">
         <div className="seller-details">
           <img
-            src={userData.img_url}
+            src={sellerData.img_url}
             alt="Profile"
             style={{ width: "10rem", height: "auto" }}
           />
           <Grid container spacing={2} alignItems="center" sx={{ mt: 2 }}>
             <Grid item>
               <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-                {userData.name}
+                {sellerData.name}
               </Typography>
             </Grid>
             <Grid item>
@@ -40,7 +68,7 @@ const SellerInformation = () => {
               borderRadius: "10px",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
               overflowY: "scroll", // Add scrollable overflow
-              maxHeight: "calc(100vh - 750px)",
+              maxHeight: "calc(100vh - 30rem)",
               mt: 2,
               mb: 2,
             }}
@@ -51,21 +79,21 @@ const SellerInformation = () => {
                 color="textPrimary"
                 sx={{ marginBottom: "1rem", fontWeight: "bold" }}
               >
-                {userData.description}
+                {sellerData.description}
               </Typography>
               <Typography
                 variant="h6"
                 color="textSecondary"
                 sx={{ marginBottom: "0.5rem", fontWeight: "300" }}
               >
-                Address: {userData.address}
+                Address: {sellerData.address}
               </Typography>
               <Typography
                 variant="h6"
                 color="textSecondary"
                 sx={{ fontWeight: "300" }}
               >
-                Phone Number: {userData.phone_number}
+                Phone Number: {sellerData.phone_number}
               </Typography>
             </CardContent>
           </Card>
@@ -85,7 +113,7 @@ const SellerInformation = () => {
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Followers"
-                total={userData.followers}
+                total={sellerData.followers}
                 icon={"mdi:account-heart"}
               />
             </Grid>
@@ -93,7 +121,7 @@ const SellerInformation = () => {
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Products"
-                total={userData.number_of_products}
+                total={sellerData.number_of_products}
                 color="success"
                 icon={"mdi:store"}
               />
@@ -102,7 +130,7 @@ const SellerInformation = () => {
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Rate"
-                total={userData.rate ? userData.rate : 0}
+                total={sellerData.rate ? sellerData.rate : 0}
                 color="warning"
                 icon={"mdi:creation"}
               />
@@ -111,7 +139,7 @@ const SellerInformation = () => {
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Review count"
-                total={userData.review_count ? userData.review_count : 0}
+                total={sellerData.review_count ? sellerData.review_count : 0}
                 icon={"mdi:creation"}
               />
             </Grid>

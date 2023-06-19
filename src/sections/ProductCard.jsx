@@ -20,8 +20,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 
-// ----------------------------------------------------------------------
-
 const StyledProductImg = styled("img")({
   top: 0,
   width: "100%",
@@ -29,8 +27,6 @@ const StyledProductImg = styled("img")({
   objectFit: "cover",
   position: "absolute",
 });
-
-// ----------------------------------------------------------------------
 
 ShopProductCard.propTypes = {
   product: PropTypes.object,
@@ -44,6 +40,17 @@ export default function ShopProductCard({ product }) {
   const [editedName, setEditedName] = useState("");
   const [editedPrice, setEditedPrice] = useState("");
   const [editedImg, setEditedImg] = useState("");
+
+  useEffect(() => {
+    // Set background color of html and body to white
+    document.documentElement.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "white";
+    return () => {
+      // Reset background color when component is unmounted
+      document.documentElement.style.backgroundColor = null;
+      document.body.style.backgroundColor = null;
+    };
+  }, []);
 
   useEffect(() => {
     const fetchItemData = async () => {
@@ -186,18 +193,16 @@ export default function ShopProductCard({ product }) {
         </Link>
 
         <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
+          direction={{ xs: "column", sm: "row" }} // Vertical layout on small screens, horizontal on larger screens
+          spacing={1}
+          sx={{ justifyContent: { xs: "flex-start", sm: "space-between" } }} // Align buttons to the left on small screens, space-between on larger screens
         >
-          <Stack direction="row" spacing={1}>
-            <Button variant="outlined" onClick={handleEdit}>
-              Edit
-            </Button>
-            <Button variant="outlined" onClick={handleDelete} color="error">
-              Delete
-            </Button>
-          </Stack>
+          <Button variant="outlined" onClick={handleEdit}>
+            Edit
+          </Button>
+          <Button variant="outlined" onClick={handleDelete} color="error">
+            Delete
+          </Button>
         </Stack>
       </Stack>
 

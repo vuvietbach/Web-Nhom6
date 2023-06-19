@@ -5,10 +5,10 @@ export default styled.div`
     padding: 0;
     margin: 0;
     margin-top: 2rem;
-    margin-left: 2%;
+    margin-left: 4%;
     margin-right: 2%;
     background-color: white;
-    width: 80vw;
+    width: 75vw;
   }
 
   .picture2 {
