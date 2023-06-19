@@ -1,17 +1,17 @@
 import "./searchResultPage.scss";
 import { MainLayout } from "components/layoutTemplate/layoutTemplate";
 import DropdownOption from "components/dropdown/dropdown";
-import Button from "react-bootstrap/Button";
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getAllBrands, searchItems, getAllCategories } from "axiosAPI/API";
+import { getAllBrands, searchItems, getAllCategories, filterItem } from "axiosAPI/API";
 import ItemsContainer from "components/itemContainer/itemContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { setItems } from "redux_code/dispatch";
 import { selectDisplayItems } from "redux_code/selector";
-import { CustomPagination } from "components/misc/misc";
+import { CheckBox, CustomPagination } from "components/misc/misc";
 import { sortItems, filterItems } from "redux_code/dispatch";
 import { sortTypeMap } from "utils";
+import { ExpandableList } from "components/misc/misc";
 const filters = [
   {
     name: "Thương hiệu",
@@ -35,7 +35,7 @@ const filters = [
   },
 ];
 
-const Filter = ({filter}) => {
+const Filter = ({ filter }) => {
   const [showValues, setShowValues] = useState([]);
   useEffect(() => {
     if (filter.values.length <= 4) {
@@ -72,7 +72,7 @@ const VR = () => {
     ></div>
   );
 };
-const FilterSlider = ({filters}) => {
+const FilterSlider = ({ filters }) => {
   const [currentFirst, setCurrentFirst] = useState(0);
   const [movement, setMovement] = useState(0);
   const elementRefs = useRef([]);
@@ -89,32 +89,29 @@ const FilterSlider = ({filters}) => {
     } else if (type === "next") {
       if (currentFirst < newFilters.length - 1) {
         let offset = elementWidths[currentFirst];
-        
+
         setCurrentFirst(currentFirst + 1);
 
         setMovement(movement - offset); // Move left by 100 pixels (adjust as needed)
-
       }
     }
   };
   const [newFilters, setNewFilters] = useState([]);
   useEffect(() => {
-    const tmpFilters = []
+    const tmpFilters = [];
     const entries = Object.entries(filters);
     for (let i = 0; i < entries.length; i++) {
       const [key, value] = entries[i];
-      tmpFilters.push({id: key, ...value});
+      tmpFilters.push({ id: key, ...value });
     }
     setNewFilters(tmpFilters);
-    
+
     let tmpWidths = elementRefs.current.map(
       (item, index) => item.getBoundingClientRect().width
     );
     setElementWidths(tmpWidths);
-  
   }, [filters]);
-  useEffect(() => {
-  }, [newFilters]);
+  useEffect(() => {}, [newFilters]);
   const assignRef = (index) => (element) => {
     elementRefs.current[index] = element;
   };
@@ -177,6 +174,43 @@ const SortSection = () => {
     </div>
   );
 };
+const FilterContainer = ({ filter }) => {
+  const [checkBoxes, setCheckBoxes] = useState([]);
+  const [selectedValues, setSelectedValues] = useState([]);
+  const handleClick = (event, item) => {
+    const isChecked = event.target.checked;
+    setSelectedValues((prev) => {
+      if (isChecked) {
+        return [...prev, item];
+      } else {
+        return prev.filter((i) => i !== item);
+      }
+    });
+  };
+  useEffect(() => {
+    if(filter.onClick !== undefined) {
+      const timer = setTimeout(() => {
+        filter.onClick(filter.id, selectedValues);
+      }
+      , 500);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedValues]);
+  useEffect(() => {
+    const tmpCheckBoxes = filter.values.map((item) => {
+      return <CheckBox item={item} onClick={handleClick}></CheckBox>;
+    });
+    setCheckBoxes(tmpCheckBoxes);
+  }, [filter]);
+  return (
+    <div class="side-card">
+      <h6 className="card-title">{filter.name}</h6>
+      <ExpandableList data={checkBoxes} initiallyExpanded={10}>
+        {checkBoxes}
+      </ExpandableList>
+    </div>
+  );
+};
 export default function SearchResultPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -191,10 +225,22 @@ export default function SearchResultPage() {
       .catch((err) => console.log(err));
   }, [query]);
   const handleFilter = (filterType, filterValue) => {
-    setSelectedFilter({...selectedFilter, [filterType]: filterValue})
-  }
-  const [options, setOptions] = useState({ brands: {name: "Thương hiệu", values: [], onClick: handleFilter}, categories: {name: "Danh mục", values: [], onClick: handleFilter} });
-  const [selectedFilter, setSelectedFilter] = useState({})
+    //console.log(filterType, filterValue);
+    setSelectedFilter({ ...selectedFilter, [filterType]: filterValue.map((item) => item.id) });
+  };
+  const [options, setOptions] = useState({
+    brands: { name: "Thương hiệu", values: [], onClick: handleFilter },
+    categories: { name: "Danh mục", values: [], onClick: handleFilter },
+  });
+  const [filters, setFilters] = useState([]);
+  useEffect(() => {
+    const tmpFilters = Object.entries(options).map(([key, value]) => {
+      return { id: key, ...value };
+    })
+    setFilters(tmpFilters);
+  }, [options]);
+
+  const [selectedFilter, setSelectedFilter] = useState({});
   const items = useSelector((state) => state.item.items);
   useEffect(() => {
     let itemBrandID = items.map((item) => item.brand_id);
@@ -211,41 +257,34 @@ export default function SearchResultPage() {
         itemCategoryID.includes(item.id)
       );
       const newCategories = { ...options.categories, values: itemCategory };
-      setOptions({ ...options, categories: newCategories});
+      setOptions({ ...options, categories: newCategories });
     });
   }, [items]);
-  useEffect(() => {
-    console.log(options);
-  }, [options]);
+
 
   useEffect(() => {
     dispatch(filterItems(selectedFilter))
-  }, [selectedFilter])
+  }, [selectedFilter]);
+  useEffect(() => {
+    // console.log(displayItems);
+  }, [displayItems]);
   return (
     <div key={query}>
       <MainLayout>
         <div class="two-area-layout">
           <div class="result-container">
             <div className="card" style={{ marginBottom: "15px" }}>
-              {/* <div class="filter-section">
-                <FilterSlider filters={options}/>
-                <div class="filter-modal-section">
-                  <VR />
-                  <button class="filter-modal-button">
-                    <i class="fa-solid fa-filter"></i>
-                    &nbsp;
-                    <span>Tất cả</span>
-                  </button>
-                </div>
-              </div>
-              <hr style={{ marginTop: "10px", marginBottom: "10px" }} /> */}
               <SortSection />
             </div>
             <ItemsContainer items={displayItems} />
             <CustomPagination />
           </div>
-          <div class="banner">
-            <img src="https://salt.tikicdn.com/ts/tka/fa/7c/6b/e4540edcd4c3b6247ddca94936f23b6b.jpg" />
+          <div class="side-container">
+            {
+              filters.map((item) => {
+                return <FilterContainer filter={item}></FilterContainer>
+              })
+            }
           </div>
         </div>
       </MainLayout>

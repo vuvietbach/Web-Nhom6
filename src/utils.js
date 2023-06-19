@@ -28,6 +28,9 @@ export function filterItems(items, filterArgs) {
     if (filterArgs.rating !== undefined) {
         itemsCopy = itemsCopy.filter((item) => item.rating >= filterArgs.rating);
     }
+    if (filterArgs.categories !== undefined && filterArgs.categories.length !== 0) {
+        itemsCopy = itemsCopy.filter((item) => filterArgs.categories.includes(item.category_id));
+    }
     return itemsCopy;
 }
 export const getFullPath = (location) => {
