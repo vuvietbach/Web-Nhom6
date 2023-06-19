@@ -111,7 +111,9 @@ function ProductDetail() {
         quantity: quantity,
       };
       axios
-        .post(`http://localhost:8080/cart/add-cart`, data)
+        .post(`http://localhost:8080/cart/add-cart`, data,{
+          withCredentials: true
+        })
         .then((response) => {
           console.log(response.data);
           toast.success("Thêm vào giỏ hàng thành công");
@@ -242,9 +244,9 @@ function ProductDetail() {
     const offset = (currentPage - 1) * itemsPerPage;
     const newData = comments.slice(offset, offset + itemsPerPage);
     setCurrentPageData(newData);
-    console.log(comments);
-    console.log(newData);
-    console.log(currentPage);
+    // console.log(comments);
+    // console.log(newData);
+    // console.log(currentPage);
   }, [currentPage, comments]);
 
   const handleChangePage = (event, page) => {
@@ -563,7 +565,7 @@ function ProductDetail() {
         </div>
 
         {/* Info Detail */}
-        <div className="container-info">
+        {/* <div className="container-info">
           <div className="info-detail">
             <h2>Thông Tin Chi Tiết</h2>
             <div className="content-table">
@@ -607,13 +609,25 @@ function ProductDetail() {
               alt=""
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Product Description */}
-        <div className="product-description">
-          <h2>Mô Tả Sản Phẩm</h2>
-          <div className="description">
-            <MyComponent description={item.description} />
+        <div style={{display:"flex"}}>
+          <div className="product-description">
+              <h2>Mô Tả Sản Phẩm</h2>
+              <div className="description">
+                <MyComponent description={item.description} />
+              </div>            
+          </div>
+          <div className="container-info_img">
+            <img
+              src="https://salt.tikicdn.com/cache/w1080/ts/tka/12/38/43/e03d71a9ded46b8027026c0e48720603.png.webp"
+              style={{
+                width: "290px",
+                height: "490px",
+              }}
+              alt=""
+            />
           </div>
         </div>
 
@@ -743,7 +757,7 @@ function ProductDetail() {
                 <div className="review-rating_number">0</div>
               </div>
             </div>
-            <div className="review-filter">
+            {/* <div className="review-filter">
               <div>Lọc xem theo:</div>
               <div className="review-star five clickable" onClick={Click}>
                 {isChange ? (
@@ -858,7 +872,7 @@ function ProductDetail() {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
 
           {currentPageData.map((comment, index) => (
