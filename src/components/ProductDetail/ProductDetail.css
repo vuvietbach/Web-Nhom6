@@ -53,6 +53,7 @@
 
 .product-detail {
     margin-left: 15px;
+    padding-bottom: 15px;
 }
 
 .seperate {
@@ -82,7 +83,7 @@
 
 /* Detail-left */
 .left {
-    width: 450px;
+    width: 420px;
     margin-right: 15px;
 }
 
@@ -149,7 +150,7 @@
 .option {
     display: grid;
     position: relative;
-    height: 40px;
+    min-height: 40px;
     width: 130px;
     background-color: rgb(242, 242, 242);
     border-radius: 5px;
