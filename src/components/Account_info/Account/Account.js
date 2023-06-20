@@ -1,130 +1,196 @@
-import React from 'react';
-import './Account.css'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import "./Account.css";
 import images from "../../assets/assets";
-const Account = () => {
-    return (
-        <>
-              
-              <div>
-                <div id="cot_menu" className="menu">
-                  <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
-                    <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
-                  </div>
-                  <div id="menu_1" style={{display: 'inline-block', verticalAlign: 'top', border: '#F9EAEA 0px none', height: '50px', marginBottom: '20px', marginLeft: '20px'}}>Tài khoản của <br />
-                    <strong>Bách Vũ</strong>
-                  </div>
-                  <div id="menu_2" style={{backgroundColor: '#E0E0E0', height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtintaikhoan.png']} alt="Avatar" />Thông tin tài khoản
-                  </div>
-                  <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongbaocuatoi.png']} alt="Avatar" />Thông báo của tôi </div>
-                  <div id="menu_4" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydonhang.png']} alt="Avatar" />Quản lý đơn hàng </div>
-                  <div id="menu_5" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydoitra.png']} alt="Avatar" />Quản lý đổi trả </div>
-                  <div id="menu_6" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
-                  <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
-                  <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
-                  
-                  
-                  </div>
-                <div className="thongtinchinh" style={{display: 'inline-block', verticalAlign: 'top'}}>
-                  <div id="tieude" style={{marginLeft: '50px', marginTop: '110px'}}>Thông tin tài khoản </div><br />
-                  <div id="thongtinchinh_1">
-                    <div id="thongtin_tk" className="thongtin" style={{marginTop: '0px'}}>
-                      <h3 style={{color: '#808080', marginLeft: '20px'}}>Thông tin cá nhân</h3>
-                      <div id="avatar_1" style={{marginLeft: '10px', width: '120px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '120px', borderRadius: '50%', overflow: 'hidden'}}>
-                        <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
-                      </div>
-                      <div style={{display: 'inline-block', verticalAlign: 'top', marginLeft: '40px'}}>
-                        <div id="ho_ten" style={{display: 'inline-block', marginTop: '20px', verticalAlign: 'top'}}> Họ và tên
-                          <form style={{display: 'inline-block', marginLeft: '50px'}}>
-                            <input type="text" placeholder="Nhập họ và tên" />
-                          </form>
-                        </div><br />
-                        <div id="nickname" style={{marginTop: '20px'}}>Nickname
-                          <form style={{display: 'inline-block', marginLeft: '50px'}}>
-                            <input type="text" placeholder="Thêm nickname" />	
-                          </form>
-                        </div>
-                      </div>
-                      <br />
-                      <div id="ngay_sinh" style={{marginTop: '50px', marginLeft: '20px'}}>Ngày sinh
-                        <select name="day" id="day" style={{marginLeft: '50px'}}>
-                          <option value>Ngày</option>
-                        </select>
-                        <select name="thang" id="thang" style={{marginLeft: '20px'}}>
-                          <option value>Tháng</option>
-                        </select>
-                        <select name="nam" id="nam" style={{marginLeft: '20px'}}>
-                          <option value>Năm</option> 
-                        </select>
-                      </div><br />
-                      <div id="gioi_tinh" style={{marginTop: '20px', marginLeft: '20px'}}>Giới tính
-                        <input type="radio" defaultValue="Nam" style={{marginLeft: '50px'}} />Nam
-                        <input type="radio" defaultValue="Nam" style={{marginLeft: '20px'}} />Nữ
-                        <input type="radio" defaultValue="Nam" style={{marginLeft: '20px'}} />Khác
-                      </div><br />
-                      <div id="quoc_tich" style={{marginTop: '20px', marginLeft: '20px'}}>Quốc tịch
-                        <select style={{marginLeft: '50px'}}>
-                          <option value>Chọn quốc tịch</option>
-                        </select>
-                      </div><br />
-                      <div id="luuthaydoi" style={{marginTop: '20px'}}>Lưu thay đổi</div>
-                    </div>
-                    <div id="thongtinkhac" className="tkkhac" style={{marginTop: '0px'}}>
-                      <h3 style={{color: '#808080', marginLeft: '30px'}}>Số điện thoại và email</h3>
-                      <div id="sodienthoai">
-                        <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodienthoai.png']} alt="Avatar" />Số điện thoại
-                        <form style={{display: 'inline-block'}} id="sdt">
-                          <input type="text" placeholder="Cập nhật" />
-                        </form>
-                      </div><br />
-                      <div id="email"><img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./email.png']} alt="Avatar" />
-                        Địa chỉ email
-                        <form style={{display: 'inline-block'}} id="mail">
-                          <input type="text" placeholder="Cập nhật" />
-                        </form>
-                      </div><br />
-                      <h3 style={{color: '#808080', marginLeft: '30px'}}>Bảo mật</h3>
-                      <div id="doimatkhau"><img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./doimatkhau.png']} alt="Avatar" />
-                        Đổi mật khẩu
-                        <form style={{display: 'inline-block'}} id="doimk">
-                          <input type="text" placeholder="Cập nhật" />
-                        </form>
-                      </div><br />
-                      <div id="mapin"><img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./mapin.png']} alt="Avatar" />
-                        Thiết lập mã PIN
-                        <form style={{display: 'inline-block'}} id="maP">
-                          <input type="text" placeholder="Thiết lập" />
-                        </form>
-                      </div><br />
-                      <h3 style={{color: '#808080', marginLeft: '30px'}}>Liên kết mạng xã hội</h3>
-                      <div id="facebook">
-                        <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./facebook.png']} alt="Avatar" />Facebook
-                        <form style={{display: 'inline-block'}} id="face">
-                          <input type="text" placeholder="Liên kết" />
-                        </form>
-                      </div><br />
-                      <div id="Google">
-                        <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./google.png']} alt="Avatar" />Google
-                        <form style={{display: 'inline-block'}} id="goog">
-                          <input type="text" placeholder="Liên kết" />
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-    
-  
 
-            </>
-        )
+function Account() {
+  const { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/user/get-user-by-id/${id}`).then((res) => {
+      setUser(res.data);
+    });
+  }, [id]);
+
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/user/update-user", {
+        username: user.username,
+        first_name: firstName,
+        last_name: lastName,
+        phone_number: phoneNumber,
+      })
+      .then((res) => {
+        setUser(res.data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+  };
+
+  const handleUpdatePassword = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/user/update-password", {
+        username: user.username,
+        old_password: oldPassword,
+        new_password: newPassword,
+        confirm_password: confirmPassword,
+      })
+      .then(() => {
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+  };
+
+  const handleUploadAvatar = (e) => {
+    const formData = new FormData();
+    formData.append("avatar", e.target.files[0]);
+    axios
+      .post(`http://localhost:8080/user/change-avatar/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+  };
+
+  return (
+    <>
+    <div id="cot_menu" className="menu">
+    <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
+      <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
+    </div>
+    <div id="menu_1" style={{display: 'inline-block', verticalAlign: 'top', border: '#F9EAEA 0px none', height: '50px', marginBottom: '20px', marginLeft: '20px'}}>Tài khoản của <br />
+    </div>
+    <div id="menu_2" style={{ height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtintaikhoan.png']} alt="Avatar" />Thông tin tài khoản
+    </div>
+    <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongbaocuatoi.png']} alt="Avatar" />Thông báo của tôi </div>
+    <div id="menu_4" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydonhang.png']} alt="Avatar" />Quản lý đơn hàng </div>
+    <div id="menu_5" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydoitra.png']} alt="Avatar" />Quản lý đổi trả </div>
+    <div id="menu_6" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
+    <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
+    <div id="menu_8" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
+      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
     
+  </div>
+    <div className="account-page">
+      {user ? (
+        <div className="user-info">
+          <h1>{user.username} Account</h1>
+          <p>
+            Name: {user.first_name} {user.last_name}
+          </p>
+          <p>Phone Number: {user.phone_number}</p>
+          <img src={user.avatar_url} alt="avatar" />
+          <form onSubmit={handleUpdateUser}>
+            <h2>Update Your Information</h2>
+            <div>
+              <label htmlFor="firstName">First Name:</label>
+              <input
+                type="text"
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName">Last Name:</label>
+              <input
+                type="text"
+                id="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="phoneNumber">Phone Number:</label>
+              <input
+                type="tel"
+                id="phoneNumber"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit">Update</button>
+          </form>
+          <form onSubmit={handleUpdatePassword}>
+            <h2>Change Password</h2>
+            <div>
+              <label htmlFor="oldPassword">Old Password:</label>
+              <input
+                type="password"
+                id="oldPassword"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="newPassword">New Password:</label>
+              <input
+                type="password"
+                id="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit">Change Password</button>
+          </form>
+          <form>
+            <h2>Change Avatar</h2>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleUploadAvatar}
+            />
+            {error && <p className="error-message">{error}</p>}
+          </form>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+    </>
+  );
 }
 
 export default Account;

@@ -31,7 +31,7 @@ function App() {
             <Route path="/Rating" element={<Rating/>} />
             <Route path="/chi-tiet-san-pham/:id" element={<ProductDetail/>} />
             <Route path="/GioHang" element={<GioHang/>}/>
-            <Route path="/Ordermanagement" element={<OrderManagement/>}/>
+            <Route path="/OrderManagement" element={<OrderManagement/>}/>
             <Route path="/danh-muc/:id" element={<ProductPage/>}/>
             <Route path="/tim-kiem" element={<SearchResultPage/>}/>
             <Route path="/seller" element={<SellerMenu />} />
