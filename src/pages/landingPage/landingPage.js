@@ -90,25 +90,6 @@ const LandingPage = () => {
               </Carousel.Item>
             </Carousel>
           </div>
-          <div className="card ">
-            <h5 className="card-title">Thương hiệu chính hãng</h5>
-            <Carousel>
-              <Carousel.Item>
-                <div className="carousel-item-container">
-                  {bst_noibat.map((item) => {
-                    return <img src={item} />;
-                  })}
-                </div>
-              </Carousel.Item>
-              <Carousel.Item>
-                <div className="carousel-item-container">
-                  {thuong_hieu.map((item) => {
-                    return <img src={item} />;
-                  })}
-                </div>
-              </Carousel.Item>
-            </Carousel>
-          </div>
           <div className="recommendation-container">
             <div className="card">
               <h5 className="card-title">Gợi ý hôm nay</h5>

@@ -3,10 +3,10 @@ import Tikilogo from "../assets/tiki.png";
 import { SearchBar } from "components/searchBar/searchBar";
 import "./header.css";
 import { AddressModalButton } from "components/modal/AddressModal";
-import { Link, useLocation } from "react-router-dom";
-function HeaderButton({ fa_icon, text }) {
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+function HeaderButton({ fa_icon, text, onClick }) {
   return (
-    <button type="button" className="unstyled-button header-button">
+    <button type="button" className="unstyled-button header-button" onClick={()=>onClick(text)}>
       <i class={fa_icon}></i>
       {text && <div>{text}</div>}
     </button>
@@ -33,6 +33,23 @@ const TikiLogo = () => {
 }
 export default function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const handelClick = (text) => {
+    if (text === "Tài khoản") {
+      if(localStorage.getItem('user') == null) {
+        navigate("/SignIn");
+      } else{
+        const user = JSON.parse(localStorage.getItem('user'));
+        if("followers" in user) {
+          navigate("/seller");
+        } else {
+          navigate("/Account");
+        }
+      }
+    } else if(text === "Trang chủ") {
+      navigate("/");
+    }
+  }
   // TODO: replace with real url
   const headerButtons = [
     {
@@ -48,8 +65,7 @@ export default function Header() {
     {
       fa_icon: "fa-regular fa-face-smile-beam",
       text: "Tài khoản",
-      url: location.pathname,
-    },
+    }
   ];
 
 
@@ -66,9 +82,8 @@ export default function Header() {
           </div>
           {headerButtons.map((item, index) => {
             return (
-              <CustomLink to={item.url} style={{height: "100%"}}>
-                <HeaderButton fa_icon={item.fa_icon} text={item.text} />
-              </CustomLink>);
+                <HeaderButton fa_icon={item.fa_icon} text={item.text} onClick={handelClick} />
+            )
           })}
           <div className="vertical-rule" />
           <div className="unstyled-button header-button cart-icon">
