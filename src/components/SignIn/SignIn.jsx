@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate,useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +13,7 @@ const SignIn = () => {
   const [passwordInputValue, setPasswordInputValue] = useState("");
   const [cookies, setCookie] = useCookies(["accessToken", "refreshToken"]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkValidName = (e) => {
     const name = e.target.value;
@@ -51,23 +52,34 @@ const SignIn = () => {
       });
       setCookie("accessToken", res.data.accessToken);
       setCookie("refreshToken", res.data.refreshToken);
-      // const userData = JSON.parse(localStorage.getItem("user"));
-      // console.log(userData.phone_number);
       document.querySelector(".error-message").innerHTML = "";
 
-      sendRefreshToken(); // Gửi refresh token sau khi nhận được token từ API login
-      if (res.data.data.role == "user") {
-        localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
-      } else {
-        localStorage.setItem("user", JSON.stringify(res.data.data.dataSeller));
-      }
-      toast.success("Đăng nhập thành công!", {
-        autoClose: 300, // Thời gian hiển thị toast là 1000ms (1 giây)
-      });
+      sendRefreshToken();
 
-      setTimeout(() => {
-        navigate(-1);
-      }, 1000); // Chuyển hướng trang sau 1 giây (1000ms)
+      toast.success("Đăng nhập thành công!", {
+        autoClose: 300, 
+      });
+      if (res.data.data.role == "seller") {
+        localStorage.setItem("user", JSON.stringify(res.data.data.dataSeller));
+        setTimeout(() => {
+          navigate("/seller");
+        }, 1000); // 
+        localStorage.setItem("user", JSON.stringify(res.data.data.dataSeller));
+      } else {
+        localStorage.setItem("user", JSON.stringify(res.data.data.dataUser));
+
+        const isPreviousPageSignUp = location.state?.previousPath === "/SignUp";
+        if(isPreviousPageSignUp) {
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        }
+        else {
+          setTimeout(() => {
+            navigate(-1);
+          }, 1000); // Chuyển hướng trang sau 1 giây (1000ms)
+        }
+      }
     } catch (error) {
       document.querySelector(".error-message").innerHTML =
         "Sai tài khoản hoặc mật khẩu";
@@ -89,7 +101,7 @@ const SignIn = () => {
         console.log(error.response.data);
       }
       sendRefreshToken();
-    }, 1000 * 60 * 30);
+    }, 1000 * 60 * 120);
   };
 
   const isPost = () => {

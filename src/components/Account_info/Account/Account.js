@@ -1,10 +1,11 @@
 import React from 'react';
 import './Account.css'
-import images from "../assets/assets";
+import images from "../../assets/assets";
 const Account = () => {
     return (
-        <>    
-            <div>
+        <>
+              
+              <div>
                 <div id="cot_menu" className="menu">
                   <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
                     <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
@@ -27,38 +28,9 @@ const Account = () => {
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
                   <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
-                  <div id="menu_9" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sanphambandaxem.png']} alt="Avatar" />Sản phẩm bạn đã xem </div>
-                  <div id="menu_10" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sanphamyeuthich.png']} alt="Avatar" />Sản phẩm yêu thích </div>
-                  <div id="menu_11" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sanphammuasau.png']} alt="Avatar" />Sản phẩm mua sau </div>
-                  <div id="menu_12" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./nhanxetcuatoi.png']} alt="Avatar" />Nhận xét của tôi</div>
-                  <div id="menu_13" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thanhvien.png']} alt="Avatar" />
-                    <div style={{display: 'inline-block', verticalAlign: 'top'}}>
-                      Thành viên <br /> <i>Bạn đang có 0 Astra</i>
-                    </div>
+                  
+                  
                   </div>
-                  <div id="menu_14" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./chiasecoloi.png']} alt="Avatar" />Chia sẻ có lời </div>
-                  <div id="menu_15" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./hopdongbaohiem.png']} alt="Avatar" />Hợp đồng bảo hiểm </div>
-                  <div id="menu_16" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./muatruoctrasau.png']} alt="Avatar" />Mua trước trả sau </div>
-                  <div id="menu_17" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./magiamgia.png']} alt="Avatar" />Mã giảm giá </div>
-                  <div id="menu_18" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./astracuaban.png']} alt="Avatar" />
-                    <div style={{display: 'inline-block', verticalAlign: 'top'}}>
-                      Astra của bạn<br /><i>0 ASA </i> </div>
-                  </div>
-                  <div id="menu_19" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlytikixu.png']} alt="Avatar" />Quản lý Tiki Xu của tôi </div>
-                  <div id="menu_20" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./bookcare.png']} alt="Avatar" />BookCare của tôi </div>
-                </div>
                 <div className="thongtinchinh" style={{display: 'inline-block', verticalAlign: 'top'}}>
                   <div id="tieude" style={{marginLeft: '50px', marginTop: '110px'}}>Thông tin tài khoản </div><br />
                   <div id="thongtinchinh_1">
@@ -147,6 +119,8 @@ const Account = () => {
                   </div>
                 </div>
               </div>
+    
+  
 
             </>
         )

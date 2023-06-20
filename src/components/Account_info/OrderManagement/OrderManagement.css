@@ -1,0 +1,108 @@
+.order-management {
+    margin: 20px;
+  }
+  
+  .order-management h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .order-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .order-filters button {
+    padding: 8px 20px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .order-filters button.active {
+    font-weight: bold;
+    color: #ff5500;
+  }
+  
+  .order-list {
+    display: grid;
+    grid-gap: 20px;
+  }
+  
+  .order-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .order-details {
+    display: grid;
+    grid-gap: 10px;
+  }
+  
+  .order-id {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .order-product,
+  .order-status {
+    font-size: 16px;
+  }
+  
+  .order-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .receive-button {
+    padding: 8px 16px;
+    background-color: #ff5500;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .create-order-button {
+    padding: 12px 24px;
+    background-color: #0800ff;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+.menu{
+	width:200px;
+	margin-left: 250px;
+	margin-top: 100px;
+	display:inline-block;
+	box-sizing: border-box;
+}
+#body{
+	background-color: #F5F5F5;
+}
+#menu_1:hover,#menu_2:hover,#menu_3:hover,#menu_4:hover,#menu_5:hover,#menu_6:hover,#menu_7:hover,#menu_8:hover,#menu_9:hover,#menu_10:hover,#menu_11:hover,#menu_12:hover,#menu_13:hover,#menu_14:hover,#menu_15:hover,#menu_16:hover,#menu_17:hover,#menu_18:hover,#menu_19:hover,#menu_20:hover{
+	background-color:#E0E0E0;
+	cursor: pointer;
+}
+.order-management{
+    vertical-align: top;
+  display:inline-block;
+	box-sizing: border-box;
+  text-align: center;
+	width:900px;
+	height:600px;
+  top: 500px;
+	margin-left: 50px;
+	vertical-align: top;
+	margin-top:100px;
+	background-color:#FFFFFF; 
+	border:#C0C0C0 1px solid;
+	border-radius: 10px 10px 10px 10px;
+}
