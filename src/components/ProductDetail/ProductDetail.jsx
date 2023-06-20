@@ -94,7 +94,7 @@ function ProductDetail() {
       return (value / 1000).toFixed(1) + "k";
     } else {
       return value;
-    }
+    } 
   };
 
   const addToCart = (e) => {
@@ -413,7 +413,7 @@ function ProductDetail() {
                   <div className="rating-and-follower">
                     <div className="rating">
                       <div className="rating-title">
-                        {convertValue(seller.rating)} / 5
+                        {seller.rating} / 5
                         <GradeIcon
                           style={{
                             color: "rgb(255,193,32)",
