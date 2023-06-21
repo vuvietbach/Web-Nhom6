@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Account.css";
 import images from "../../assets/assets";
-
+import { MainLayout } from "components/layoutTemplate/layoutTemplate";
 function Account() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -14,9 +14,9 @@ function Account() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
-
   useEffect(() => {
     axios.get(`http://localhost:8080/user/get-user-by-id/${id}`).then((res) => {
+      console.log(res.data)
       setUser(res.data);
     });
   }, [id]);
@@ -78,6 +78,7 @@ function Account() {
   };
 
   return (
+    <MainLayout>
     <>
     <div id="cot_menu" className="menu">
     <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
@@ -190,6 +191,7 @@ function Account() {
       )}
     </div>
     </>
+    </MainLayout>
   );
 }
 
