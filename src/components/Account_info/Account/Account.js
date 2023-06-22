@@ -86,7 +86,7 @@ function Account() {
     </div>
     <div id="menu_1" style={{display: 'inline-block', verticalAlign: 'top', border: '#F9EAEA 0px none', height: '50px', marginBottom: '20px', marginLeft: '20px'}}>Tài khoản của <br />
     </div>
-    <div id="menu_2" style={{ height: '40px', border: '#F9EAEA 0px none'}}>
+    <div id="menu_2" style={{backgroundColor: '#E0E0E0', height: '40px', border: '#F9EAEA 0px none'}}>
       <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtintaikhoan.png']} alt="Avatar" />Thông tin tài khoản
     </div>
     <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
@@ -99,13 +99,14 @@ function Account() {
       <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
     <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
       <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
-    <div id="menu_8" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
+    <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
       <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
     
   </div>
     <div className="account-page">
       {user ? (
         <div className="user-info">
+          <div className="user">
           <h1>{user.username} Account</h1>
           <p>
             Name: {user.first_name} {user.last_name}
@@ -144,6 +145,8 @@ function Account() {
             {error && <p className="error-message">{error}</p>}
             <button type="submit">Update</button>
           </form>
+          </div>
+          <div className="password">
           <form onSubmit={handleUpdatePassword}>
             <h2>Change Password</h2>
             <div>
@@ -176,6 +179,8 @@ function Account() {
             {error && <p className="error-message">{error}</p>}
             <button type="submit">Change Password</button>
           </form>
+          </div>
+          <div className="avatar">
           <form>
             <h2>Change Avatar</h2>
             <input
@@ -185,6 +190,7 @@ function Account() {
             />
             {error && <p className="error-message">{error}</p>}
           </form>
+          </div>
         </div>
       ) : (
         <p>Loading...</p>
