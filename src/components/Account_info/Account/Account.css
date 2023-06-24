@@ -23,45 +23,7 @@
 	margin-top: 160px;
   }
   
-  /* form {
-	display: flex;
-	flex-direction: column;
-  }
   
-  form h2 {
-	font-size: 18px;
-	margin-bottom: 10px;
-	color: #333;
-  }
-  
-  form div {
-	margin-bottom: 10px;
-  }
-  
-  label {
-	font-size: 14px;
-	color: #333;
-  }
-   */
-  /* input[type="tel"],
-  input[type="password"],
-  input[type="file"] {
-	width: 100%;
-	padding: 8px;
-	font-size: 14px;
-	border-radius: 5px;
-	border: 1px solid #ccc;
-  } */
-  
-  button[type="submit"] {
-	background-color: #3122ff;
-	color: #fff;
-	padding: 8px 16px;
-	font-size: 14px;
-	border-radius: 5px;
-	border: none;
-	cursor: pointer;
-  } */
   
   .error-message {
 	color: red;
