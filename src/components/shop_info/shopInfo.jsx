@@ -27,7 +27,7 @@ const ShopInfo = () => {
     const fetchSellerData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/seller/get-seller-by-id/${id}`
+          `${window.env.REACT_APP_SERVER_URL}/seller/get-seller-by-id/${id}`
         );
         setSellerData(response.data.data);
       } catch (error) {
@@ -42,7 +42,7 @@ const ShopInfo = () => {
     const fetchItemsBySellerId = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/item/get-item-by-seller-id/${sellerData?.id}`
+          `${window.env.REACT_APP_SERVER_URL}/item/get-item-by-seller-id/${sellerData?.id}`
         );
         setItemData(response.data.data);
       } catch (error) {

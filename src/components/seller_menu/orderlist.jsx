@@ -40,7 +40,7 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
       };
 
       const response = await axios.post(
-        "http://localhost:8080/order/change-status",
+        `${window.env.REACT_APP_SERVER_URL}/order/change-status`,
         requestBody,
         { withCredentials: true }
       );
@@ -143,7 +143,7 @@ const OrderList = () => {
     const fetchOrdersBySellerId = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/order/get-order-by-seller-id/${userData?.id}`
+          `${window.env.REACT_APP_SERVER_URL}/order/get-order-by-seller-id/${userData?.id}`
         );
         setOrders(response.data.data);
       } catch (error) {

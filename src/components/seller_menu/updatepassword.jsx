@@ -32,8 +32,8 @@ const UpdatePassword = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/seller/update-password",
+      await axios.post(
+        `${window.env.REACT_APP_SERVER_URL}/seller/update-password`,
         {
           username: userData.username,
           old_password: oldPassword,
