@@ -53,7 +53,7 @@ function ItemList() {
     const fetchItemsBySellerId = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/item/get-item-by-seller-id/${userData?.id}`
+          `${window.env.REACT_APP_SERVER_URL}/get-item-by-seller-id/${userData?.id}`
         );
         setItemData(response.data.data);
       } catch (error) {
@@ -70,7 +70,7 @@ function ItemList() {
     const fetchCategoryList = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/category/get-all-category"
+          `${window.env.REACT_APP_SERVER_URL}/category/get-all-category`
         );
         setCategoryList(response.data.data);
       } catch (error) {
@@ -160,7 +160,7 @@ function ItemList() {
 
       // Send the item data to the API
       const response = await axios.post(
-        "http://localhost:8080/item/create-item-v2",
+        `${window.env.REACT_APP_SERVER_URL}/item/create-item-v2`,
         item,
         { withCredentials: true }
       );
@@ -175,7 +175,7 @@ function ItemList() {
         const formData = new FormData();
         formData.append("image", file);
         return axios.post(
-          `http://localhost:8080/item/item-picture/${newItemId}`,
+          `${window.env.REACT_APP_SERVER_URL}/item/item-picture/${newItemId}`,
           formData,
           {
             headers: {

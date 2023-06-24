@@ -1,7 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import {
-  Avatar,
   Box,
   Divider,
   Drawer,
@@ -21,32 +20,9 @@ import ItemList from "./itemlist";
 import OrderList from "./orderlist";
 import UpdateInfo from "./updateinformation";
 import UpdatePassword from "./updatepassword";
-import axios from "axios";
 
 const drawerWidth = 300;
 function SellerMenu(props) {
-  // const [seller, setSeller] = React.useState(null);
-
-  // React.useEffect(() => {
-  //   async function getSellerById() {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:8080/seller/get-seller-by-id/1"
-  //       );
-  //       const sellerData = response.data.data;
-  //       setSeller(sellerData);
-  //       console.log("Seller:", sellerData);
-  //       console.log(seller);
-  //       // You can do further processing with the seller object here
-  //     } catch (error) {
-  //       console.error("Error:", error.message);
-  //       // Handle the error case here
-  //     }
-  //   }
-
-  //   getSellerById();
-  // }, []);
-
   const [showShopInfo, setShowShopInfo] = React.useState(true);
   const [showItemList, setShowItemList] = React.useState(false);
   const [showOrderList, setShowOrderList] = React.useState(false);
