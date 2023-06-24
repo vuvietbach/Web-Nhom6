@@ -101,7 +101,7 @@ const SignUp = () => {
         name: nameInputValue,
         phone_number: phoneNumberInputValue
       };
-      const url = role === "user" ? "http://localhost:8080/user/create-user" : "http://localhost:8080/seller/create-seller";
+      const url = role === "user" ? `${window.env.REACT_APP_SERVER_URL}/user/create-user` : `${window.env.REACT_APP_SERVER_URL}/seller/create-seller`;
   
       axios.post(url, data)
         .then(response => {
