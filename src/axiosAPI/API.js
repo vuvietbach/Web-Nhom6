@@ -1,6 +1,5 @@
 import axios from "axios";
-import { func } from "prop-types";
-const API_URL = "http://localhost:8080";
+const SERVER_URL = window.env.REACT_APP_SERVER_URL
 function adjustItemKey(items) {
     if(items.length > 0) {
         let mapNewKey = {"img":"image_url", "rate":"rating"}
@@ -18,7 +17,7 @@ function adjustItemKey(items) {
 }
 export async function getSubCategories(category_id) {
     try {
-        const response = await axios.get(`${API_URL}/category/get-subcategories/${category_id}`);
+        const response = await axios.get(`${SERVER_URL}/category/get-subcategories/${category_id}`);
         return response.data.data;
     } catch(error) {
         throw error;
@@ -27,7 +26,7 @@ export async function getSubCategories(category_id) {
 export async function getBrandsByCategory(category_id) {
     try {
 
-        const response = await axios.get(`${API_URL}/brand/get-brands-by-category/${category_id}`);
+        const response = await axios.get(`${SERVER_URL}/brand/get-brands-by-category/${category_id}`);
         let result = await response.data.data;
         result = result.map((brand) => {
             return {...brand, id : parseInt(brand.id)}
@@ -40,7 +39,7 @@ export async function getBrandsByCategory(category_id) {
 
 export async function getItemsByCategory(category_id) {
     try {
-        const response = await axios.get(`${API_URL}/item/get-item-by-category/${category_id}`);
+        const response = await axios.get(`${SERVER_URL}/item/get-item-by-category/${category_id}`);
         return adjustItemKey(response.data.data);
     } catch(error) {
         throw error;
@@ -60,24 +59,25 @@ export async function searchItems(searchTerm) {
         const queryParams = new URLSearchParams();
         queryParams.append("searchTerm", searchTerm);
         const queryString = queryParams.toString();
-        const url = `${API_URL}/item/search-item/${queryString}`;
-        const response = await axios.get(`${API_URL}/item/search-item?${queryString}`);
+        const response = await axios.get(`${SERVER_URL}/item/search-item?${queryString}`);
         return adjustItemKey(response.data.data);
     } catch(error) {
         throw error;
     }
 } 
 export async function getItemRecommendation() {
+
     try {
-        const response = await axios.get(`${API_URL}/item/get-item-recommendation`);
+        const response = await axios.get(`${SERVER_URL}/item/get-item-recommendation`);
         return adjustItemKey(response.data.data);
     } catch(error) {
+        console.log(error);
         throw error;
     }
 }
 export async function getCategoryById(id) {
     try {
-        const response = await axios.get(`${API_URL}/category/get-category-by-id/${id}`);
+        const response = await axios.get(`${SERVER_URL}/category/get-category-by-id/${id}`);
         return response.data.data[0];
     } catch(error) {
         throw error;
@@ -85,7 +85,7 @@ export async function getCategoryById(id) {
 }
 export async function getAllBrands() {
     try {
-        const response = await axios.get(`${API_URL}/brand/get-all-brand`);
+        const response = await axios.get(`${SERVER_URL}/brand/get-all-brand`);
         return response.data.data;
     } catch(error) {
         throw error;
@@ -93,7 +93,7 @@ export async function getAllBrands() {
 }
 export async function getAllCategories() {
     try {
-        const response = await axios.get(`${API_URL}/category/get-all-category`);
+        const response = await axios.get(`${SERVER_URL}/category/get-all-category`);
         return response.data.data;
     } catch(error) {
         throw error;

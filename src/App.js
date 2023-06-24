@@ -1,7 +1,6 @@
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
   Routes,
 } from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
