@@ -46,7 +46,7 @@ const SignIn = () => {
   const post = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/auth/login", {
+      const res = await axios.post(`${window.env.REACT_APP_SERVER_URL}/auth/login`, {
         username: nameInputValue,
         password: passwordInputValue,
       });
@@ -90,7 +90,7 @@ const SignIn = () => {
     setTimeout(async () => {
       try {
         const res = await axios.post(
-          "http://localhost:8080/auth/refresh-token",
+          `${window.env.REACT_APP_SERVER_URL}/auth/refresh-token`,
           null,
           {
             withCredentials: true, // Gửi cookie trong yêu cầu
