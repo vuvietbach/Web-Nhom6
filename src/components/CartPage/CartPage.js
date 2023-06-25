@@ -10,7 +10,7 @@ const CartPage = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch('http://localhost:8080/user/get-user-by-id/{id}');
+      const response = await fetch(`${window.env.REACT_APP_SERVER_URL}/user/get-user-by-id/{id}`);
       const data = await response.json();
       setUser(data);
     } catch (error) {
@@ -20,7 +20,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch('http://localhost:8080/cart/get-cart/{user_id}');
+      const response = await fetch(`${window.env.REACT_APP_SERVER_URL}/cart/get-cart/{user_id}`);
       const data = await response.json();
       setCart(data.items || []);
     } catch (error) {
@@ -55,7 +55,7 @@ const CartPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/cart/add-cart', {
+      const response = await fetch(`${window.env.REACT_APP_SERVER_URL}/cart/add-cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const CartPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/cart/delete-cart', {
+      const response = await fetch(`${window.env.REACT_APP_SERVER_URL}/cart/delete-cart`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const CartPage = () => {
 
   const purchaseItems = async () => {
     try {
-      const response = await fetch('http://localhost:8080/cart/purchase', {
+      const response = await fetch(`${window.env.REACT_APP_SERVER_URL}/cart/purchase`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
