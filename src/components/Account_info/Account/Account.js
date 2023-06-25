@@ -106,7 +106,7 @@ function Account() {
       {user ? (
         <div className="user-info">
           <div className="user">
-          <h1>{user.username} Account</h1>
+          <h1>{user.username} <strong>Account</strong></h1>
           <p>
             Name: {user.first_name} {user.last_name}
           </p>

@@ -1,90 +1,88 @@
-
+.account-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: Arial, sans-serif;
+	background-color: #f0f0f0;
+  }
+  
   .user-info {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;
-	flex-wrap: wrap;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
+  .avatar,
+  .password,
   .user {
-	flex-basis: calc(33.33% - 10px);
-	margin-bottom: 10px;
+	flex-basis: 30%;
   }
   
-  .password {
-	flex-basis: calc(33.33% - 10px);
-	margin-bottom: 10px;
-	margin-top: 160px;
+  .avatar form,
+  .password form,
+  .user form {
+	margin-bottom: 20px;
   }
   
-  .avatar {
-	flex-basis: calc(33.33% - 10px);
-	margin-bottom: 10px;
-	margin-top: 160px;
+  .form-group {
+	margin-bottom: 15px;
   }
   
-  form {
-	display: flex;
-	flex-direction: column;
+  .form-group label {
+	font-weight: bold;
   }
   
-  form h2 {
-	font-size: 18px;
-	margin-bottom: 10px;
-	color: #333;
-  }
-  
-  form div {
-	margin-bottom: 10px;
-  }
-  
-  label {
-	font-size: 14px;
-	color: #333;
-  }
-  
-  input[type="text"],
-  input[type="tel"],
-  input[type="password"],
-  input[type="file"] {
+  .form-group input {
 	width: 100%;
 	padding: 8px;
-	font-size: 14px;
-	border-radius: 5px;
 	border: 1px solid #ccc;
-  }
-  
-  button[type="submit"] {
-	background-color: #3122ff;
-	color: #fff;
-	padding: 8px 16px;
-	font-size: 14px;
-	border-radius: 5px;
-	border: none;
-	cursor: pointer;
+	border-radius: 4px;
   }
   
   .error-message {
 	color: red;
-	font-size: 14px;
 	margin-top: 5px;
   }
   
+  button {
+	padding: 8px 16px;
+	background-color: #1890ff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+  }
   
-  
-  
+  .loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: Arial, sans-serif;
+  }
   .account-page{
-	vertical-align: top;
-	display:inline-block;
+    vertical-align: top;
+  display:inline-block;
 	box-sizing: border-box;
-	text-align: center;
-	width: 1000px;
-	height:600px;
-	top: 500px;
+  text-align: center;
+	width:900px;
+	height:400px;
+  top: 500px;
 	margin-left: 50px;
 	vertical-align: top;
 	margin-top:100px;
 	background-color:#FFFFFF; 
 	border:#C0C0C0 1px solid;
 	border-radius: 10px 10px 10px 10px;
-  }
+}
+.menu{
+	width:200px;
+	margin-left: 250px;
+	margin-top: 100px;
+	display:inline-block;
+	box-sizing: border-box;
+}
