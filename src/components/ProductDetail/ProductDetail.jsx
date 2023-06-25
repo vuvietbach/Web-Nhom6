@@ -166,7 +166,7 @@ function ProductDetail() {
   const FetchItem = async () => {
     try {
       const response = await axios.get(
-        `${window.env.REACT_APP_SERVER_URL}/get-item-by-id/${id}`
+        `${window.env.REACT_APP_SERVER_URL}/item/get-item-by-id/${id}`
       );
       setItem(response.data.data[0]);
       console.log(response.data.data[0]);
