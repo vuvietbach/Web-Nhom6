@@ -16,7 +16,7 @@ function Account() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`${window.env.REACT_APP_SERVER_URL}/get-user-by-id/${id}`).then((res) => {
+    axios.get(`http://localhost:8080/user/get-user-by-id/${id}`).then((res) => {
       setUser(res.data);
     });
   }, [id]);
@@ -24,7 +24,7 @@ function Account() {
   const handleUpdateUser = (e) => {
     e.preventDefault();
     axios
-      .post(`${window.env.REACT_APP_SERVER_URL}/user/update-user`, {
+      .post(`http://localhost:8080/user/update-user`, {
         username: user.username,
         first_name: firstName,
         last_name: lastName,
@@ -42,7 +42,7 @@ function Account() {
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     axios
-      .post(`${window.env.REACT_APP_SERVER_URL}/user/update-password`, {
+      .post(`http://localhost:8080/user/update-password"`, {
         username: user.username,
         old_password: oldPassword,
         new_password: newPassword,
@@ -63,7 +63,7 @@ function Account() {
     const formData = new FormData();
     formData.append("avatar", e.target.files[0]);
     axios
-      .post(`${window.env.REACT_APP_SERVER_URL}/user/change-avatar/${id}`, formData, {
+      .post(`http://localhost:8080/user/change-avatar/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -106,7 +106,7 @@ function Account() {
       {user ? (
         <div className="user-info">
           <div className="user">
-          <h1>{user.username} <strong>Account</strong></h1>
+          <h1>{user.username} Account</h1>
           <p>
             Name: {user.first_name} {user.last_name}
           </p>

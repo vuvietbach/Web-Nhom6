@@ -13,7 +13,7 @@ const Rating = ({ itemId }) => {
     // Gọi API để lấy thông tin sản phẩm dựa trên itemId
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${window.env.REACT_APP_SERVER_URL}/product/get-product/${itemId}`);
+        const response = await axios.get(`http://localhost:8080/product/get-product/${itemId}`);
         setProduct(response.data);
       } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ const Rating = ({ itemId }) => {
     // Gọi API để lấy thông tin đánh giá của sản phẩm dựa trên itemId
     const fetchRating = async () => {
       try {
-        const response = await axios.get(`${window.env.REACT_APP_SERVER_URL}/rate/get-rate/${itemId}`);
+        const response = await axios.get(`http://localhost:8080/rate/get-rate/${itemId}`);
         setRating(response.data);
       } catch (error) {
         console.log(error);
@@ -45,7 +45,7 @@ const Rating = ({ itemId }) => {
     };
 
     try {
-      await axios.post(`${window.env.REACT_APP_SERVER_URL}/rate/create-rating`, data);
+      await axios.post(`http://localhost:8080/rate/create-rating`, data);
       // Tạo đánh giá thành công, làm các xử lý tương ứng (nếu cần)
     } catch (error) {
       console.log(error);

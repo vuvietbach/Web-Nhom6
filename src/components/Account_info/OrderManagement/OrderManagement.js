@@ -4,6 +4,7 @@ import "./OrderManagement.css"
 import images from "../../assets/assets";
 
 
+
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -14,7 +15,7 @@ const OrderManagement = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${window.env.REACT_APP_SERVER_URL}/order/get-order-by-user-id/{user_id}`);
+      const response = await axios.get(`http://localhost:8080/order/get-order-by-user-id/{user_id}`);
       if (response.data.orders) {
         setOrders(response.data.orders);
       }
@@ -26,7 +27,7 @@ const OrderManagement = () => {
   const createOrder = async () => {
     try {
       // Code to create a new order
-      await axios.post(`${window.env.REACT_APP_SERVER_URL}/order/create-order`, { /* order data */ });
+      await axios.post(`http://localhost:8080/order/create-order`, { /* order data */ });
       fetchOrders();
     } catch (error) {
       console.error('Error creating order:', error);
@@ -35,7 +36,7 @@ const OrderManagement = () => {
 
   const changeOrderStatus = async (orderId) => {
     try {
-      await axios.post(`${window.env.REACT_APP_SERVER_URL}/order/change-status`, { orderId, newStatus: 'DONE' });
+      await axios.post(`http://localhost:8080/order/change-status`, { orderId, newStatus: 'DONE' });
       fetchOrders();
     } catch (error) {
       console.error('Error changing order status:', error);
