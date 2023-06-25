@@ -3,7 +3,7 @@ import axios from 'axios';
 import "./OrderManagement.css"
 import images from "../../assets/assets";
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = window.env.REACT_APP_SERVER_URL;
 
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
