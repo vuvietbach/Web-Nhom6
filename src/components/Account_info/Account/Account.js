@@ -14,8 +14,9 @@ function Account() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const SERVER_URL = window.env.REACT_APP_SERVER_URL;
   useEffect(() => {
-    axios.get(`${window.env.REACT_APP_SERVER_URL}/user/get-user-by-id/${id}`).then((res) => {
+    axios.get(`${SERVER_URL}/user/get-user-by-id/${id}`).then((res) => {
       console.log(res.data)
       setUser(res.data);
     });
@@ -23,8 +24,7 @@ function Account() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    axios
-      .post(`${window.env.REACT_APP_SERVER_URL}/user/update-user`, {
+    axios.post(`${SERVER_URL}/user/update-user`, {
         username: user.username,
         first_name: firstName,
         last_name: lastName,
@@ -41,8 +41,7 @@ function Account() {
 
   const handleUpdatePassword = (e) => {
     e.preventDefault();
-    axios
-      .post(`${window.env.REACT_APP_SERVER_URL}/user/update-password"`, {
+    axios.post(`${SERVER_URL}/user/update-password`, {
         username: user.username,
         old_password: oldPassword,
         new_password: newPassword,
@@ -62,8 +61,7 @@ function Account() {
   const handleUploadAvatar = (e) => {
     const formData = new FormData();
     formData.append("avatar", e.target.files[0]);
-    axios
-      .post(`${window.env.REACT_APP_SERVER_URL}/user/change-avatar/${id}`, formData, {
+    axios.post(`${SERVER_URL}/user/change-avatar/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

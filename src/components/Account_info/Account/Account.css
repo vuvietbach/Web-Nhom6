@@ -8,12 +8,6 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .avatar,
-  .password,
-  .user {
-	flex-basis: 30%;
-  }
-  
   .avatar form,
   .password form,
   .user form {
@@ -34,8 +28,6 @@
 	border: 1px solid #ccc;
 	border-radius: 4px;
   }
-
-  
   .error-message {
 	color: red;
 	margin-top: 5px;
@@ -70,7 +62,6 @@
 	margin-top:100px;
 	background-color:#FFFFFF; 
 	border:#C0C0C0 1px solid;
-	border-radius: 10px 10px 10px 10px;
 }
 .menu{
 	width:200px;

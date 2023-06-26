@@ -4,18 +4,17 @@ import "./OrderManagement.css"
 import images from "../../assets/assets";
 
 
-
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState('all');
-
+  const [user_id, setUser_id] = useState('');
   useEffect(() => {
     fetchOrders();
   }, []);
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${window.env.REACT_APP_SERVER_URL}/order/get-order-by-user-id/{user_id}`);
+      const response = await axios.get(`${window.env.REACT_APP_SERVER_URL}/order/get-order-by-user-id/${user_id}`);
       if (response.data.orders) {
         setOrders(response.data.orders);
       }
@@ -23,7 +22,11 @@ const OrderManagement = () => {
       console.error('Error fetching orders:', error);
     }
   };
-
+  useEffect(() => {
+    if (user_id) {
+      fetchOrders();
+    }
+  }, [user_id]);
   const createOrder = async () => {
     try {
       // Code to create a new order
