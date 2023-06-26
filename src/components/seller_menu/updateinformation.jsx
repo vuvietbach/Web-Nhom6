@@ -51,8 +51,7 @@ const UpdateInfo = () => {
     try {
       const response = await axios.post(
         `${window.env.REACT_APP_SERVER_URL}/seller/update-seller`,
-        updatedData,
-        { withCredentials: true }
+        updatedData
       );
       if (response.data.message === "OK") {
         toast.success("Success");

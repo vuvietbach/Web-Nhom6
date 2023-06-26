@@ -39,15 +39,14 @@ const UpdatePassword = () => {
           old_password: oldPassword,
           new_password: newPassword,
           confirm_password: confirmPassword,
-        },
-        { withCredentials: true }
+        }
       );
 
       // Handle success scenario
       toast.success("Change password successfully");
     } catch (error) {
       // Handle error scenario
-      toast.error(error.response.data.message);
+      toast.error(error);
     }
   };
 
