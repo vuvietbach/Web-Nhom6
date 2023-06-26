@@ -42,7 +42,6 @@ function Account() {
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     axios.post(`${SERVER_URL}/user/update-password`, {
-
         username: user.username,
         old_password: oldPassword,
         new_password: newPassword,
@@ -62,8 +61,7 @@ function Account() {
   const handleUploadAvatar = (e) => {
     const formData = new FormData();
     formData.append("avatar", e.target.files[0]);
-    axios
-      .post(`${SERVER_URL}/user/change-avatar/${id}`, formData, {
+    axios.post(`${SERVER_URL}/user/change-avatar/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

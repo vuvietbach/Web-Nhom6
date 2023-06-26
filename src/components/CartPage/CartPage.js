@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import "./CartPage.css"; // Import stylesheet
+import "./CartPage.css"; 
 import axios from "axios";
 
 const CartPage = () => {
@@ -56,7 +56,6 @@ const CartPage = () => {
       );
       setTotalPrice(totalPrice);
     };
-
     calculateTotalPrice();
   }, [cart]);
 
@@ -87,10 +86,12 @@ const CartPage = () => {
     };
 
     try {
+
       const response = await axios.delete(
         `${SERVER_URL}/cart/delete-cart`,
         payload
       );
+
       if (response.status === 200) {
         fetchCart();
       } else {
@@ -104,7 +105,6 @@ const CartPage = () => {
   if (!user) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className="cart-page">
       <h1>
@@ -169,10 +169,7 @@ const CartPage = () => {
         <h2>Thông tin </h2>
         <p>Tổng số vật phẩm: {cart.length}</p>
         <p>Thành tiền: {totalPrice} vnđ</p>
-
-        <button className="purchase-btn">
-          Mua
-        </button>
+        <button className="purchase-btn">Mua</button>
       </div>
     </div>
   );

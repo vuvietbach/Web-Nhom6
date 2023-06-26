@@ -1,116 +1,55 @@
-/* File: RatingComponent.css */
-
-.rating-component {
-  margin-top: 20px;
+.rating-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.no-product-message {
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #212121;
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-.product-info {
+.rating-form {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
-.product-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-right: 20px;
-}
-
-.product-details {
-  flex: 1;
-}
-
-.product-details h3 {
-  font-size: 18px;
-  margin: 0;
-  color: #212121;
-}
-
-.product-details p {
-  margin: 5px 0;
-  color: #757575;
-}
-
-.rated-info {
-  padding: 10px;
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  margin-top: 10px;
-}
-
-.rated-info h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #212121;
-}
-
-.rated-info p {
-  margin-bottom: 8px;
-  color: #757575;
-}
-
-.rated-info .rate-label,
-.rated-info .comment-label,
-.rated-info .title-label {
+.rating-form label {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.rated-info .rate-value {
-  color: #ee4d2d;
-  font-weight: bold;
+.rating-form input,
+.rating-form textarea {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
 }
 
-.create-rating-button {
-  padding: 8px 12px;
-  font-size: 14px;
-  background-color: #ee4d2d;
+.rating-form button {
+  padding: 10px 20px;
+  background-color: #4223ce;
   color: #fff;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
 }
 
-.create-rating-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.rating-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.create-rating-button:hover {
-  background-color: #c63920;
+.rating-list li {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
 }
-.rating-component{
-  vertical-align: top;
-  display:inline-block;
-	box-sizing: border-box;
-  text-align: center;
-	width:900px;
-	height:600px;
-  top: 500px;
-	margin-left: 50px;
-	vertical-align: top;
-	margin-top:100px;
-	background-color:#FFFFFF; 
-	border:#C0C0C0 1px solid;
-	border-radius: 10px 10px 10px 10px;
+
+.rating-list p {
+  margin: 0;
 }
-.menu{
-	width:200px;
-	margin-left: 250px;
-	margin-top: 100px;
-	display:inline-block;
-	box-sizing: border-box;
-}
-#body{
-	background-color: #F5F5F5;
-}
-#menu_1:hover,#menu_2:hover,#menu_3:hover,#menu_4:hover,#menu_5:hover,#menu_6:hover,#menu_7:hover,#menu_8:hover,#menu_9:hover,#menu_10:hover,#menu_11:hover,#menu_12:hover,#menu_13:hover,#menu_14:hover,#menu_15:hover,#menu_16:hover,#menu_17:hover,#menu_18:hover,#menu_19:hover,#menu_20:hover{
-	background-color:#E0E0E0;
-	cursor: pointer;
-}
+
