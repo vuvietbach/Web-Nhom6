@@ -7,7 +7,7 @@ import Account from "components/Account_info/Account/Account";
 import LandingPage from "pages/landingPage/landingPage";
 import ProductPage from "pages/productPage/productPage";
 import SearchResultPage from "pages/searchResultPage/searchResultPage";
-import CartPage from "./components/CartPage/CartPage";
+import CartPage from "pages/cartPage/cartPage";
 import { CookiesProvider } from "react-cookie";
 import SellerMenu from "components/seller_menu/sellermenu";
 import ShopInfo from "components/shop_info/shopInfo";
@@ -31,7 +31,7 @@ function App() {
             <Route path="/tim-kiem" element={<SearchResultPage />} />
             <Route path="/seller" element={<SellerMenu />} />
             <Route path="/shop/:id" element={<ShopInfo />} />
-            <Route path="/GioHang" element={<CartPage />} />
+            <Route path="/gio-hang" element={<CartPage />} />
           </Routes>
         </Router>
       </div>
