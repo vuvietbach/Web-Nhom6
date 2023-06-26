@@ -102,9 +102,7 @@ export default function ShopProductCard({ product }) {
 
     // Send the update request to the API
     axios
-      .post(`${SERVER_URL}/item/update-specific-item`, payload, {
-        withCredentials: true,
-      })
+      .post(`${SERVER_URL}/item/update-specific-item`, payload)
       .then(() => {
         toast.success("Update successful");
       })
@@ -129,9 +127,7 @@ export default function ShopProductCard({ product }) {
 
     // Send the update request to the API
     axios
-      .post(`${SERVER_URL}/item/update-item`, payload, {
-        withCredentials: true,
-      })
+      .post(`${SERVER_URL}/item/update-item`, payload)
       .then(() => {
         toast.success("Item saved successfully");
       })
@@ -151,9 +147,7 @@ export default function ShopProductCard({ product }) {
     if (confirmed) {
       // Send delete request to API
       axios
-        .delete(`${SERVER_URL}/item/delete-item/${id}`, {
-          withCredentials: true,
-        })
+        .delete(`${SERVER_URL}/item/delete-item/${id}`)
         .then(() => {
           toast.success("Delete successfully");
         })
