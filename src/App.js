@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import Rating from "./components/Account_info/Rating/Rating";
@@ -23,18 +19,19 @@ function App() {
       <div className="App">
         <Router>
           <Routes>
-            <Route path="/" element={<LandingPage/>}/>
-            <Route path="/SignUp" element={<SignUp/>} />
-            <Route path="/SignIn" element={<SignIn/>} />
-            <Route path="/Account/:id" element={<Account/>} />
-            <Route path="/Rating" element={<Rating/>} />
-            <Route path="/chi-tiet-san-pham/:id" element={<ProductDetail/>} />
-            <Route path="/CartPage" element={<CartPage/>}/>
-            <Route path="/OrderManagement" element={<OrderManagement/>}/>
-            <Route path="/danh-muc/:id" element={<ProductPage/>}/>
-            <Route path="/tim-kiem" element={<SearchResultPage/>}/>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/SignIn" element={<SignIn />} />
+            <Route path="/Account/:id" element={<Account />} />
+            <Route path="/Rating" element={<Rating />} />
+            <Route path="/chi-tiet-san-pham/:id" element={<ProductDetail />} />
+            <Route path="/CartPage" element={<CartPage />} />
+            <Route path="/OrderManagement" element={<OrderManagement />} />
+            <Route path="/danh-muc/:id" element={<ProductPage />} />
+            <Route path="/tim-kiem" element={<SearchResultPage />} />
             <Route path="/seller" element={<SellerMenu />} />
             <Route path="/shop/:id" element={<ShopInfo />} />
+            <Route path="/GioHang" element={<CartPage />} />
           </Routes>
         </Router>
       </div>

@@ -53,9 +53,11 @@ function ItemList() {
     const fetchItemsBySellerId = async () => {
       try {
         const response = await axios.get(
-          `${window.env.REACT_APP_SERVER_URL}/get-item-by-seller-id/${userData?.id}`
+          `${window.env.REACT_APP_SERVER_URL}/item/get-item-by-seller-id/${userData?.id}`
         );
+        console.log(userData.id);
         setItemData(response.data.data);
+        console.log(itemData);
       } catch (error) {
         console.error(error);
       }
@@ -145,6 +147,15 @@ function ItemList() {
         return;
       }
 
+      const missingPicture = additionalItems.some(
+        (item, index) => !selectedFiles[index]
+      );
+
+      if (missingPicture) {
+        toast.error("Please add a picture for each specific item");
+        return;
+      }
+
       // Create the item object to send to the API
       const item = {
         name: newItemName,
@@ -161,8 +172,7 @@ function ItemList() {
       // Send the item data to the API
       const response = await axios.post(
         `${window.env.REACT_APP_SERVER_URL}/item/create-item-v2`,
-        item,
-        { withCredentials: true }
+        item
       );
 
       // Log the response from the API
