@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './CartPage.css'; // Import stylesheet
+import './CartPage.css'; 
+import axios from 'axios';
+
 
 const CartPage = () => {
   const [user, setUser] = useState(null);
@@ -10,7 +12,7 @@ const CartPage = () => {
   const SERVER_URL = window.env.REACT_APP_SERVER_URL;
   const fetchUser = async () => {
     try {
-      const response = await fetch(`${SERVER_URL}/user/get-user-by-id/{id}`);
+      const response = await axios.get(`${SERVER_URL}/user/get-user-by-id/{id}`);
       const data = await response.json();
       setUser(data);
     } catch (error) {
@@ -20,7 +22,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch(`${SERVER_URL}/cart/get-cart`);
+      const response = await axios.get(`${SERVER_URL}/cart/get-cart`);
       const data = await response.json();
       setCart(data.items || []);
     } catch (error) {
@@ -53,12 +55,9 @@ const CartPage = () => {
       item_id: itemId,
       quantity: quantity,
     };
-
     try {
 
-      
-
-      const response = await fetch(`${SERVER_URL}/cart/add-cart`, {
+      const response = await axios.post(`${SERVER_URL}/cart/add-cart`, {
 
         method: 'POST',
         headers: {
@@ -84,7 +83,7 @@ const CartPage = () => {
     };
 
     try {
-      const response = await fetch(`${SERVER_URL}/cart/delete-cart`, {
+      const response = await axios.delete(`${SERVER_URL}/cart/delete-cart`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -106,26 +105,7 @@ const CartPage = () => {
     return <div>Loading...</div>;
   }
 
-  const purchaseItems = async () => {
-    try {
-      const response = await fetch(`${SERVER_URL}/cart/purchase`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user_id: user.id }),
-      });
 
-      if (response.ok) {
-        setCart([]);
-        console.log('Purchase successful!');
-      } else {
-        console.error('Error purchasing items:', response.status);
-      }
-    } catch (error) {
-      console.error('Error purchasing items:', error);
-    }
-  };
 
   return (
     <div className="cart-page">
@@ -173,7 +153,6 @@ const CartPage = () => {
         <h2>Thông tin </h2>
         <p>Tổng số vật phẩm: {cart.length}</p>
         <p>Thành tiền: {totalPrice} vnđ</p>
-        <button onClick={purchaseItems} className="purchase-btn">Mua</button>
       </div>
     </div>
   );
