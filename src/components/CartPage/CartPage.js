@@ -43,7 +43,6 @@ const CartPage = () => {
       const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
       setTotalPrice(totalPrice);
     };
-
     calculateTotalPrice();
   }, [cart]);
 
@@ -102,26 +101,7 @@ const CartPage = () => {
     return <div>Loading...</div>;
   }
 
-  const purchaseItems = async () => {
-    try {
-      const response = await fetch(`${window.env.REACT_APP_SERVER_URL}/cart/purchase`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user_id: user.id }),
-      });
-
-      if (response.ok) {
-        setCart([]);
-        console.log('Purchase successful!');
-      } else {
-        console.error('Error purchasing items:', response.status);
-      }
-    } catch (error) {
-      console.error('Error purchasing items:', error);
-    }
-  };
+  
 
   return (
     <div className="cart-page">
@@ -169,7 +149,7 @@ const CartPage = () => {
         <h2>Thông tin </h2>
         <p>Tổng số vật phẩm: {cart.length}</p>
         <p>Thành tiền: {totalPrice} vnđ</p>
-        <button onClick={purchaseItems} className="purchase-btn">Mua</button>
+        <button className="purchase-btn">Mua</button>
       </div>
     </div>
   );
