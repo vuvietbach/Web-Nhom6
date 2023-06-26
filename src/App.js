@@ -31,7 +31,7 @@ function App() {
             <Route path="/tim-kiem" element={<SearchResultPage />} />
             <Route path="/seller" element={<SellerMenu />} />
             <Route path="/shop/:id" element={<ShopInfo />} />
-            <Route path="GioHang" element={<CartPage />} />
+            <Route path="/GioHang" element={<CartPage />} />
           </Routes>
         </Router>
       </div>
