@@ -12,6 +12,7 @@ import { CookiesProvider } from "react-cookie";
 import SellerMenu from "components/seller_menu/sellermenu";
 import ShopInfo from "components/shop_info/shopInfo";
 import OrderManagement from "components/Account_info/OrderManagement/OrderManagement";
+import { Test } from "components/Test";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/seller" element={<SellerMenu />} />
             <Route path="/shop/:id" element={<ShopInfo />} />
             <Route path="/gio-hang" element={<CartPage />} />
+            <Route path="/test" element={<Test />} />
           </Routes>
         </Router>
       </div>
