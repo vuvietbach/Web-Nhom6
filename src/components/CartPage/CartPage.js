@@ -20,7 +20,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch(`${SERVER_URL}/cart/get-cart/${user_id}`);
+      const response = await fetch(`${SERVER_URL}/cart/get-cart`);
       const data = await response.json();
       setCart(data.items || []);
     } catch (error) {
