@@ -111,7 +111,7 @@ function ProductDetail() {
         quantity: quantity,
       };
       axios
-        .post(`http://localhost:8080/cart/add-cart`, data,{
+        .post(`${window.env.REACT_APP_SERVER_URL}/cart/add-cart`, data,{
           withCredentials: true
         })
         .then((response) => {
@@ -154,7 +154,7 @@ function ProductDetail() {
   const FetchSpecificItem = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/item/get-item-specific-by-origin-id/${id}`
+        `${window.env.REACT_APP_SERVER_URL}/item/get-item-specific-by-origin-id/${id}`
       );
       setSpecificItem(response.data.data);
       setCurrentItem(response.data.data[0]);
@@ -166,7 +166,7 @@ function ProductDetail() {
   const FetchItem = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/item/get-item-by-id/${id}`
+        `${window.env.REACT_APP_SERVER_URL}/item/get-item-by-id/${id}`
       );
       setItem(response.data.data[0]);
       console.log(response.data.data[0]);
@@ -180,7 +180,7 @@ function ProductDetail() {
     try {
       const _item = JSON.parse(localStorage.getItem("item"));
       const response = await axios.get(
-        `http://localhost:8080/seller/get-seller-by-id/${_item.seller_id}`
+        `${window.env.REACT_APP_SERVER_URL}/seller/get-seller-by-id/${_item.seller_id}`
       );
       setSeller(response.data.data);
       // const item=localStorage.getItem("item");
@@ -194,7 +194,7 @@ function ProductDetail() {
     try {
       const _item = JSON.parse(localStorage.getItem("item"));
       const response = await axios.get(
-        `http://localhost:8080/item/get-item-by-category/${_item.category_id}`
+        `${window.env.REACT_APP_SERVER_URL}/item/get-item-by-category/${_item.category_id}`
       );
       setSimilarProduct(response.data.data);
     } catch (error) {
@@ -206,7 +206,7 @@ function ProductDetail() {
     try {
       const _item = JSON.parse(localStorage.getItem("item"));
       const response = await axios.get(
-        `http://localhost:8080/rate/get-rate/${_item.id}`
+        `${window.env.REACT_APP_SERVER_URL}/rate/get-rate/${_item.id}`
       );
       setComments(response.data.data);
       console.log(response.data.data);
@@ -656,7 +656,7 @@ function ProductDetail() {
                   </div>
                 </div>
               </div>
-              <div className="review-rating_level">
+              {/* <div className="review-rating_level">
                 <Rating
                   name="size-small"
                   defaultValue={5}
@@ -755,7 +755,7 @@ function ProductDetail() {
                   ></div>
                 </div>
                 <div className="review-rating_number">0</div>
-              </div>
+              </div> */}
             </div>
             {/* <div className="review-filter">
               <div>Lọc xem theo:</div>

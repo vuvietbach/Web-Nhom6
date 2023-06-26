@@ -31,6 +31,7 @@ const StyledProductImg = styled("img")({
 ShopProductCard.propTypes = {
   product: PropTypes.object,
 };
+const SERVER_URL = window.env.REACT_APP_SERVER_URL;
 
 export default function ShopProductCard({ product }) {
   const { name, img, price, id } = product;
@@ -56,10 +57,10 @@ export default function ShopProductCard({ product }) {
     const fetchItemData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/item/get-item-by-id/${id}`
+          `${SERVER_URL}/item/get-item-by-id/${id}`
         );
         const specificItemResponse = await axios.get(
-          `http://localhost:8080/item/get-item-specific-by-origin-id/${id}`
+          `${SERVER_URL}/item/get-item-specific-by-origin-id/${id}`
         );
         setSpecificItem(specificItemResponse.data.data);
         setItemData(response.data.data[0]);
@@ -101,7 +102,7 @@ export default function ShopProductCard({ product }) {
 
     // Send the update request to the API
     axios
-      .post(`http://localhost:8080/item/update-specific-item`, payload, {
+      .post(`${SERVER_URL}/item/update-specific-item`, payload, {
         withCredentials: true,
       })
       .then(() => {
@@ -128,7 +129,7 @@ export default function ShopProductCard({ product }) {
 
     // Send the update request to the API
     axios
-      .post("http://localhost:8080/item/update-item", payload, {
+      .post(`${SERVER_URL}/item/update-item`, payload, {
         withCredentials: true,
       })
       .then(() => {
@@ -150,7 +151,7 @@ export default function ShopProductCard({ product }) {
     if (confirmed) {
       // Send delete request to API
       axios
-        .delete(`http://localhost:8080/item/delete-item/${id}`, {
+        .delete(`${SERVER_URL}/item/delete-item/${id}`, {
           withCredentials: true,
         })
         .then(() => {

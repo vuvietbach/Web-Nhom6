@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Account.css";
 import images from "../../assets/assets";
-
+import { MainLayout } from "components/layoutTemplate/layoutTemplate";
 function Account() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
@@ -14,17 +14,17 @@ function Account() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
-
+  const SERVER_URL = window.env.REACT_APP_SERVER_URL;
   useEffect(() => {
-    axios.get(`http://localhost:8080/user/get-user-by-id/${id}`).then((res) => {
+    axios.get(`${SERVER_URL}/user/get-user-by-id/${id}`).then((res) => {
+      console.log(res.data)
       setUser(res.data);
     });
   }, [id]);
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    axios
-      .post(`http://localhost:8080/user/update-user`, {
+    axios.post(`${SERVER_URL}/user/update-user`, {
         username: user.username,
         first_name: firstName,
         last_name: lastName,
@@ -41,8 +41,8 @@ function Account() {
 
   const handleUpdatePassword = (e) => {
     e.preventDefault();
-    axios
-      .post(`http://localhost:8080/user/update-password"`, {
+    axios.post(`${SERVER_URL}/user/update-password`, {
+
         username: user.username,
         old_password: oldPassword,
         new_password: newPassword,
@@ -63,7 +63,7 @@ function Account() {
     const formData = new FormData();
     formData.append("avatar", e.target.files[0]);
     axios
-      .post(`http://localhost:8080/user/change-avatar/${id}`, formData, {
+      .post(`${SERVER_URL}/user/change-avatar/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -78,6 +78,7 @@ function Account() {
   };
 
   return (
+    <MainLayout>
     <>
     <div id="cot_menu" className="menu">
     <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
@@ -196,6 +197,7 @@ function Account() {
       )}
     </div>
     </>
+    </MainLayout>
   );
 }
 

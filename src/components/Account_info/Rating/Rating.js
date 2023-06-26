@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Rating.css";
 import images from "../../assets/assets";
-
+const SERVER_URL = window.env.REACT_APP_SERVER_URL;
 const Rating = ({ itemId }) => {
   const [rating, setRating] = useState(null);
   const [product, setProduct] = useState(null);
@@ -36,16 +36,8 @@ const Rating = ({ itemId }) => {
 
   const handleCreateRating = async () => {
     // Gọi API để tạo đánh giá cho sản phẩm
-    const data = {
-      user_id: 123, // Thay đổi thành user_id tương ứng
-      item_id: itemId,
-      rate: 5, // Thay đổi thành đánh giá tương ứng
-      comment: "Great product", // Thay đổi thành bình luận tương ứng
-      title: "Excellent" // Thay đổi thành tiêu đề tương ứng
-    };
-
     try {
-      await axios.post(`http://localhost:8080/rate/create-rating`, data);
+      await axios.post(`http://localhost:8080/rate/create-rating`);
       // Tạo đánh giá thành công, làm các xử lý tương ứng (nếu cần)
     } catch (error) {
       console.log(error);

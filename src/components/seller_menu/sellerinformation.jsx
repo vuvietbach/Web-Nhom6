@@ -24,7 +24,7 @@ const SellerInformation = () => {
     const fetchSellerData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/seller/get-seller-by-id/${userData.id}`
+          `${window.env.REACT_APP_SERVER_URL}seller/get-seller-by-id/${userData.id}`
         );
         setSellerData(response.data.data);
       } catch (error) {
