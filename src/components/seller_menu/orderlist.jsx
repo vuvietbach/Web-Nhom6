@@ -41,8 +41,7 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
 
       const response = await axios.post(
         `${window.env.REACT_APP_SERVER_URL}/order/change-status`,
-        requestBody,
-        { withCredentials: true }
+        requestBody
       );
       console.log(
         `Order ${
@@ -146,6 +145,7 @@ const OrderList = () => {
           `${window.env.REACT_APP_SERVER_URL}/order/get-order-by-seller-id/${userData?.id}`
         );
         setOrders(response.data.data);
+        console.log(orders);
       } catch (error) {
         console.error(error);
       }

@@ -94,15 +94,14 @@ function ProductDetail() {
       return (value / 1000).toFixed(1) + "k";
     } else {
       return value;
-    } 
+    }
   };
 
   const addToCart = (e) => {
     e.preventDefault();
-    if(localStorage.getItem('user') == null) {
-      setTimeout(navigate("/SignIn"),500);
-    } 
-    else {
+    if (localStorage.getItem("user") == null) {
+      setTimeout(navigate("/SignIn"), 500);
+    } else {
       const user = JSON.parse(localStorage.getItem("user"));
       console.log(user);
       const data = {
@@ -111,9 +110,7 @@ function ProductDetail() {
         quantity: quantity,
       };
       axios
-        .post(`${window.env.REACT_APP_SERVER_URL}/cart/add-cart`, data,{
-          withCredentials: true
-        })
+        .post(`${window.env.REACT_APP_SERVER_URL}/cart/add-cart`, data)
         .then((response) => {
           console.log(response.data);
           toast.success("Thêm vào giỏ hàng thành công");
@@ -122,7 +119,7 @@ function ProductDetail() {
           console.log(err);
         });
     }
-    }
+  };
 
   const handleSlideLeft = () => {
     if (slideContainerRef.current) {
@@ -438,7 +435,11 @@ function ProductDetail() {
                     spacing={2}
                     direction="row"
                   >
-                    <Button className="button-icon" variant="outlined" onClick={() => navigate(`/shop/${item.seller_id}`)}>
+                    <Button
+                      className="button-icon"
+                      variant="outlined"
+                      onClick={() => navigate(`/shop/${item.seller_id}`)}
+                    >
                       <StorefrontOutlinedIcon
                         style={{
                           marginRight: "8px",
@@ -612,12 +613,12 @@ function ProductDetail() {
         </div> */}
 
         {/* Product Description */}
-        <div style={{display:"flex"}}>
+        <div style={{ display: "flex" }}>
           <div className="product-description">
-              <h2>Mô Tả Sản Phẩm</h2>
-              <div className="description">
-                <MyComponent description={item.description} />
-              </div>            
+            <h2>Mô Tả Sản Phẩm</h2>
+            <div className="description">
+              <MyComponent description={item.description} />
+            </div>
           </div>
           <div className="container-info_img">
             <img
