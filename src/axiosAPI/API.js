@@ -1,5 +1,5 @@
 import axios from "axios";
-const SERVER_URL = window.env.REACT_APP_SERVER_URL
+let SERVER_URL = window.env.REACT_APP_SERVER_URL
 function adjustItemKey(items) {
     if(items.length > 0) {
         let mapNewKey = {"img":"image_url", "rate":"rating"}
