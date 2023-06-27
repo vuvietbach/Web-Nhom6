@@ -1,7 +1,10 @@
 import { MainLayout } from "components/layoutTemplate/layoutTemplate";
 import "./cartPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeleteCartModalButton from "components/modal/DeleteCartModal";
+import { getCartByUserId, updateCartItem } from "axiosAPI/API";
+import { CustomLink } from "components/misc/misc";
+import { deleteCartItem } from "axiosAPI/API";
 const QuantityButton = ({ id, quantity, onClick }) => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
@@ -28,7 +31,6 @@ const convertToVND = (price) => {
 };
 const CartItem = ({ item, handleQuantityChange }) => {
   const handleClick = (type) => {
-    console.log(type, item);
     let quantity = 0;
     if (type === "delete") {
       quantity = 0;
@@ -45,12 +47,12 @@ const CartItem = ({ item, handleQuantityChange }) => {
     <div class="cart-row" style={{ marginBottom: "15px" }}>
       <input type="checkbox"></input>
       <div style={{ display: "flex", gap: "15px" }}>
-        <img
-          src={item.image_url}
-          alt={item.name}
-          style={{ width: "80px", height: "80px" }}
-        />
-        <div>{item.name}</div>
+        <CustomLink to={`/chi-tiet-san-pham/${item.origin_id}`}>
+            <img src={item.image_url} alt={item.name} style={{ width: "80px" }} />
+        </CustomLink>
+        <CustomLink to={`/chi-tiet-san-pham/${item.origin_id}`}>
+            <div>{item.name}</div>
+        </CustomLink>
       </div>
       <div style={{ margin: "auto 0" }}>{convertToVND(item.price)}</div>
       <div style={{ margin: "auto 0" }}>
@@ -63,7 +65,7 @@ const CartItem = ({ item, handleQuantityChange }) => {
       <div style={{ margin: "auto 0" }}>
         {convertToVND(item.price * item.quantity)}
       </div>
-      <DeleteCartModalButton deleteItem={()=>handleClick("delete")}>
+      <DeleteCartModalButton deleteItem={() => handleClick("delete")}>
         <div
           class="clickable"
           style={{ display: "flex", alignItems: "center" }}
@@ -76,56 +78,55 @@ const CartItem = ({ item, handleQuantityChange }) => {
 };
 
 export default function CartPage() {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      image_url:
-        "https://salt.tikicdn.com/cache/w78/ts/product/df/b9/d1/15e8aece47d0d13ca0f0fe7d94a1f302.png.webp",
-      name: "Iphone 12",
-      price: 10000000,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      image_url:
-        "https://salt.tikicdn.com/cache/w78/ts/product/df/b9/d1/15e8aece47d0d13ca0f0fe7d94a1f302.png.webp",
-      name: "Iphone 12",
-      price: 10000000,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      image_url:
-        "https://salt.tikicdn.com/cache/w78/ts/product/df/b9/d1/15e8aece47d0d13ca0f0fe7d94a1f302.png.webp",
-      name: "Iphone 12",
-      price: 10000000,
-      quantity: 1,
-    },
-  ]);
-  const [toBeDeletedItem, setToBeDeletedItem] = useState(null);
-  const [needReload, setNeedReload] = useState(true);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [cart, setCart] = useState([]);
+  const [updateCart, setUpdateCart] = useState(false);
   const handleQuantityChange = (item, quantity) => {
     if (quantity < 1) {
-      setToBeDeletedItem(item);
-      return;
+        // const newCart = cart.filter((cartItem) => cartItem.item_id !== item.item_id);
+        // setCart(newCart);
+        deleteCartItem(user.id, item.item_id).then((res) => {
+            console.log(res);
+            setUpdateCart(true);
+        }).catch((err) => {
+            console.log(err);
+        })
     } else {
-      const newCart = cart.map((cartItem) => {
-        if (cartItem.id === item.id) {
-          return { ...cartItem, quantity: quantity };
-        }
-        return cartItem;
+        quantity = (quantity > item.quantity) ? 1 : -1;
+        updateCartItem(user.id, item.item_id, quantity).then((res) => {
+            console.log(res);
+            setUpdateCart(true);
+        }).catch((err) => {
+            console.log(err);
+        })
+    //   const newCart = cart.map((cartItem) => {
+    //     if (cartItem.item_id === item.item_id) {
+    //       return { ...cartItem, quantity: quantity };
+    //     }
+    //     return cartItem;
+    //   });
+    //   setCart(newCart);
+        // updateCartItem(user.id, item.item_id, quantity).then((res) => {
+    }
+  };
+  useEffect(() => {
+    if (user) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+      getCartByUserId(user.id).then((res) => {
+        setCart(res);
       });
-      setCart(newCart);
     }
-  };
-  const handleDeleteItem = (type) => {
-    if (type === "confirm") {
-      console.log("hello");
-    } else {
-      setToBeDeletedItem(null);
+  }, []);
+  useEffect(() => {
+    if (updateCart) {
+      if (user) {
+        getCartByUserId(user.id).then((res) => {
+          setCart(res);
+        });
+      }
+      setUpdateCart(false);
     }
-  };
-
+  }, [updateCart]);
   return (
     <MainLayout>
       <div style={{ fontSize: "1.5rem", textTransform: "uppercase" }}>
@@ -168,8 +169,11 @@ export default function CartPage() {
               )}
             </div>
             <hr />
-            <button type="button" class="btn btn-primary btn-block">
-              {needReload ? "Cập nhập giỏ hàng" : "Thanh toán"}
+            <button type="button" class="btn btn-primary btn-block" onClick={()=>setUpdateCart(true)}>
+              {"Cập nhập giỏ hàng"}
+            </button>
+            <button type="button" class="btn btn-danger btn-block">
+              {"Thanh toán"}
             </button>
           </div>
         </div>

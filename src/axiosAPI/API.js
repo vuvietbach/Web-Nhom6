@@ -99,3 +99,31 @@ export async function getAllCategories() {
         throw error;
     }
 }
+export async function getCartByUserId(user_id) {
+    try {
+        const response = await axios.get(`${SERVER_URL}/cart/get-cart/${user_id}`);
+        return adjustItemKey(response.data.data);
+    } catch(error) {
+        throw error;
+    }
+}
+export async function deleteCartItem(user_id, itemspecific_id) {
+    try {
+        console.log(user_id, itemspecific_id)
+        const data = {user_id: user_id, item_id: itemspecific_id}
+        const response = await axios.delete(`${SERVER_URL}/cart/delete-cart`, data);
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+}
+export async function updateCartItem(user_id, itemspecific_id, quantity) {
+    try {
+        console.log(user_id, itemspecific_id, quantity)
+        const data = {user_id: user_id, item_id: itemspecific_id, quantity: quantity}
+        const response = await axios.post(`${SERVER_URL}/cart/add-cart`, data);
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+}
