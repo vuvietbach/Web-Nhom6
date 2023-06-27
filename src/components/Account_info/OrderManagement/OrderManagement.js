@@ -77,7 +77,7 @@ const OrderManagement = () => {
                   </div>
                   <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongbaocuatoi.png']} alt="Avatar" />Thông báo của tôi </div>
-                  <div id="menu_4" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                  <div id="menu_4" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydonhang.png']} alt="Avatar" />Quản lý đơn hàng </div>
                   <div id="menu_5" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydoitra.png']} alt="Avatar" />Quản lý đổi trả </div>
@@ -85,7 +85,7 @@ const OrderManagement = () => {
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
                   <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
-                  <div id="menu_8" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
+                  <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
                   
                 </div>
