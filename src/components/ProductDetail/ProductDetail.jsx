@@ -101,6 +101,7 @@ function ProductDetail() {
     e.preventDefault();
     if (localStorage.getItem("user") == null) {
       setTimeout(navigate("/SignIn"), 500);
+
     } else {
       const user = JSON.parse(localStorage.getItem("user"));
       console.log(user);
@@ -109,6 +110,8 @@ function ProductDetail() {
         user_id: user.id,
         quantity: quantity,
       };
+      console.log("Hello", specific_item);
+      console.log("Hello", data);
       axios
         .post(`${window.env.REACT_APP_SERVER_URL}/cart/add-cart`, data)
         .then((response) => {
