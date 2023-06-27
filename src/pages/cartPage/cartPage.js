@@ -2,9 +2,10 @@ import { MainLayout } from "components/layoutTemplate/layoutTemplate";
 import "./cartPage.css";
 import { useEffect, useState } from "react";
 import DeleteCartModalButton from "components/modal/DeleteCartModal";
-import { getCartByUserId, updateCartItem } from "axiosAPI/API";
+import { deleteCart, getCartByUserId, updateCartItem, createOrder } from "axiosAPI/API";
 import { CustomLink } from "components/misc/misc";
 import { deleteCartItem } from "axiosAPI/API";
+import CustomModal from "components/modal/customModal";
 const QuantityButton = ({ id, quantity, onClick }) => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
@@ -48,10 +49,10 @@ const CartItem = ({ item, handleQuantityChange }) => {
       <input type="checkbox"></input>
       <div style={{ display: "flex", gap: "15px" }}>
         <CustomLink to={`/chi-tiet-san-pham/${item.origin_id}`}>
-            <img src={item.image_url} alt={item.name} style={{ width: "80px" }} />
+          <img src={item.image_url} alt={item.name} style={{ width: "80px" }} />
         </CustomLink>
         <CustomLink to={`/chi-tiet-san-pham/${item.origin_id}`}>
-            <div>{item.name}</div>
+          <div>{item.name}</div>
         </CustomLink>
       </div>
       <div style={{ margin: "auto 0" }}>{convertToVND(item.price)}</div>
@@ -83,32 +84,53 @@ export default function CartPage() {
   const [updateCart, setUpdateCart] = useState(false);
   const handleQuantityChange = (item, quantity) => {
     if (quantity < 1) {
-        // const newCart = cart.filter((cartItem) => cartItem.item_id !== item.item_id);
-        // setCart(newCart);
-        deleteCartItem(user.id, item.item_id).then((res) => {
-            console.log(res);
-            setUpdateCart(true);
-        }).catch((err) => {
-            console.log(err);
+      // const newCart = cart.filter((cartItem) => cartItem.item_id !== item.item_id);
+      // setCart(newCart);
+      deleteCartItem(user.id, item.item_id)
+        .then((res) => {
+          console.log(res);
+          setUpdateCart(true);
         })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-        quantity = (quantity > item.quantity) ? 1 : -1;
-        updateCartItem(user.id, item.item_id, quantity).then((res) => {
-            console.log(res);
-            setUpdateCart(true);
-        }).catch((err) => {
-            console.log(err);
+      quantity = quantity > item.quantity ? 1 : -1;
+      updateCartItem(user.id, item.item_id, quantity)
+        .then((res) => {
+          console.log(res);
+          setUpdateCart(true);
         })
-    //   const newCart = cart.map((cartItem) => {
-    //     if (cartItem.item_id === item.item_id) {
-    //       return { ...cartItem, quantity: quantity };
-    //     }
-    //     return cartItem;
-    //   });
-    //   setCart(newCart);
-        // updateCartItem(user.id, item.item_id, quantity).then((res) => {
+        .catch((err) => {
+          console.log(err);
+        });
+      //   const newCart = cart.map((cartItem) => {
+      //     if (cartItem.item_id === item.item_id) {
+      //       return { ...cartItem, quantity: quantity };
+      //     }
+      //     return cartItem;
+      //   });
+      //   setCart(newCart);
+      // updateCartItem(user.id, item.item_id, quantity).then((res) => {
     }
   };
+  const handleCheckOut = () => {
+    const order = {
+      user_id: user.id,
+      ship_address: "Hanoi",
+      order_detail: cart.map((item) => {
+        return {
+          item_id: item.item_id,
+          quantity: item.quantity,
+        };
+      })
+    };
+    createOrder(order).then((res) => {
+        deleteCart(user.id).then((res) => {
+            setUpdateCart(true);
+        })
+    })
+};
   useEffect(() => {
     if (user) {
       setUser(JSON.parse(localStorage.getItem("user")));
@@ -169,12 +191,14 @@ export default function CartPage() {
               )}
             </div>
             <hr />
-            <button type="button" class="btn btn-primary btn-block" onClick={()=>setUpdateCart(true)}>
+            {/* <button type="button" class="btn btn-primary btn-block" onClick={()=>setUpdateCart(true)}>
               {"Cập nhập giỏ hàng"}
-            </button>
-            <button type="button" class="btn btn-danger btn-block">
-              {"Thanh toán"}
-            </button>
+            </button> */}
+            <CustomModal onConfirm={handleCheckOut}>
+              <button type="button" class="btn btn-danger btn-block">
+                {"Thanh toán"}
+              </button>
+            </CustomModal>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export const SearchBar = () => {
         </form>
         {showDropdown && (
           <div className="dropdown_menu">
-            <a>Hello World</a>
+            {/* <a>Hello World</a> */}
           </div>
         )}
       </div>
