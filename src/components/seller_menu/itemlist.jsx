@@ -55,7 +55,7 @@ function ItemList() {
         const response = await axios.get(
           `${window.env.REACT_APP_SERVER_URL}/item/get-item-by-seller-id/${userData?.id}`
         );
-        console.log(userData.id);
+        console.log(1);
         setItemData(response.data.data);
         console.log(itemData);
       } catch (error) {
