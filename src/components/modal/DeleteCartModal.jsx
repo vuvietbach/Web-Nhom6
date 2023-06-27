@@ -7,7 +7,6 @@ import "./DeleteCartModal.css";
 import { orange } from "@mui/material/colors";
 import axios from "axios";
 const DeleteCartModalButton = (props) => {
-    const { user_id, item_id } = props;
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = (event) => {
@@ -19,30 +18,31 @@ const DeleteCartModalButton = (props) => {
     setShowModal(false);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = (type) => {
     // Xử lý logic xóa sản phẩm ở đây
-    const data = {
-        user_id : user_id,
-        item_id : item_id
+    // const data = {
+    //     user_id : user_id,
+    //     item_id : item_id
+    // }
+    // axios
+    //     .post(`${window.env.REACT_APP_SERVER_URL}/cart/delete-cart`, data)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    if (type === "yes") {
+      props.deleteItem();
     }
-    axios
-        .post(`${window.env.REACT_APP_SERVER_URL}/cart/delete-cart`, data)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-    console.log(data);
     setShowModal(false);
   };
 
   return (
-    <div className="main" style={{width:"250px"}}>
-      <a href="#" onClick={handleOpenModal}>
+    <div style={{display:"flex", alignItems:"center", justifyContent:"flex-end"}}>
+      <div onClick={handleOpenModal}>
         {props.children}
-      </a>
+      </div>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Body>
             <h2>
@@ -55,10 +55,10 @@ const DeleteCartModalButton = (props) => {
           </h2>
           <div className="content">Bạn có muốn xóa sản phẩm đang chọn?</div>
           <Stack spacing={2} direction="row" style={{left:"100px"}}>
-            <Button variant="outlined" onClick={handleConfirmDelete} style={{marginLeft:"50px"}}>
+            <Button variant="outlined" onClick={()=>handleConfirmDelete("yes")} style={{marginLeft:"50px"}}>
               Xác nhận
             </Button>
-            <Button variant="contained" onClick={handleCloseModal}>
+            <Button variant="contained" onClick={()=>handleCloseModal("no")}>
               Hủy
             </Button>
           </Stack>

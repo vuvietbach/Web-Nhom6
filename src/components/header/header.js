@@ -123,6 +123,7 @@ export default function Header() {
     }
   };
   const handleCart = () => {
+    console.log(localStorage.getItem("user"));
     if (localStorage.getItem("user") == null) {
       navigate("/SignIn");
     } else {
@@ -130,7 +131,7 @@ export default function Header() {
       if ("followers" in user) {
         navigate("/SignIn");
       } else {
-        navigate("/GioHang");
+        navigate("/gio-hang");
       }
     }
   };
