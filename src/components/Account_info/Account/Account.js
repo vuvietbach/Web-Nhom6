@@ -24,8 +24,7 @@ function Account() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    axios
-      .post(`${SERVER_URL}/user/update-user`, {
+    axios.post(`${SERVER_URL}/user/update-user`, {
         username: user.username,
         first_name: firstName,
         last_name: lastName,
@@ -42,8 +41,7 @@ function Account() {
 
   const handleUpdatePassword = (e) => {
     e.preventDefault();
-    axios
-      .post(`${SERVER_URL}/user/update-password`, {
+    axios.post(`${SERVER_URL}/user/update-password`, {
         username: user.username,
         old_password: oldPassword,
         new_password: newPassword,
@@ -63,8 +61,7 @@ function Account() {
   const handleUploadAvatar = (e) => {
     const formData = new FormData();
     formData.append("avatar", e.target.files[0]);
-    axios
-      .post(`${SERVER_URL}/user/change-avatar/${id}`, formData, {
+    axios.post(`${SERVER_URL}/user/change-avatar/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -82,33 +79,34 @@ function Account() {
     <MainLayout>
     <>
     <div id="cot_menu" className="menu">
-    <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
-      <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
-    </div>
-    <div id="menu_1" style={{display: 'inline-block', verticalAlign: 'top', border: '#F9EAEA 0px none', height: '50px', marginBottom: '20px', marginLeft: '20px'}}>Tài khoản của <br />
-    </div>
-    <div id="menu_2" style={{backgroundColor: '#E0E0E0', height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtintaikhoan.png']} alt="Avatar" />Thông tin tài khoản
-    </div>
-    <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongbaocuatoi.png']} alt="Avatar" />Thông báo của tôi </div>
-    <div id="menu_4" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydonhang.png']} alt="Avatar" />Quản lý đơn hàng </div>
-    <div id="menu_5" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydoitra.png']} alt="Avatar" />Quản lý đổi trả </div>
-    <div id="menu_6" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
-    <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
-    <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
-      <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
-    
-  </div>
+                  <div id="avatar" style={{width: '50px', display: 'inline-block', verticalAlign: 'top', backgroundColor: '#F11B1F', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
+                    <img src={images['./bach.jpg']} alt="Avatar" style={{width: '100%', height: '100%', display: 'inline-block'}} />
+                  </div>
+                  <div id="menu_1" style={{display: 'inline-block', verticalAlign: 'top', border: '#F9EAEA 0px none', height: '50px', marginBottom: '20px', marginLeft: '20px'}}>Tài khoản của <br />
+                    <strong>Bách Vũ</strong>
+                  </div>
+                  <div id="menu_2" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtintaikhoan.png']} alt="Avatar" />Thông tin tài khoản
+                  </div>
+                  <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongbaocuatoi.png']} alt="Avatar" />Thông báo của tôi </div>
+                  <div id="menu_4" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydonhang.png']} alt="Avatar" />Quản lý đơn hàng </div>
+                  <div id="menu_5" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydoitra.png']} alt="Avatar" />Quản lý đổi trả </div>
+                  <div id="menu_6" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
+                  <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
+                  <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                    <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
+                  
+                </div>
     <div className="account-page">
       {user ? (
         <div className="user-info">
           <div className="user">
-          <h1>{user.username} <strong>Account</strong></h1>
+          <h1>{user.username} Account</h1>
           <p>
             Name: {user.first_name} {user.last_name}
           </p>

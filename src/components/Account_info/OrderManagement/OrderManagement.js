@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./OrderManagement.css"
 import images from "../../assets/assets";
-
-const API_BASE_URL = window.env.REACT_APP_SERVER_URL;
-
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState('all');
+  const [user_id, setUser_id] = useState('');
 
   useEffect(() => {
     fetchOrders();
@@ -15,7 +13,9 @@ const OrderManagement = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/order/get-order-by-user-id/{user_id}`);
+
+      const response = await axios.get(`${window.env.REACT_APP_SERVER_URL}/order/get-order-by-user-id/${user_id}`);
+
       if (response.data.orders) {
         setOrders(response.data.orders);
       }
@@ -23,11 +23,17 @@ const OrderManagement = () => {
       console.error('Error fetching orders:', error);
     }
   };
-
+  useEffect(() => {
+    if (user_id) {
+      fetchOrders();
+    }
+  }, [user_id]);
   const createOrder = async () => {
     try {
       // Code to create a new order
-      await axios.post(`${API_BASE_URL}/order/create-order`, { /* order data */ });
+
+      await axios.post(`${window.env.REACT_APP_SERVER_URL}/order/create-order`, { /* order data */ });
+
       fetchOrders();
     } catch (error) {
       console.error('Error creating order:', error);
@@ -36,7 +42,9 @@ const OrderManagement = () => {
 
   const changeOrderStatus = async (orderId) => {
     try {
-      await axios.post(`${API_BASE_URL}/order/change-status`, { orderId, newStatus: 'DONE' });
+
+      await axios.post(`${window.env.REACT_APP_SERVER_URL}/order/change-status`, { orderId, newStatus: 'DONE' });
+
       fetchOrders();
     } catch (error) {
       console.error('Error changing order status:', error);
@@ -69,7 +77,7 @@ const OrderManagement = () => {
                   </div>
                   <div id="menu_3" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongbaocuatoi.png']} alt="Avatar" />Thông báo của tôi </div>
-                  <div id="menu_4" style={{height: '40px', border: '#F9EAEA 0px none'}}>
+                  <div id="menu_4" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydonhang.png']} alt="Avatar" />Quản lý đơn hàng </div>
                   <div id="menu_5" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./quanlydoitra.png']} alt="Avatar" />Quản lý đổi trả </div>
@@ -77,7 +85,7 @@ const OrderManagement = () => {
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./sodiachi.png']} alt="Avatar" />Sổ địa chỉ </div>
                   <div id="menu_7" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./thongtinthanhtoan.png']} alt="Avatar" />Thông tin thanh toán </div>
-                  <div id="menu_8" style={{backgroundColor: '#E0E0E0',height: '40px', border: '#F9EAEA 0px none'}}>
+                  <div id="menu_8" style={{height: '40px', border: '#F9EAEA 0px none'}}>
                     <img style={{width: '30px', display: 'inline-block', verticalAlign: 'top', height: '30px', borderRadius: '50%', overflow: 'hidden'}} src={images['./danhgiasanpham.png']} alt="Avatar" />Đánh giá sản phẩm </div>
                   
                 </div>

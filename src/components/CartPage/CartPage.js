@@ -1,6 +1,8 @@
+
 import React, { useEffect, useState } from "react";
-import "./CartPage.css"; // Import stylesheet
+import "./CartPage.css"; 
 import axios from "axios";
+
 const CartPage = () => {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
@@ -11,6 +13,7 @@ const CartPage = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
   const fetchUser = async () => {
     try {
+
       const response = await axios.get(
         `${SERVER_URL}/user/get-user-by-id/${userData.id}`
       );
@@ -23,6 +26,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
+
       const response = await axios.get(
         `${SERVER_URL}/cart/get-cart/${userData.id}`
       );
@@ -52,7 +56,6 @@ const CartPage = () => {
       );
       setTotalPrice(totalPrice);
     };
-
     calculateTotalPrice();
   }, [cart]);
 
@@ -62,8 +65,8 @@ const CartPage = () => {
       item_id: itemId,
       quantity: quantity,
     };
-
     try {
+
       const response = await axios.post(`${SERVER_URL}/cart/add-cart`, payload);
       console.log(response);
       if (response.status === 200) {
@@ -83,6 +86,7 @@ const CartPage = () => {
     };
 
     try {
+
       const response = await axios.delete(
         `${SERVER_URL}/cart/delete-cart`,
         payload
@@ -101,28 +105,6 @@ const CartPage = () => {
   if (!user) {
     return <div>Loading...</div>;
   }
-
-  const purchaseItems = async () => {
-    try {
-      const response = await fetch(`${SERVER_URL}/cart/purchase`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id: user.id }),
-      });
-
-      if (response.ok) {
-        setCart([]);
-        console.log("Purchase successful!");
-      } else {
-        console.error("Error purchasing items:", response.status);
-      }
-    } catch (error) {
-      console.error("Error purchasing items:", error);
-    }
-  };
-
   return (
     <div className="cart-page">
       <h1>
@@ -187,9 +169,7 @@ const CartPage = () => {
         <h2>Thông tin </h2>
         <p>Tổng số vật phẩm: {cart.length}</p>
         <p>Thành tiền: {totalPrice} vnđ</p>
-        <button onClick={purchaseItems} className="purchase-btn">
-          Mua
-        </button>
+        <button className="purchase-btn">Mua</button>
       </div>
     </div>
   );

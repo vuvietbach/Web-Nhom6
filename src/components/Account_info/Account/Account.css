@@ -1,12 +1,4 @@
-.account-page {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	font-family: Arial, sans-serif;
-	background-color: #f0f0f0;
-  }
-  
+
   .user-info {
 	display: flex;
 	justify-content: space-between;
@@ -14,12 +6,6 @@
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .avatar,
-  .password,
-  .user {
-	flex-basis: 30%;
   }
   
   .avatar form,
@@ -42,7 +28,6 @@
 	border: 1px solid #ccc;
 	border-radius: 4px;
   }
-  
   .error-message {
 	color: red;
 	margin-top: 5px;
@@ -69,7 +54,7 @@
   display:inline-block;
 	box-sizing: border-box;
   text-align: center;
-	width:900px;
+	width:600px;
 	height:400px;
   top: 500px;
 	margin-left: 50px;
