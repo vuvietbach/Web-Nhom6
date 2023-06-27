@@ -99,3 +99,48 @@ export async function getAllCategories() {
         throw error;
     }
 }
+export async function getCartByUserId(user_id) {
+    try {
+        const response = await axios.get(`${SERVER_URL}/cart/get-cart/${user_id}`);
+        return adjustItemKey(response.data.data);
+    } catch(error) {
+        throw error;
+    }
+}
+export async function deleteCartItem(user_id, itemspecific_id) {
+    try {
+        console.log(user_id, itemspecific_id)
+        const data = {user_id: user_id, item_id: itemspecific_id}
+        console.log(`${SERVER_URL}/cart/delete-cart`)
+        const response = await axios.delete(`${SERVER_URL}/cart/delete-cart`, {data:data});
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+}
+export async function updateCartItem(user_id, itemspecific_id, quantity) {
+    try {
+        const data = {user_id: user_id, item_id: itemspecific_id, quantity: quantity}
+        const response = await axios.post(`${SERVER_URL}/cart/add-cart`, data);
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+}
+export async function createOrder(order) {
+    try {
+        const response = await axios.post(`${SERVER_URL}/order/create-order`, order);
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+
+}
+export async function deleteCart(user_id) {
+    try {
+        const response = await axios.delete(`${SERVER_URL}/cart/delete-all-cart/${user_id}`);
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+}

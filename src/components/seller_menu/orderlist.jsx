@@ -82,7 +82,9 @@ const OrderBar = ({ itemspecific_name, quantity, status, id, item_id }) => {
         backgroundColor: "whitesmoke",
       }}
     >
-      <Typography variant="body1">{itemspecific_name}</Typography>
+      <Typography sx={{ width: "40px" }} variant="body1">
+        {itemspecific_name}
+      </Typography>
       <Typography variant="body1">Quantity: {quantity}</Typography>
       <div
         style={{
@@ -144,6 +146,7 @@ const OrderList = () => {
         const response = await axios.get(
           `${window.env.REACT_APP_SERVER_URL}/order/get-order-by-seller-id/${userData?.id}`
         );
+        console.log(1);
         setOrders(response.data.data);
         console.log(orders);
       } catch (error) {

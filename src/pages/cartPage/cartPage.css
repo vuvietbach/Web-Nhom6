@@ -1,0 +1,18 @@
+.cart-row {
+    display: grid;
+    grid-template-columns: 5% 43% 16% 16% 16% 3%;
+}
+.cart-row input[type="checkbox"] {
+    width: 20px;
+}
+.quantity-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #efefef;
+    cursor: pointer;
+    background-color: inherit;
+    color: black;
+}

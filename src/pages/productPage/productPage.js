@@ -182,7 +182,7 @@ export default function ProductPage() {
               onClick={handleRatingFilterChange}
             ></ButtonGroup>
           </div>
-          <SideCard title={"Giá"}>
+          {/* <SideCard title={"Giá"}>
             <div>Chọn khoảng giá</div>
             <form>
               <div class="d-flex">
@@ -192,7 +192,7 @@ export default function ProductPage() {
               </div>
               <input class="price-submit" type="submit"></input>
             </form>
-          </SideCard>
+          </SideCard> */}
         </div>
         <div class="main-container">
           <div class="card">
